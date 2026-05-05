@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Atelier Ouaga — Restaurant by Diacfa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark:    #0D0D0B;
+    --dark2:   #141410;
+    --olive:   #2C2C1A;
+    --gold:    #C9A84C;
+    --gold-lt: #E8D08A;
+    --cream:   #F5F0E8;
+    --text:    #E8E0D0;
+    --muted:   #888070;
+    --green:   #3D4A2E;
+    --green2:  #4E5E38;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 6%;
+    height: 72px;
+    background: rgba(13,13,11,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: rgba(232,224,208,0.65);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-reserve {
+    border: 1px solid var(--gold) !important;
+    color: var(--gold) !important;
+    padding: 0.45rem 1.4rem;
+    border-radius: 2px;
+    transition: all 0.25s !important;
+  }
+  .nav-reserve:hover {
+    background: var(--gold) !important;
+    color: var(--dark) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 110px 6% 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(78,94,56,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 45%),
+      radial-gradient(ellipse at 90% 10%, rgba(201,168,76,0.06) 0%, transparent 40%);
+  }
+  .hero-line {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+    opacity: 0.4;
+    margin-left: 6%;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 600px;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem;
+    animation: fadeUp 1s 0.1s ease both;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--gold);
+  }
+  .hero-eyebrow span {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  .hero p {
+    font-size: 1rem;
+    color: rgba(232,224,208,0.6);
+    line-height: 1.8;
+    max-width: 460px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: none; border-radius: 2px;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.25);
+  }
+  .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 0.9rem 2.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid rgba(232,224,208,0.3);
+    border-radius: 2px;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-info {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeUp 1s 0.5s ease both;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-info-item {}
+  .hero-info-item .label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+  .hero-info-item .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    font-weight: 400;
+  }
+  .hero-float {
+    position: absolute; right: 6%; top: 50%;
+    transform: translateY(-50%);
+    font-size: 13rem;
+    opacity: 0.04;
+    user-select: none;
+    animation: float 8s ease-in-out infinite;
+    font-family: serif;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(-50%) rotate(-3deg); }
+    50%      { transform: translateY(-55%) rotate(3deg); }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1.5rem; padding: 3rem 6%;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1;
+    height: 1px; background: rgba(201,168,76,0.2);
+  }
+  .divider-icon { color: var(--gold); font-size: 1.1rem; opacity: 0.7; }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 6%;
+    background: var(--dark2);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .about-visual {
+    position: relative; height: 500px;
+  }
+  .about-img-main {
+    width: 78%; height: 85%;
+    background: linear-gradient(160deg, var(--green) 0%, var(--olive) 100%);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 7rem;
+    position: absolute; bottom: 0; left: 0;
+    overflow: hidden;
+  }
+  .about-img-main::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+  }
+  .about-img-accent {
+    width: 50%; height: 48%;
+    background: linear-gradient(160deg, var(--olive) 0%, #1a1a0e 100%);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    position: absolute; top: 0; right: 0;
+    border: 3px solid var(--dark2);
+  }
+  .about-badge {
+    position: absolute; bottom: 24px; left: 24px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.6rem 1.2rem;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .section-eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: var(--gold);
+  }
+  .section-eyebrow span {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-body {
+    font-size: 0.92rem;
+    color: rgba(232,224,208,0.55);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+  }
+  .about-features { display: flex; flex-direction: column; gap: 1.2rem; }
+  .about-feat {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .about-feat:last-child { border-bottom: none; }
+  .feat-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    color: var(--gold);
+  }
+  .feat-text h4 { font-size: 0.88rem; font-weight: 600; color: var(--cream); margin-bottom: 0.2rem; letter-spacing: 0.04em; }
+  .feat-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* ── MENU ── */
+  .menu-section {
+    padding: 100px 6%;
+    background: var(--dark);
+  }
+  .menu-header { text-align: center; margin-bottom: 4rem; }
+  .menu-header .section-eyebrow { justify-content: center; }
+  .menu-header .section-eyebrow::before { display: none; }
+  .menu-header .section-body { margin: 0 auto; max-width: 500px; text-align: center; }
+  .menu-tabs {
+    display: flex; gap: 0; justify-content: center;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px; overflow: hidden;
+    width: fit-content; margin: 0 auto 3.5rem;
+  }
+  .mtab {
+    background: transparent;
+    color: var(--muted);
+    padding: 0.65rem 1.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: all 0.2s;
+    border-right: 1px solid rgba(201,168,76,0.2);
+  }
+  .mtab:last-child { border-right: none; }
+  .mtab.active, .mtab:hover { background: var(--gold); color: var(--dark); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1); }
+  .menu-item {
+    background: var(--dark2);
+    padding: 2rem;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .menu-item:hover { background: var(--olive); }
+  .menu-item-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
+  .menu-item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--cream); line-height: 1.2; }
+  .menu-item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); font-weight: 600; white-space: nowrap; margin-left: 1rem; }
+  .menu-item-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .menu-item-tag {
+    display: inline-block; margin-top: 0.8rem;
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.2rem 0.6rem; border-radius: 2px;
+  }
+
+  /* ── RESERVATION ── */
+  .reservation {
+    padding: 100px 6%;
+    background: var(--dark2);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .reservation::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(78,94,56,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 50%);
+  }
+  .reservation > * { position: relative; z-index: 1; }
+  .reservation .section-eyebrow { justify-content: center; }
+  .reservation .section-eyebrow::before { display: none; }
+  .reservation .section-body { max-width: 520px; margin: 0 auto 3.5rem; }
+  .res-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 0;
+    max-width: 780px; margin: 0 auto;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 2px; overflow: hidden;
+  }
+  .res-form input, .res-form select {
+    background: rgba(255,255,255,0.04);
+    border: none;
+    border-right: 1px solid rgba(201,168,76,0.15);
+    color: var(--cream);
+    padding: 1.1rem 1.4rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    outline: none;
+    width: 100%;
+  }
+  .res-form input::placeholder { color: var(--muted); }
+  .res-form select option { background: var(--dark2); }
+  .res-form .btn-gold { border-radius: 0; white-space: nowrap; padding: 1.1rem 2rem; }
+  .contact-alts { display: flex; gap: 2rem; justify-content: center; margin-top: 2.5rem; flex-wrap: wrap; }
+  .contact-alt {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: rgba(232,224,208,0.55);
+    font-size: 0.85rem; font-weight: 300;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-alt:hover { color: var(--gold); }
+  .contact-alt .icon { font-size: 1.1rem; }
+
+  /* ── LOCATION ── */
+  .location {
+    padding: 100px 6%;
+    background: var(--dark);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .map-frame {
+    height: 420px;
+    background: var(--olive);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    font-size: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .map-frame::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent, transparent 20px,
+      rgba(201,168,76,0.03) 20px, rgba(201,168,76,0.03) 21px
+    );
+  }
+  .map-frame-inner { position: relative; z-index: 1; text-align: center; }
+  .map-frame p { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+  .map-frame a { font-size: 0.82rem; color: var(--gold); text-decoration: none; font-weight: 500; letter-spacing: 0.06em; }
+  .info-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+  .info-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .info-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; color: var(--gold);
+    border-radius: 2px;
+  }
+  .info-item h4 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .info-item p { font-size: 0.88rem; color: rgba(232,224,208,0.6); line-height: 1.7; font-weight: 300; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080807;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    padding: 60px 6% 30px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 4rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 2rem;
+  }
+  .footer-brand .logo { display: block; margin-bottom: 1.2rem; font-size: 1.6rem; }
+  .footer-brand p { font-size: 0.83rem; color: var(--muted); line-height: 1.8; font-weight: 300; max-width: 260px; }
+  footer h5 {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  footer ul a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 300; transition: color 0.2s; }
+  footer ul a:hover { color: var(--cream); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--muted); }
+  .social-row { display: flex; gap: 0.8rem; }
+  .soc {
+    width: 34px; height: 34px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 0.9rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .soc:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about, .location { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .res-form { grid-template-columns: 1fr; }
+    .res-form input, .res-form select { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.15); }
+    .hero-info { gap: 1.5rem; flex-wrap: wrap; }
+    section { padding: 70px 5%; }
+    .hero-float { display: none; }
+    .menu-tabs { flex-wrap: wrap; width: 100%; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">L'<span>Atelier</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#localisation">Localisation</a></li>
+    <li><a href="#reservation" class="nav-reserve">Réserver</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Restaurant gastronomique · Ouagadougou</span>
+    </div>
+    <h1>L'art de la<br>table <em>revisité</em><br>au Burkina</h1>
+    <p>L'Atelier by Diacfa vous invite à une expérience culinaire raffinée au cœur de Ouagadougou. Des saveurs authentiques sublimées par une cuisine d'exception.</p>
+    <div class="hero-btns">
+      <a href="#reservation" class="btn-gold">Réserver une table</a>
+      <a href="#menu" class="btn-outline">Découvrir le menu</a>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item">
+        <div class="label">Téléphone</div>
+        <div class="value">+226 50 50 20 54</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="label">Horaires</div>
+        <div class="value">Lun – Sam, 12h – 22h</div>
+      </div>
+      <div class="hero-info-item">
+        <div class="label">Déjeuner à</div>
+        <div class="value">À partir de 10 000 FCFA</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-float">🍽</div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider">
+  <div class="divider-icon">✦</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-img-main">🍲</div>
+    <div class="about-img-accent">🥗</div>
+    <div class="about-badge">✦ Restaurant by Diacfa</div>
+  </div>
+  <div>
+    <div class="section-eyebrow"><span>Notre histoire</span></div>
+    <h2 class="section-title">Une cuisine<br><em>d'auteur</em> à Ouaga</h2>
+    <p class="section-body">L'Atelier Ouaga est un espace gastronomique unique où la tradition culinaire africaine rencontre la finesse de la cuisine moderne. Chaque plat est une création, chaque repas une expérience mémorable.</p>
+    <div class="about-features">
+      <div class="about-feat">
+        <div class="feat-icon">🌿</div>
+        <div class="feat-text">
+          <h4>Produits frais & locaux</h4>
+          <p>Nos ingrédients sont soigneusement sélectionnés auprès de producteurs locaux pour garantir fraîcheur et authenticité.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">👨‍🍳</div>
+        <div class="feat-text">
+          <h4>Chef Diacfa aux commandes</h4>
+          <p>Une vision culinaire unique qui allie techniques modernes et saveurs du terroir burkinabè.</p>
+        </div>
+      </div>
+      <div class="about-feat">
+        <div class="feat-icon">🥂</div>
+        <div class="feat-text">
+          <h4>Cadre élégant & intimiste</h4>
+          <p>Une salle raffinée pensée pour les repas d'affaires, dîners en amoureux et célébrations privées.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div class="section-eyebrow"><span>Carte du restaurant</span></div>
+    <h2 class="section-title">Notre <em>Menu</em></h2>
+    <p class="section-body">Une sélection de plats soigneusement composés pour éveiller vos papilles et vous faire voyager.</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="mtab active">Entrées</button>
+    <button class="mtab">Plats</button>
+    <button class="mtab">Desserts</button>
+    <button class="mtab">Boissons</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Salade de l'Atelier</div>
+        <div class="menu-item-price">4 500 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Mesclun de saison, tomates cerises, vinaigrette maison aux agrumes et copeaux de parmesan.</div>
+      <span class="menu-item-tag">Végétarien</span>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Velouté du Chef</div>
+        <div class="menu-item-price">5 000 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Velouté onctueux de légumes du marché, crème fraîche et herbes aromatiques.</div>
+      <span class="menu-item-tag">Signature</span>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Brochettes de Bœuf</div>
+        <div class="menu-item-price">12 000 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Pièce de bœuf grillée, sauce secrète de l'Atelier, accompagnée de frites maison et légumes sautés.</div>
+      <span class="menu-item-tag">Chef recommande</span>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Poulet Rôti Diacfa</div>
+        <div class="menu-item-price">9 500 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Poulet entier mariné 24h, rôti lentement, servi avec riz basmati et sauce aux épices locales.</div>
+      <span class="menu-item-tag">Bestseller</span>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Pavé de Capitaine</div>
+        <div class="menu-item-price">11 000 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Filet de capitaine du fleuve Niger, sauce vierge aux tomates fraîches, purée de banane plantain.</div>
+      <span class="menu-item-tag">Poisson du jour</span>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-top">
+        <div class="menu-item-name">Fondant Chocolat</div>
+        <div class="menu-item-price">3 500 FCFA</div>
+      </div>
+      <div class="menu-item-desc">Cœur coulant au chocolat noir 70%, boule de glace vanille et coulis de fruits rouges.</div>
+      <span class="menu-item-tag">Dessert</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="section-eyebrow"><span>Réservation en ligne</span></div>
+  <h2 class="section-title">Réservez votre <em>table</em></h2>
+  <p class="section-body">Assurez votre place pour un repas inoubliable. Réservation confirmée dans les 2 heures.</p>
+  <div class="res-form">
+    <input type="text" placeholder="Votre nom" />
+    <input type="date" />
+    <select>
+      <option>Nombre de personnes</option>
+      <option>1 personne</option>
+      <option>2 personnes</option>
+      <option>3-4 personnes</option>
+      <option>5+ personnes</option>
+    </select>
+    <a href="https://wa.me/22650502054" class="btn-gold">Réserver →</a>
+  </div>
+  <div class="contact-alts">
+    <a href="tel:+22650502054" class="contact-alt">
+      <span class="icon">📞</span> +226 50 50 20 54
+    </a>
+    <a href="tel:+22607074949" class="contact-alt">
+      <span class="icon">📞</span> +226 07 07 49 49
+    </a>
+    <a href="mailto:reservation@resto-latelier.com" class="contact-alt">
+      <span class="icon">✉️</span> reservation@resto-latelier.com
+    </a>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="localisation">
+  <div class="map-frame">
+    <div class="map-frame-inner">
+      <div>📍</div>
+      <p>Ouagadougou, Burkina Faso</p>
+      <a href="#">Voir sur Google Maps →</a>
+    </div>
+  </div>
+  <div>
+    <div class="section-eyebrow"><span>Nous trouver</span></div>
+    <h2 class="section-title">Au cœur de<br><em>Ouagadougou</em></h2>
+    <p class="section-body">Venez nous rendre visite dans notre espace élégant et chaleureux, conçu pour vous offrir un moment de grâce.</p>
+    <div class="info-list">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div>
+          <h4>Adresse</h4>
+          <p>01 BP 23 Ouagadougou 01<br>Burkina Faso</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div>
+          <h4>Horaires</h4>
+          <p>Lundi – Samedi : 12h00 – 22h00<br>Dimanche : sur réservation uniquement</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div>
+          <h4>Contacts</h4>
+          <p>+226 50 50 20 54 &nbsp;|&nbsp; +226 07 07 49 49<br>reservation@resto-latelier.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">L'<span>Atelier</span></a>
+      <p>Restaurant L'Atelier by Diacfa — Une expérience gastronomique unique au cœur de Ouagadougou, Burkina Faso.</p>
+    </div>
+    <div>
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#menu">Notre menu</a></li>
+        <li><a href="#reservation">Réservation</a></li>
+        <li><a href="#localisation">Localisation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="tel:+22650502054">+226 50 50 20 54</a></li>
+        <li><a href="tel:+22607074949">+226 07 07 49 49</a></li>
+        <li><a href="mailto:reservation@resto-latelier.com">reservation@resto-latelier.com</a></li>
+        <li><a href="https://instagram.com/latelierouagadiacfa">@latelierouagadiacfa</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 L'Atelier Ouaga by Diacfa — Tous droits réservés</p>
+    <div class="social-row">
+      <a href="https://instagram.com/latelierouagadiacfa" class="soc">📸</a>
+      <a href="https://wa.me/22650502054" class="soc">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.mtab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Garden — Restaurant Indien · Ouagadougou</title>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron:  #E8621A;
+    --saffron2: #C04F10;
+    --turmeric: #D4A017;
+    --turmeric2:#F5C842;
+    --green:    #2D5016;
+    --green2:   #3D6B1F;
+    --cream:    #FDF6ED;
+    --warm:     #F7EDD8;
+    --dark:     #1A0C00;
+    --text:     #2A1500;
+    --muted:    #7A5A3A;
+    --white:    #FFFFFF;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Nunito',sans-serif; background:var(--cream); color:var(--text); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    background:rgba(26,12,0,0.96); backdrop-filter:blur(14px);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 5%; height:66px;
+    border-bottom:2px solid var(--saffron);
+  }
+  .logo-nav { font-family:'Yeseva One',serif; font-size:1.3rem; color:var(--white); text-decoration:none; letter-spacing:0.04em; }
+  .logo-nav span { color:var(--turmeric2); }
+  .nav-links { display:flex; gap:1.8rem; list-style:none; align-items:center; }
+  .nav-links a { color:rgba(255,255,255,0.72); text-decoration:none; font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--turmeric2); }
+  .nav-cta { background:var(--saffron)!important; color:var(--white)!important; padding:0.45rem 1.4rem; border-radius:50px; }
+  .nav-cta:hover { background:var(--saffron2)!important; }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    background:linear-gradient(150deg, #1A0C00 0%, #2D1200 40%, #3D1A00 100%);
+    display:flex; align-items:center;
+    position:relative; overflow:hidden;
+    padding:110px 5% 80px;
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 65% 40%, rgba(232,98,26,0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 10% 70%, rgba(212,160,23,0.1) 0%, transparent 45%);
+  }
+  .hero-mandala {
+    position:absolute; right:-80px; top:50%; transform:translateY(-50%);
+    width:600px; height:600px;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(232,98,26,0.06) 10deg, transparent 20deg, rgba(212,160,23,0.06) 30deg, transparent 40deg, rgba(232,98,26,0.06) 50deg, transparent 60deg, rgba(212,160,23,0.06) 70deg, transparent 80deg, rgba(232,98,26,0.06) 90deg, transparent 100deg, rgba(212,160,23,0.06) 110deg, transparent 120deg, rgba(232,98,26,0.06) 130deg, transparent 140deg, rgba(212,160,23,0.06) 150deg, transparent 160deg, rgba(232,98,26,0.06) 170deg, transparent 180deg, rgba(212,160,23,0.06) 190deg, transparent 200deg, rgba(232,98,26,0.06) 210deg, transparent 220deg, rgba(212,160,23,0.06) 230deg, transparent 240deg, rgba(232,98,26,0.06) 250deg, transparent 260deg, rgba(212,160,23,0.06) 270deg, transparent 280deg, rgba(232,98,26,0.06) 290deg, transparent 300deg, rgba(212,160,23,0.06) 310deg, transparent 320deg, rgba(232,98,26,0.06) 330deg, transparent 340deg, rgba(212,160,23,0.06) 350deg, transparent 360deg);
+    border-radius:50%;
+    animation:spin 60s linear infinite;
+  }
+  @keyframes spin { to { transform:translateY(-50%) rotate(360deg); } }
+  .hero-content { position:relative; z-index:2; max-width:600px; }
+  @keyframes up { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(232,98,26,0.15); border:1px solid rgba(232,98,26,0.35);
+    color:var(--turmeric2); font-size:0.7rem;
+    letter-spacing:0.16em; text-transform:uppercase;
+    padding:0.4rem 1rem; border-radius:50px;
+    margin-bottom:1.8rem; animation:up 0.8s 0.1s both;
+  }
+  .hero h1 {
+    font-family:'Yeseva One',serif;
+    font-size:clamp(2.8rem,7vw,5.2rem);
+    line-height:1.05; color:var(--white);
+    margin-bottom:1.4rem; animation:up 0.8s 0.2s both;
+  }
+  .hero h1 span { color:var(--saffron); }
+  .hero-spices {
+    display:flex; gap:0.6rem; flex-wrap:wrap;
+    margin-bottom:1.6rem; animation:up 0.8s 0.25s both;
+  }
+  .spice { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.75); font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:0.3rem 0.9rem; border-radius:50px; }
+  .hero p { font-size:0.98rem; color:rgba(255,255,255,0.6); line-height:1.8; max-width:480px; margin-bottom:2.5rem; font-weight:300; animation:up 0.8s 0.3s both; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:up 0.8s 0.4s both; }
+  .btn-saffron { background:var(--saffron); color:var(--white); padding:0.95rem 2.4rem; font-size:0.82rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; border:none; border-radius:50px; cursor:pointer; text-decoration:none; display:inline-block; box-shadow:0 4px 20px rgba(232,98,26,0.4); transition:all 0.25s; }
+  .btn-saffron:hover { background:var(--saffron2); transform:translateY(-2px); }
+  .btn-outline { background:transparent; color:var(--white); padding:0.95rem 2.4rem; font-size:0.82rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; border:2px solid rgba(255,255,255,0.3); border-radius:50px; cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.25s; }
+  .btn-outline:hover { border-color:var(--turmeric2); color:var(--turmeric2); }
+  .hero-stats { display:flex; gap:2.5rem; margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid rgba(232,98,26,0.2); animation:up 0.8s 0.5s both; flex-wrap:wrap; }
+  .hstat-num { font-family:'Yeseva One',serif; font-size:2rem; color:var(--turmeric2); line-height:1; }
+  .hstat-lbl { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:0.2rem; font-weight:600; }
+
+  /* INFO BAR */
+  .info-bar {
+    background:var(--saffron);
+    padding:1rem 5%;
+    display:flex; justify-content:center; gap:4rem; flex-wrap:wrap;
+  }
+  .ib-item { display:flex; align-items:center; gap:0.6rem; color:var(--white); font-size:0.85rem; font-weight:700; }
+  .ib-item .icon { font-size:1.1rem; }
+
+  /* SECTIONS */
+  section { padding:100px 5%; }
+  .sec-label { font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--saffron); font-weight:700; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.8rem; }
+  .sec-label::before { content:''; display:block; width:24px; height:2px; background:var(--saffron); border-radius:1px; }
+  .sec-title { font-family:'Yeseva One',serif; font-size:clamp(2rem,4vw,3rem); line-height:1.1; color:var(--text); margin-bottom:1rem; }
+  .sec-title span { color:var(--saffron); }
+  .sec-sub { font-size:0.92rem; color:var(--muted); line-height:1.8; font-weight:300; max-width:500px; }
+
+  /* SPECIALTIES */
+  .specialties { background:var(--dark); }
+  .specialties .sec-label { color:var(--turmeric2); }
+  .specialties .sec-label::before { background:var(--turmeric2); }
+  .specialties .sec-title { color:var(--white); }
+  .specialties .sec-sub { color:rgba(255,255,255,0.5); }
+  .spec-header { margin-bottom:3.5rem; }
+  .spec-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
+  .spec-card {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(232,98,26,0.15);
+    border-radius:16px; padding:2rem;
+    transition:all 0.3s; cursor:default;
+  }
+  .spec-card:hover { background:rgba(232,98,26,0.08); border-color:rgba(232,98,26,0.4); transform:translateY(-4px); }
+  .spec-icon { font-size:2.5rem; margin-bottom:1rem; display:block; }
+  .spec-card h4 { font-family:'Yeseva One',serif; font-size:1.1rem; color:var(--white); margin-bottom:0.4rem; }
+  .spec-card p { font-size:0.82rem; color:rgba(255,255,255,0.5); line-height:1.7; font-weight:300; }
+  .spec-tag { display:inline-block; margin-top:0.8rem; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--turmeric2); border:1px solid rgba(212,160,23,0.3); padding:0.2rem 0.7rem; border-radius:50px; }
+
+  /* MENU */
+  .menu-section { background:var(--cream); }
+  .menu-head { text-align:center; margin-bottom:3.5rem; }
+  .menu-head .sec-label { justify-content:center; }
+  .menu-head .sec-label::before { display:none; }
+  .menu-head .sec-sub { margin:0 auto; text-align:center; }
+  .menu-cats { display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
+  .mcat { background:var(--white); border:2px solid rgba(232,98,26,0.15); color:var(--text); padding:0.6rem 1.6rem; border-radius:50px; font-weight:700; font-size:0.82rem; cursor:pointer; transition:all 0.2s; }
+  .mcat.active,.mcat:hover { background:var(--saffron); color:var(--white); border-color:var(--saffron); }
+  .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
+  .mcard { background:var(--white); border-radius:20px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,0.06); transition:transform 0.3s,box-shadow 0.3s; }
+  .mcard:hover { transform:translateY(-6px); box-shadow:0 12px 36px rgba(232,98,26,0.12); }
+  .mcard-img { height:160px; background:linear-gradient(135deg,var(--saffron2) 0%,var(--dark) 100%); display:flex; align-items:center; justify-content:center; font-size:5rem; position:relative; }
+  .mcard-img::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 70% 30%,rgba(212,160,23,0.2) 0%,transparent 60%); }
+  .mbadge { position:absolute; top:0.8rem; right:0.8rem; background:var(--turmeric); color:var(--dark); font-size:0.62rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:50px; z-index:1; }
+  .mveg { position:absolute; top:0.8rem; left:0.8rem; width:20px; height:20px; border:2px solid #2D5016; border-radius:3px; display:flex; align-items:center; justify-content:center; z-index:1; background:var(--white); }
+  .mveg::after { content:''; width:8px; height:8px; background:#2D5016; border-radius:50%; display:block; }
+  .mcard-body { padding:1.2rem 1.5rem 1.5rem; }
+  .mcard-name { font-family:'Yeseva One',serif; font-size:1.05rem; color:var(--text); margin-bottom:0.3rem; }
+  .mcard-desc { font-size:0.8rem; color:var(--muted); line-height:1.6; margin-bottom:1rem; font-weight:300; }
+  .mcard-footer { display:flex; justify-content:space-between; align-items:center; }
+  .mprice { font-family:'Yeseva One',serif; font-size:1.05rem; color:var(--saffron); }
+  .mbtn { background:var(--saffron); color:var(--white); border:none; border-radius:50px; padding:0.5rem 1.2rem; font-size:0.78rem; font-weight:700; cursor:pointer; transition:background 0.2s; }
+  .mbtn:hover { background:var(--saffron2); }
+
+  /* ORDER */
+  .order-section {
+    background:linear-gradient(135deg,var(--saffron2) 0%,var(--dark) 60%,#0A0500 100%);
+    text-align:center; position:relative; overflow:hidden;
+  }
+  .order-section::before {
+    content:'';
+    position:absolute; inset:0;
+    background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 5 L50 30 L75 30 L55 48 L63 73 L40 58 L17 73 L25 48 L5 30 L30 30 Z' fill='%23E8621A' fill-opacity='0.04'/%3E%3C/svg%3E") repeat;
+  }
+  .order-section > * { position:relative; z-index:1; }
+  .order-section .sec-label { justify-content:center; color:var(--turmeric2); }
+  .order-section .sec-label::before { display:none; }
+  .order-section .sec-title { color:var(--white); }
+  .order-section .sec-sub { color:rgba(255,255,255,0.55); margin:0 auto 3rem; text-align:center; }
+  .order-cards { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:3rem; }
+  .ocard { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:2rem 1.8rem; text-align:center; transition:background 0.2s; min-width:160px; }
+  .ocard:hover { background:rgba(232,98,26,0.15); border-color:rgba(232,98,26,0.4); }
+  .ocard .icon { font-size:2.2rem; margin-bottom:0.8rem; display:block; }
+  .ocard h4 { color:var(--white); font-weight:700; font-size:0.9rem; margin-bottom:0.2rem; }
+  .ocard p { color:rgba(255,255,255,0.45); font-size:0.75rem; font-weight:300; }
+  .wa-btn {
+    display:inline-flex; align-items:center; gap:0.9rem;
+    background:#25D366; color:var(--white);
+    padding:1.1rem 3rem; border-radius:50px;
+    font-size:1rem; font-weight:700;
+    text-decoration:none; letter-spacing:0.06em;
+    box-shadow:0 6px 28px rgba(37,211,102,0.4);
+    transition:all 0.25s;
+  }
+  .wa-btn:hover { transform:translateY(-3px); box-shadow:0 10px 36px rgba(37,211,102,0.5); }
+
+  /* CONTACT */
+  .contact {
+    background:var(--warm);
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:5rem; align-items:center;
+  }
+  .contact-info .sec-label::before { background:var(--saffron); }
+  .hours-box { background:var(--white); border-radius:16px; padding:2rem; margin-top:2rem; border-left:4px solid var(--saffron); }
+  .hours-box h4 { font-family:'Yeseva One',serif; font-size:1rem; color:var(--saffron); margin-bottom:1rem; }
+  .hours-row { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid var(--cream); font-size:0.85rem; font-weight:600; }
+  .hours-row:last-child { border-bottom:none; }
+  .hours-row span { color:var(--muted); font-weight:400; }
+  .contact-cards { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+  .ccard { background:var(--white); border-radius:12px; padding:1.2rem 1.4rem; display:flex; gap:1rem; align-items:center; border-left:3px solid var(--saffron); box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+  .ccard .icon { font-size:1.3rem; flex-shrink:0; }
+  .ccard h5 { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--saffron); margin-bottom:0.2rem; font-weight:700; }
+  .ccard p { font-size:0.85rem; color:var(--text); line-height:1.5; }
+  .ccard a { color:var(--saffron); text-decoration:none; font-weight:600; }
+  .map-placeholder { background:var(--dark); border-radius:20px; height:380px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem; font-size:4rem; position:relative; overflow:hidden; border:1px solid rgba(232,98,26,0.2); }
+  .map-placeholder::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(232,98,26,0.08) 0%, transparent 70%); }
+  .map-placeholder p { font-size:0.88rem; color:rgba(255,255,255,0.5); z-index:1; }
+  .map-placeholder a { font-size:0.82rem; color:var(--turmeric2); text-decoration:none; font-weight:600; z-index:1; }
+
+  /* FOOTER */
+  footer { background:var(--dark); padding:70px 5% 30px; border-top:3px solid var(--saffron); }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.07); margin-bottom:2rem; }
+  .footer-brand .logo-nav { display:block; margin-bottom:0.5rem; font-size:1.5rem; }
+  .footer-brand .ft-cat { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--saffron); margin-bottom:1rem; font-weight:700; }
+  .footer-brand p { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.8; font-weight:300; }
+  .rating-pill { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(212,160,23,0.12); border:1px solid rgba(212,160,23,0.25); border-radius:50px; padding:0.35rem 1rem; font-size:0.78rem; color:var(--turmeric2); margin-top:1rem; font-weight:700; }
+  footer h6 { font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--saffron); margin-bottom:1.2rem; font-weight:700; }
+  footer ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+  footer ul a { color:rgba(255,255,255,0.45); text-decoration:none; font-size:0.83rem; font-weight:300; transition:color 0.2s; }
+  footer ul a:hover { color:var(--turmeric2); }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:rgba(255,255,255,0.3); flex-wrap:wrap; gap:1rem; }
+  .socials { display:flex; gap:0.6rem; }
+  .soc { width:34px; height:34px; border:1px solid rgba(232,98,26,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,0.4); text-decoration:none; transition:all 0.2s; }
+  .soc:hover { border-color:var(--turmeric2); color:var(--turmeric2); }
+
+  /* RESPONSIVE */
+  @media (max-width:768px) {
+    .nav-links { display:none; }
+    .contact { grid-template-columns:1fr; gap:3rem; }
+    .footer-top { grid-template-columns:1fr; gap:2rem; }
+    section { padding:70px 5%; }
+    .info-bar { gap:1.5rem; }
+    .hero-mandala { display:none; }
+    .footer-bottom { flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo-nav">Royal <span>Garden</span></a>
+  <ul class="nav-links">
+    <li><a href="#specialites">Spécialités</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#contact">Localisation</a></li>
+    <li><a href="#commander" class="nav-cta">Réserver 🍛</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero::before"></div>
+  <div class="hero-mandala"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇧🇫 Cuisine indienne authentique · Ouagadougou</div>
+    <h1>L'Inde dans<br>votre <span>assiette</span><br>à Ouaga</h1>
+    <div class="hero-spices">
+      <span class="spice">🍛 Cuisine Indienne</span>
+      <span class="spice">🥂 Bar</span>
+      <span class="spice">🎉 Kitty Party</span>
+      <span class="spice">🛵 Livraison</span>
+    </div>
+    <p>Bienvenue au Royal Garden Restaurant, où nos spécialités indiennes sont préparées avec authenticité et les épices les plus parfumées d'Inde. Une expérience unique à Ouagadougou.</p>
+    <div class="hero-btns">
+      <a href="#commander" class="btn-saffron">Réserver une table</a>
+      <a href="#menu" class="btn-outline">Voir le menu</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">⭐ 4,8</div><div class="hstat-lbl">Note Google</div></div>
+      <div><div class="hstat-num">53</div><div class="hstat-lbl">Avis clients</div></div>
+      <div><div class="hstat-num">100%</div><div class="hstat-lbl">Authentique</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="ib-item"><span class="icon">🕙</span> Lun–Sam : 10h00 – 15h00</div>
+  <div class="ib-item"><span class="icon">🕔</span> Soir : 17h30 – 22h00+</div>
+  <div class="ib-item"><span class="icon">📞</span> +226 66 76 32 99</div>
+  <div class="ib-item"><span class="icon">📍</span> Koulouba, Ouagadougou</div>
+</div>
+
+<!-- SPECIALTIES -->
+<section class="specialties" id="specialites">
+  <div class="spec-header">
+    <div class="sec-label">Ce qui nous rend uniques</div>
+    <h2 class="sec-title" style="color:white;">Nos <span>Spécialités</span></h2>
+    <p class="sec-sub">Une cuisine indienne 100% authentique, préparée avec des épices importées directement d'Inde.</p>
+  </div>
+  <div class="spec-grid">
+    <div class="spec-card">
+      <span class="spec-icon">🍗</span>
+      <h4>Tandoori & Grillades</h4>
+      <p>Poulet tandoori, kebabs et brochettes marinés aux épices, cuits dans notre four tandoor traditionnel.</p>
+      <span class="spec-tag">Spécialité maison</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-icon">🍛</span>
+      <h4>Currys & Masalas</h4>
+      <p>Butter Chicken, Chicken Tikka Masala, Mutton Kadai — des sauces riches et parfumées qui réchauffent l'âme.</p>
+      <span class="spec-tag">Best-seller</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-icon">🥬</span>
+      <h4>Végétarien</h4>
+      <p>Palak Paneer, Dal Kabhi, Paneer Peas Sag — une large sélection de plats végétariens savoureux.</p>
+      <span class="spec-tag">Veg friendly</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-icon">🍞</span>
+      <h4>Pains & Riz</h4>
+      <p>Naan frais, Roti, Lachha Paratha et biryani parfumé au safran — les accompagnements parfaits.</p>
+      <span class="spec-tag">Fait maison</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-icon">🎋</span>
+      <h4>Chinese Platter</h4>
+      <p>Hakka Noodles, Spring Rolls, Chow Mein — une touche asiatique dans notre carte pour varier les plaisirs.</p>
+      <span class="spec-tag">Fusion</span>
+    </div>
+    <div class="spec-card">
+      <span class="spec-icon">🎉</span>
+      <h4>Kitty Party & Événements</h4>
+      <p>Organisez vos fêtes, anniversaires et événements privés dans notre espace dédié. Formules sur mesure.</p>
+      <span class="spec-tag">Sur réservation</span>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-head">
+    <div class="sec-label">Notre carte</div>
+    <h2 class="sec-title">Notre <span>Menu</span></h2>
+    <p class="sec-sub">Des saveurs indiennes authentiques pour tous les goûts. Végétarien, viande, poisson et plus.</p>
+  </div>
+  <div class="menu-cats">
+    <button class="mcat active">Tout voir</button>
+    <button class="mcat">🍗 Grillades</button>
+    <button class="mcat">🍛 Currys</button>
+    <button class="mcat">🥬 Végétarien</button>
+    <button class="mcat">🍞 Pains & Riz</button>
+  </div>
+  <div class="menu-grid">
+    <div class="mcard">
+      <div class="mcard-img">🍗<div class="mbadge">Signature</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Chicken Tikka Masala</div>
+        <div class="mcard-desc">Morceaux de poulet grillés dans une sauce tomate crémeuse aux épices indiennes. Servi avec naan.</div>
+        <div class="mcard-footer"><span class="mprice">5 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🧆<div class="mbadge">Best-seller</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Butter Chicken</div>
+        <div class="mcard-desc">Poulet tendre dans une sauce au beurre onctueuse et épices douces. Le classique incontournable.</div>
+        <div class="mcard-footer"><span class="mprice">5 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🥬<div class="mbadge">Végétarien</div><div class="mveg"></div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Palak Paneer</div>
+        <div class="mcard-desc">Fromage frais indien dans une sauce aux épinards crémeuse et épicée. Un plat emblématique.</div>
+        <div class="mcard-footer"><span class="mprice">4 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍖<div class="mbadge">Spécial</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Mutton Kadai</div>
+        <div class="mcard-desc">Agneau mijoté aux poivrons, tomates et épices dans un kadai traditionnel. Riche et savoureux.</div>
+        <div class="mcard-footer"><span class="mprice">6 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍟<div class="mbadge">Entrée</div><div class="mveg"></div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Veg Crispy / Spring Rolls</div>
+        <div class="mcard-desc">Bouchées croustillantes aux légumes épicés. Parfaites en entrée ou en accompagnement.</div>
+        <div class="mcard-footer"><span class="mprice">3 000 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍱</div>
+      <div class="mcard-body">
+        <div class="mcard-name">Formule Buffet</div>
+        <div class="mcard-desc">Buffet complet avec entrée, plat principal, dessert, roti/naan et boisson soft. Idéal pour les groupes.</div>
+        <div class="mcard-footer"><span class="mprice">11 000 FCFA/pers.</span><button class="mbtn">Réserver</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="order-section" id="commander">
+  <div class="sec-label">Commande & Réservation</div>
+  <h2 class="sec-title">Commandez ou<br><span style="color:var(--turmeric2)">réservez votre table</span></h2>
+  <p class="sec-sub">Sur place, à emporter ou en livraison — nous vous régalons où que vous soyez à Ouagadougou.</p>
+  <div class="order-cards">
+    <div class="ocard"><span class="icon">🍽️</span><h4>Sur place</h4><p>Ambiance chaleureuse</p></div>
+    <div class="ocard"><span class="icon">🛵</span><h4>Livraison</h4><p>À domicile</p></div>
+    <div class="ocard"><span class="icon">📦</span><h4>À emporter</h4><p>Commandez à l'avance</p></div>
+    <div class="ocard"><span class="icon">🎉</span><h4>Kitty Party</h4><p>Événements privés</p></div>
+  </div>
+  <a href="https://wa.me/22666763299" class="wa-btn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Commander sur WhatsApp
+  </a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="sec-label">Nous trouver</div>
+    <h2 class="sec-title">Venez nous <span>rendre visite</span></h2>
+    <p class="sec-sub">Niché dans le quartier Koulouba, notre restaurant vous accueille dans une ambiance chaleureuse inspirée de l'Inde.</p>
+    <div class="hours-box">
+      <h4>🕐 Horaires d'ouverture</h4>
+      <div class="hours-row">Déjeuner — Lun au Sam <span>10h00 – 15h00</span></div>
+      <div class="hours-row">Dîner — Lun au Sam <span>17h30 – 22h00</span></div>
+      <div class="hours-row">Dimanche <span>Sur réservation</span></div>
+    </div>
+    <div class="contact-cards">
+      <div class="ccard">
+        <span class="icon">📞</span>
+        <div>
+          <h5>Téléphone & WhatsApp</h5>
+          <p><a href="tel:+22666763299">+226 66 76 32 99</a> · <a href="tel:+22666763295">66 76 32 95</a></p>
+        </div>
+      </div>
+      <div class="ccard">
+        <span class="icon">📍</span>
+        <div>
+          <h5>Adresse</h5>
+          <p>Avenue du Président Sayes Zerbo<br>Rue Alimata Salambere, Koulouba — Ouagadougou</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-placeholder">
+    <span>📍</span>
+    <p style="color:rgba(255,255,255,0.6);">Quartier Koulouba, Ouagadougou</p>
+    <a href="#">Voir sur Google Maps →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo-nav">Royal <span>Garden</span></a>
+      <div class="ft-cat">Restaurant Indien · Bar · Ouagadougou</div>
+      <p>Cuisine indienne authentique préparée avec passion et les meilleures épices d'Inde. Le seul restaurant indien de Ouagadougou.</p>
+      <div class="rating-pill">⭐ 4,8 / 5 · 53 avis Google</div>
+    </div>
+    <div>
+      <h6>Navigation</h6>
+      <ul>
+        <li><a href="#specialites">Spécialités</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#commander">Commander</a></li>
+        <li><a href="#contact">Localisation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="tel:+22666763299">+226 66 76 32 99</a></li>
+        <li><a href="tel:+22666763295">+226 66 76 32 95</a></li>
+        <li><a href="#">Koulouba, Ouagadougou</a></li>
+        <li><a href="https://instagram.com/royalgardenouaga">@royalgardenouaga</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Royal Garden Restaurant — Cuisine Indienne Ouagadougou</p>
+    <div class="socials">
+      <a href="https://instagram.com/royalgardenouaga" class="soc">📸</a>
+      <a href="#" class="soc">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.mcat').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.mcat').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

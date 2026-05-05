@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P'tit Paris — Restaurant · Pâtisserie · Boulangerie · Glacier</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy:  #7B1E2E;
+    --burgundy2: #5C1622;
+    --rose:      #C4596A;
+    --cream:     #FDF8F2;
+    --warm:      #F5EDE0;
+    --gold:      #C9973A;
+    --gold-lt:   #E8C97A;
+    --dark:      #1A0A0E;
+    --text:      #2D1A20;
+    --muted:     #8A6A72;
+    --white:     #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Raleway', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(123,30,46,0.97); backdrop-filter: blur(14px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; height: 66px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  }
+  .logo-nav {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 900;
+    color: var(--white); letter-spacing: 0.03em;
+    text-decoration: none;
+  }
+  .logo-nav span { color: var(--gold-lt); font-style: italic; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,0.78); text-decoration: none;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.13em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-lt); }
+  .nav-cta {
+    background: var(--gold) !important; color: var(--dark) !important;
+    padding: 0.45rem 1.4rem; border-radius: 50px;
+    font-weight: 700 !important;
+  }
+  .nav-cta:hover { background: var(--gold-lt) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(145deg, var(--burgundy2) 0%, var(--burgundy) 55%, #9B2E42 100%);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 110px 5% 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(201,151,58,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 10% 80%, rgba(0,0,0,0.3) 0%, transparent 45%);
+  }
+  .hero-dots {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+    background: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E") repeat;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 600px; }
+  @keyframes up { from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);} }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: var(--gold-lt); font-size: 0.7rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 50px;
+    margin-bottom: 1.8rem; animation: up 0.8s 0.1s both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-weight: 900; line-height: 1.02;
+    color: var(--white); margin-bottom: 1.4rem;
+    animation: up 0.8s 0.2s both;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold-lt); font-weight: 400; }
+  .hero-tags {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    margin-bottom: 1.8rem; animation: up 0.8s 0.25s both;
+  }
+  .tag {
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.3rem 0.9rem;
+    border-radius: 50px; border: 1px solid rgba(255,255,255,0.15);
+  }
+  .hero p {
+    font-size: 1rem; color: rgba(255,255,255,0.65);
+    line-height: 1.8; max-width: 480px;
+    margin-bottom: 2.5rem; font-weight: 300;
+    animation: up 0.8s 0.3s both;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: up 0.8s 0.4s both; }
+  .btn-gold {
+    background: var(--gold); color: var(--dark);
+    padding: 0.95rem 2.4rem; font-size: 0.82rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 50px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    box-shadow: 0 4px 20px rgba(201,151,58,0.4);
+    transition: all 0.25s;
+  }
+  .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); }
+  .btn-white {
+    background: transparent; color: var(--white);
+    padding: 0.95rem 2.4rem; font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 2px solid rgba(255,255,255,0.4); border-radius: 50px;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.25s;
+  }
+  .btn-white:hover { border-color: var(--gold-lt); color: var(--gold-lt); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.12);
+    animation: up 0.8s 0.5s both; flex-wrap: wrap;
+  }
+  .hstat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; color: var(--gold-lt); font-weight: 700; line-height: 1;
+  }
+  .hstat-lbl { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.2rem; font-weight: 500; }
+  .hero-float { position: absolute; right: 5%; bottom: 5%; font-size: 14rem; opacity: 0.06; user-select: none; animation: float 7s ease-in-out infinite; }
+  @keyframes float { 0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg) translateY(-15px);} }
+
+  /* ── ADDRESSES STRIP ── */
+  .addresses {
+    background: var(--dark);
+    padding: 0 5%;
+    border-bottom: 3px solid var(--gold);
+  }
+  .addr-inner { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .addr-inner::-webkit-scrollbar { display: none; }
+  .addr-item {
+    flex: 1; min-width: 220px;
+    padding: 1.4rem 1.5rem;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    display: flex; gap: 1rem; align-items: center;
+    transition: background 0.2s; cursor: pointer;
+  }
+  .addr-item:last-child { border-right: none; }
+  .addr-item:hover { background: rgba(255,255,255,0.04); }
+  .addr-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .addr-name { font-size: 0.78rem; font-weight: 700; color: var(--gold-lt); letter-spacing: 0.06em; text-transform: uppercase; }
+  .addr-phone { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 0.1rem; font-weight: 300; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 5%; }
+  .sec-label {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--burgundy); font-weight: 700; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .sec-label::before { content:''; display:block; width:24px; height:2px; background:var(--burgundy); border-radius:1px; }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1;
+    color: var(--text); margin-bottom: 1rem;
+  }
+  .sec-title em { font-style: italic; color: var(--burgundy); }
+  .sec-sub { font-size: 0.92rem; color: var(--muted); line-height: 1.8; font-weight: 300; max-width: 500px; }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .about-card {
+    background: var(--warm); border-radius: 16px;
+    padding: 1.8rem; text-align: center;
+    transition: transform 0.3s; cursor: default;
+  }
+  .about-card:hover { transform: translateY(-4px); }
+  .about-card .icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .about-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--burgundy); margin-bottom: 0.3rem; }
+  .about-card p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .about-card.highlight { background: var(--burgundy); }
+  .about-card.highlight h4 { color: var(--gold-lt); }
+  .about-card.highlight p { color: rgba(255,255,255,0.65); }
+  .about-feats { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2.5rem; }
+  .about-feat { display: flex; gap: 0.8rem; align-items: center; }
+  .about-feat .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--burgundy); flex-shrink: 0; }
+  .about-feat p { font-size: 0.88rem; color: var(--text); font-weight: 400; }
+
+  /* ── MENU ── */
+  .menu-section { background: var(--cream); }
+  .menu-head { text-align: center; margin-bottom: 3.5rem; }
+  .menu-head .sec-label { justify-content: center; }
+  .menu-head .sec-label::before { display: none; }
+  .menu-head .sec-sub { margin: 0 auto; text-align: center; }
+  .menu-cats { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .mcat {
+    background: var(--white); border: 2px solid rgba(123,30,46,0.12);
+    color: var(--text); padding: 0.6rem 1.6rem;
+    border-radius: 50px; font-weight: 600; font-size: 0.82rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .mcat.active, .mcat:hover { background: var(--burgundy); color: var(--white); border-color: var(--burgundy); }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 1.5rem; }
+  .mcard {
+    background: var(--white); border-radius: 20px;
+    overflow: hidden; box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .mcard:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(123,30,46,0.12); }
+  .mcard-img {
+    height: 170px;
+    background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; position: relative;
+  }
+  .mcard-img::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 60%); }
+  .mcard-badge { position: absolute; top: 0.8rem; left: 0.8rem; background: var(--gold); color: var(--dark); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 50px; z-index: 1; }
+  .mcard-body { padding: 1.3rem 1.5rem 1.5rem; }
+  .mcard-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .mcard-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.1rem; font-weight: 300; }
+  .mcard-footer { display: flex; justify-content: space-between; align-items: center; }
+  .mprice { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--burgundy); font-weight: 700; }
+  .mbtn { background: var(--burgundy); color: var(--white); border: none; border-radius: 50px; padding: 0.5rem 1.2rem; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+  .mbtn:hover { background: var(--burgundy2); }
+
+  /* ── LOCATIONS ── */
+  .locations { background: var(--white); }
+  .loc-head { text-align: center; margin-bottom: 3.5rem; }
+  .loc-head .sec-label { justify-content: center; }
+  .loc-head .sec-label::before { display: none; }
+  .loc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+  .loc-card {
+    background: var(--warm); border-radius: 20px;
+    overflow: hidden; transition: transform 0.3s;
+  }
+  .loc-card:hover { transform: translateY(-4px); }
+  .loc-map {
+    height: 140px;
+    background: linear-gradient(135deg, var(--burgundy) 0%, #9B2E42 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; position: relative;
+  }
+  .loc-map::after { content:''; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%); }
+  .loc-tag { position: absolute; top: 0.8rem; right: 0.8rem; background: var(--gold); color: var(--dark); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 50px; z-index: 1; }
+  .loc-body { padding: 1.5rem; }
+  .loc-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--burgundy); margin-bottom: 1rem; }
+  .loc-info { display: flex; flex-direction: column; gap: 0.6rem; }
+  .loc-row { display: flex; gap: 0.6rem; align-items: center; font-size: 0.85rem; color: var(--text); font-weight: 400; }
+  .loc-row .li { font-size: 1rem; flex-shrink: 0; }
+  .loc-actions { display: flex; gap: 0.6rem; margin-top: 1.3rem; }
+  .loc-btn { flex: 1; text-align: center; background: var(--burgundy); color: var(--white); border: none; border-radius: 50px; padding: 0.6rem; font-size: 0.75rem; font-weight: 700; cursor: pointer; text-decoration: none; display: block; transition: background 0.2s; }
+  .loc-btn:hover { background: var(--burgundy2); }
+  .loc-btn.outline { background: transparent; border: 2px solid var(--burgundy); color: var(--burgundy); }
+  .loc-btn.outline:hover { background: var(--burgundy); color: var(--white); }
+
+  /* ── ORDER CTA ── */
+  .order-cta {
+    background: linear-gradient(135deg, var(--burgundy2) 0%, var(--burgundy) 100%);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .order-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+  .order-cta > * { position: relative; z-index: 1; }
+  .order-cta .sec-label { justify-content: center; color: var(--gold-lt); }
+  .order-cta .sec-label::before { background: var(--gold-lt); display: none; }
+  .order-cta .sec-title { color: var(--white); }
+  .order-cta .sec-sub { color: rgba(255,255,255,0.6); margin: 0 auto 3rem; text-align: center; }
+  .order-methods { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .omethod {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 1.8rem 2rem; text-align: center;
+    transition: background 0.2s; min-width: 160px;
+  }
+  .omethod:hover { background: rgba(255,255,255,0.14); }
+  .omethod .icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+  .omethod h4 { color: var(--white); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .omethod p { color: rgba(255,255,255,0.5); font-size: 0.75rem; font-weight: 300; }
+  .wa-big {
+    display: inline-flex; align-items: center; gap: 0.9rem;
+    background: #25D366; color: var(--white);
+    padding: 1.1rem 3rem; border-radius: 50px;
+    font-size: 1rem; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.06em;
+    box-shadow: 0 6px 28px rgba(37,211,102,0.4);
+    transition: all 0.25s;
+  }
+  .wa-big:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(37,211,102,0.5); }
+
+  /* ── HOURS ── */
+  .hours-strip {
+    background: var(--warm);
+    padding: 3rem 5%;
+    display: flex; justify-content: center; align-items: center;
+    gap: 4rem; flex-wrap: wrap;
+    border-top: 3px solid var(--gold);
+  }
+  .hs-item { text-align: center; }
+  .hs-icon { font-size: 2rem; margin-bottom: 0.4rem; display: block; }
+  .hs-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; font-weight: 600; }
+  .hs-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--burgundy); font-weight: 700; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--dark); padding: 70px 5% 30px; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand .logo-nav { display: block; margin-bottom: 0.5rem; font-size: 1.5rem; }
+  .footer-brand .ft-sub { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 600; }
+  .footer-brand p { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.8; font-weight: 300; max-width: 240px; }
+  footer h6 { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 700; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  footer ul a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.83rem; font-weight: 300; transition: color 0.2s; }
+  footer ul a:hover { color: var(--gold-lt); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); flex-wrap: wrap; gap: 1rem; }
+  .socials { display: flex; gap: 0.6rem; }
+  .soc { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.9rem; transition: all 0.2s; }
+  .soc:hover { border-color: var(--gold); color: var(--gold); }
+  .rating-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+  .rbadge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(201,151,58,0.12); border: 1px solid rgba(201,151,58,0.25); border-radius: 50px; padding: 0.3rem 0.8rem; font-size: 0.75rem; color: var(--gold-lt); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .hero-float { display: none; }
+    section { padding: 70px 5%; }
+    .footer-bottom { flex-direction: column; }
+    .hours-strip { gap: 2rem; }
+    .addr-item { min-width: 180px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo-nav">P'tit <span>Paris</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#adresses">Adresses</a></li>
+    <li><a href="#commander">Commander</a></li>
+    <li><a href="#commander" class="nav-cta">Commander 🛒</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇧🇫 Ouagadougou · 3 adresses · Ouvert 7j/7</div>
+    <h1>Le goût de<br><em>Paris</em> au<br>Burkina</h1>
+    <div class="hero-tags">
+      <span class="tag">🍽️ Restaurant</span>
+      <span class="tag">🥐 Boulangerie</span>
+      <span class="tag">🎂 Pâtisserie</span>
+      <span class="tag">🍦 Glacier</span>
+    </div>
+    <p>Depuis le petit-déjeuner jusqu'au dîner, P'tit Paris vous régale avec des créations artisanales et des plats savoureux dans 3 adresses à Ouagadougou.</p>
+    <div class="hero-btns">
+      <a href="#commander" class="btn-gold">Commander maintenant</a>
+      <a href="#menu" class="btn-white">Voir le menu</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">⭐ 4,3</div><div class="hstat-lbl">Note Gounghin</div></div>
+      <div><div class="hstat-num">1 300+</div><div class="hstat-lbl">Avis Google</div></div>
+      <div><div class="hstat-num">3</div><div class="hstat-lbl">Adresses</div></div>
+      <div><div class="hstat-num">6h30</div><div class="hstat-lbl">Ouverture</div></div>
+    </div>
+  </div>
+  <div class="hero-float">🥐</div>
+</section>
+
+<!-- ADDRESSES STRIP -->
+<div class="addresses">
+  <div class="addr-inner">
+    <div class="addr-item">
+      <span class="addr-icon">📍</span>
+      <div>
+        <div class="addr-name">Gounghin</div>
+        <div class="addr-phone">54 16 16 16</div>
+      </div>
+    </div>
+    <div class="addr-item">
+      <span class="addr-icon">📍</span>
+      <div>
+        <div class="addr-name">Koulouba</div>
+        <div class="addr-phone">06 17 17 17</div>
+      </div>
+    </div>
+    <div class="addr-item">
+      <span class="addr-icon">📍</span>
+      <div>
+        <div class="addr-name">Zad</div>
+        <div class="addr-phone">04 18 18 18</div>
+      </div>
+    </div>
+    <div class="addr-item">
+      <span class="addr-icon">🕐</span>
+      <div>
+        <div class="addr-name">Horaires</div>
+        <div class="addr-phone">7j/7 · 6h30 – 23h00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-grid">
+    <div class="about-card">
+      <span class="icon">🥐</span>
+      <h4>Boulangerie</h4>
+      <p>Pains, viennoiseries et brioches frais chaque matin dès 6h30.</p>
+    </div>
+    <div class="about-card highlight">
+      <span class="icon">🎂</span>
+      <h4>Pâtisserie</h4>
+      <p>Gâteaux sur mesure, bûches, entremets et créations chocolat.</p>
+    </div>
+    <div class="about-card highlight">
+      <span class="icon">🍽️</span>
+      <h4>Restaurant</h4>
+      <p>Burgers, pizzas, plats du jour et spécialités pour tous les repas.</p>
+    </div>
+    <div class="about-card">
+      <span class="icon">🍦</span>
+      <h4>Glacier</h4>
+      <p>Glaces artisanales et desserts glacés pour se rafraîchir.</p>
+    </div>
+  </div>
+  <div>
+    <div class="sec-label">Qui sommes-nous</div>
+    <h2 class="sec-title">Le rendez-vous<br><em>gourmand</em> de Ouaga</h2>
+    <p class="sec-sub">P'tit Paris c'est bien plus qu'un restaurant — c'est l'adresse incontournable de Ouagadougou pour les amoureux de la bonne cuisine. Pâtisserie fine, boulangerie artisanale, restaurant et glacier réunis sous un même toit.</p>
+    <div class="about-feats">
+      <div class="about-feat"><div class="dot"></div><p>Ouvert 7j/7 de 6h30 à 23h00</p></div>
+      <div class="about-feat"><div class="dot"></div><p>3 adresses à Ouagadougou pour vous servir</p></div>
+      <div class="about-feat"><div class="dot"></div><p>Pâtisseries et gâteaux personnalisés sur commande</p></div>
+      <div class="about-feat"><div class="dot"></div><p>Plus de 1 300 avis positifs sur Google</p></div>
+    </div>
+    <a href="#commander" class="btn-gold" style="display:inline-block;margin-top:2rem;">Commander maintenant</a>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-head">
+    <div class="sec-label">Nos créations</div>
+    <h2 class="sec-title">Notre <em>Menu</em></h2>
+    <p class="sec-sub">Du petit-déjeuner au dîner, découvrez nos spécialités préparées chaque jour avec passion.</p>
+  </div>
+  <div class="menu-cats">
+    <button class="mcat active">Tout voir</button>
+    <button class="mcat">🥐 Boulangerie</button>
+    <button class="mcat">🎂 Pâtisserie</button>
+    <button class="mcat">🍔 Plats</button>
+    <button class="mcat">🍦 Glacier</button>
+  </div>
+  <div class="menu-grid">
+    <div class="mcard">
+      <div class="mcard-img">🥐<div class="mcard-badge">Matin</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Croissant au Beurre</div>
+        <div class="mcard-desc">Croissant pur beurre feuilleté, croustillant dehors et moelleux dedans. La tradition française à Ouaga.</div>
+        <div class="mcard-footer"><span class="mprice">500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🎂<div class="mcard-badge">Signature</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Entremets Chocolat</div>
+        <div class="mcard-desc">Gâteau mousse au chocolat, crémeux caramel et glaçage miroir. Une création d'exception.</div>
+        <div class="mcard-footer"><span class="mprice">À partir de 8 000 FCFA</span><button class="mbtn">Demander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍔<div class="mcard-badge">Bestseller</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Burger P'tit Paris</div>
+        <div class="mcard-desc">Steak haché maison, cheddar fondu, salade, tomates et sauce secrète. Accompagné de frites.</div>
+        <div class="mcard-footer"><span class="mprice">4 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍕<div class="mcard-badge">Plat</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Pizza Maison</div>
+        <div class="mcard-desc">Pâte fine croustillante, sauce tomate maison, mozzarella et garnitures au choix.</div>
+        <div class="mcard-footer"><span class="mprice">À partir de 4 000 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🎂<div class="mcard-badge">Noël 2025</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Bûche de Noël</div>
+        <div class="mcard-desc">Bûche glacée ou pâtissière, déclinée en plusieurs parfums. Commande anticipée recommandée.</div>
+        <div class="mcard-footer"><span class="mprice">À partir de 12 000 FCFA</span><button class="mbtn">Réserver</button></div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="mcard-img">🍦<div class="mcard-badge">Glacier</div></div>
+      <div class="mcard-body">
+        <div class="mcard-name">Coupe Glacée</div>
+        <div class="mcard-desc">Boules de glace artisanale aux parfums variés, chantilly, coulis et éclats de biscuit.</div>
+        <div class="mcard-footer"><span class="mprice">1 500 FCFA</span><button class="mbtn">Commander</button></div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2.5rem;">
+    <a href="https://menu.ptitparis.com/menu" class="btn-gold" style="display:inline-block;">Voir le menu complet 🍽️</a>
+  </div>
+</section>
+
+<!-- HOURS STRIP -->
+<div class="hours-strip">
+  <div class="hs-item"><span class="hs-icon">🕕</span><div class="hs-label">Ouverture</div><div class="hs-value">6h30</div></div>
+  <div class="hs-item"><span class="hs-icon">🕚</span><div class="hs-label">Fermeture</div><div class="hs-value">23h00</div></div>
+  <div class="hs-item"><span class="hs-icon">📅</span><div class="hs-label">Jours</div><div class="hs-value">7j/7</div></div>
+  <div class="hs-item"><span class="hs-icon">🏪</span><div class="hs-label">Adresses</div><div class="hs-value">3 à Ouaga</div></div>
+  <div class="hs-item"><span class="hs-icon">🚀</span><div class="hs-label">Livraison</div><div class="hs-value">Disponible</div></div>
+</div>
+
+<!-- LOCATIONS -->
+<section class="locations" id="adresses">
+  <div class="loc-head">
+    <div class="sec-label">Nos adresses</div>
+    <h2 class="sec-title">Trouvez le P'tit Paris<br><em>près de vous</em></h2>
+  </div>
+  <div class="loc-grid">
+    <div class="loc-card">
+      <div class="loc-map">📍<div class="loc-tag">⭐ 4,3 · 1 300 avis</div></div>
+      <div class="loc-body">
+        <div class="loc-name">P'tit Paris Gounghin</div>
+        <div class="loc-info">
+          <div class="loc-row"><span class="li">📞</span> 54 16 16 16</div>
+          <div class="loc-row"><span class="li">📍</span> Quartier Gounghin, Ouagadougou</div>
+          <div class="loc-row"><span class="li">🕐</span> 6h30 – 23h00, 7j/7</div>
+        </div>
+        <div class="loc-actions">
+          <a href="https://wa.me/22654161616" class="loc-btn">WhatsApp</a>
+          <a href="tel:+22654161616" class="loc-btn outline">Appeler</a>
+        </div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-map">📍<div class="loc-tag">⭐ 4,2 · 447 avis</div></div>
+      <div class="loc-body">
+        <div class="loc-name">P'tit Paris Koulouba</div>
+        <div class="loc-info">
+          <div class="loc-row"><span class="li">📞</span> 06 17 17 17</div>
+          <div class="loc-row"><span class="li">📍</span> Quartier Koulouba, Ouagadougou</div>
+          <div class="loc-row"><span class="li">🕐</span> 6h30 – 23h00, 7j/7</div>
+        </div>
+        <div class="loc-actions">
+          <a href="https://wa.me/22606171717" class="loc-btn">WhatsApp</a>
+          <a href="tel:+22606171717" class="loc-btn outline">Appeler</a>
+        </div>
+      </div>
+    </div>
+    <div class="loc-card">
+      <div class="loc-map">📍<div class="loc-tag">Nouvelle adresse</div></div>
+      <div class="loc-body">
+        <div class="loc-name">P'tit Paris Zad</div>
+        <div class="loc-info">
+          <div class="loc-row"><span class="li">📞</span> 04 18 18 18</div>
+          <div class="loc-row"><span class="li">📍</span> Zone Zad, Ouagadougou</div>
+          <div class="loc-row"><span class="li">🕐</span> 6h30 – 23h00, 7j/7</div>
+        </div>
+        <div class="loc-actions">
+          <a href="https://wa.me/22604181818" class="loc-btn">WhatsApp</a>
+          <a href="tel:+22604181818" class="loc-btn outline">Appeler</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER CTA -->
+<section class="order-cta" id="commander">
+  <div class="sec-label">Commande facile</div>
+  <h2 class="sec-title">Commandez en<br><em style="color:var(--gold-lt)">quelques secondes</em></h2>
+  <p class="sec-sub">Choisissez votre adresse préférée et passez votre commande directement via WhatsApp ou par téléphone.</p>
+  <div class="order-methods">
+    <div class="omethod"><span class="icon">💬</span><h4>WhatsApp</h4><p>Commande rapide</p></div>
+    <div class="omethod"><span class="icon">📞</span><h4>Téléphone</h4><p>Parlez à l'équipe</p></div>
+    <div class="omethod"><span class="icon">🏪</span><h4>Sur place</h4><p>3 adresses à Ouaga</p></div>
+    <div class="omethod"><span class="icon">🛵</span><h4>Livraison</h4><p>À domicile</p></div>
+  </div>
+  <a href="https://wa.me/22655560000" class="wa-big">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Commander via WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo-nav">P'tit <span>Paris</span></a>
+      <div class="ft-sub">Restaurant · Pâtisserie · Boulangerie · Glacier</div>
+      <p>Le rendez-vous gourmand de Ouagadougou depuis des années. Ouvert 7j/7 dans 3 adresses pour vous régaler.</p>
+      <div class="rating-row">
+        <span class="rbadge">⭐ 4,3 · Gounghin</span>
+        <span class="rbadge">⭐ 4,2 · Koulouba</span>
+      </div>
+    </div>
+    <div>
+      <h6>Navigation</h6>
+      <ul>
+        <li><a href="#menu">Notre menu</a></li>
+        <li><a href="#adresses">Nos adresses</a></li>
+        <li><a href="#commander">Commander</a></li>
+        <li><a href="https://menu.ptitparis.com/menu">Menu digital</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Nos adresses</h6>
+      <ul>
+        <li><a href="tel:+22654161616">Gounghin : 54 16 16 16</a></li>
+        <li><a href="tel:+22606171717">Koulouba : 06 17 17 17</a></li>
+        <li><a href="tel:+22604181818">Zad : 04 18 18 18</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Horaires</h6>
+      <ul>
+        <li><a href="#">Lun – Dim</a></li>
+        <li><a href="#">6h30 – 23h00</a></li>
+        <li><a href="#">Ouvert 7j/7</a></li>
+        <li><a href="https://instagram.com/ptit_paris">@ptit_paris</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 P'tit Paris Ouagadougou — Tous droits réservés</p>
+    <div class="socials">
+      <a href="https://instagram.com/ptit_paris" class="soc">📸</a>
+      <a href="#" class="soc">📘</a>
+      <a href="#" class="soc">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.mcat').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.mcat').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

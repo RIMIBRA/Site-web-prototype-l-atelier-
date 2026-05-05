@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cold Stone Creamery Burkina</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --red-dark: #9e0c22;
+    --cream: #FFF8F0;
+    --gold: #D4A843;
+    --gold-light: #F5D78E;
+    --dark: #1A0A0A;
+    --text: #2D1B1B;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(200,16,46,0.97);
+    backdrop-filter: blur(12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%;
+    height: 64px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+  }
+  .logo-nav {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  .logo-nav span { color: var(--gold-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-btn {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600 !important;
+  }
+  .nav-btn:hover { background: var(--gold-light) !important; color: var(--dark) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 50%, #e8192d 100%);
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(212,168,67,0.18) 0%, transparent 65%),
+                radial-gradient(ellipse at 10% 80%, rgba(0,0,0,0.3) 0%, transparent 50%);
+  }
+  .hero-pattern {
+    position: absolute; top: 0; right: 0;
+    width: 55%; height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
+  }
+  .hero-blob {
+    position: absolute; right: -5%; top: 5%;
+    width: 580px; height: 580px;
+    background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 620px;
+    animation: fadeUp 0.9s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.1rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 1.4rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+    animation: fadeUp 0.9s 0.3s ease both;
+    font-weight: 300;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    box-shadow: 0 4px 20px rgba(212,168,67,0.4);
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(212,168,67,0.5);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover {
+    border-color: var(--white);
+    background: rgba(255,255,255,0.1);
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    animation: fadeUp 0.9s 0.5s ease both;
+  }
+  .stat { color: var(--white); }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+    font-weight: 500;
+  }
+  .hero-ice {
+    position: absolute; right: 8%; bottom: 0;
+    font-size: 16rem;
+    opacity: 0.12;
+    animation: float 6s ease-in-out infinite;
+    user-select: none;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(-5deg); }
+    50%      { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-title span { color: var(--red); }
+  .section-sub {
+    font-size: 1rem;
+    color: #6B4040;
+    line-height: 1.7;
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center;
+  }
+  .about-visual {
+    position: relative;
+    height: 440px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-visual-inner {
+    text-align: center;
+    color: white;
+  }
+  .about-visual-inner .big-emoji { font-size: 8rem; display: block; margin-bottom: 1rem; animation: float 5s ease-in-out infinite; }
+  .about-visual-inner p { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--gold-light); }
+  .about-card {
+    position: absolute; bottom: -1px; right: -1px;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 1rem 1.5rem;
+    border-radius: 20px 0 0 0;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .features { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+  .feature { display: flex; gap: 1rem; align-items: flex-start; }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    background: rgba(200,16,46,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .feature-text h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; color: var(--dark); }
+  .feature-text p { font-size: 0.85rem; color: #6B4040; line-height: 1.5; font-weight: 300; }
+
+  /* ── MENU ── */
+  .menu { background: var(--cream); }
+  .menu-header { text-align: center; margin-bottom: 3.5rem; }
+  .menu-header .section-sub { margin: 0 auto; text-align: center; }
+  .menu-tabs {
+    display: flex; gap: 0.6rem; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 3rem;
+  }
+  .tab {
+    background: var(--white);
+    border: 2px solid rgba(200,16,46,0.12);
+    color: var(--text);
+    padding: 0.55rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600; font-size: 0.85rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tab.active, .tab:hover {
+    background: var(--red); color: var(--white); border-color: var(--red);
+  }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+  .menu-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .menu-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(200,16,46,0.12); }
+  .menu-card-img {
+    height: 160px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    position: relative; overflow: hidden;
+  }
+  .menu-card-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+  .menu-card-body { padding: 1.2rem 1.4rem 1.4rem; }
+  .menu-card-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: var(--dark); }
+  .menu-card-desc { font-size: 0.82rem; color: #6B4040; line-height: 1.5; margin-bottom: 1rem; font-weight: 300; }
+  .menu-card-footer { display: flex; justify-content: space-between; align-items: center; }
+  .price { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--red); font-size: 1.05rem; }
+  .add-btn {
+    background: var(--red); color: var(--white);
+    border: none; border-radius: 50px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .add-btn:hover { background: var(--red-dark); }
+
+  /* ── ORDER ── */
+  .order-section {
+    background: linear-gradient(135deg, var(--dark) 0%, #3D0E15 100%);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .order-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0l28-28v2L54 40h-2zm4 0l24-24v2L58 40h-2zm4 0l20-20v2L62 40h-2zm4 0l16-16v2L66 40h-2zm4 0l12-12v2L70 40h-2zm4 0l8-8v2l-6 6h-2zm4 0l4-4v2l-2 2h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .order-section .section-title { color: var(--white); }
+  .order-section .section-label { color: var(--gold-light); }
+  .order-section .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 3rem; text-align: center; }
+  .order-steps {
+    display: flex; justify-content: center; gap: 2rem;
+    flex-wrap: wrap; margin-bottom: 3.5rem;
+  }
+  .step {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    width: 200px; text-align: center;
+    transition: background 0.2s;
+  }
+  .step:hover { background: rgba(255,255,255,0.1); }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--red); color: var(--white);
+    font-weight: 900; font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-family: 'Playfair Display', serif;
+  }
+  .step-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: block; }
+  .step h4 { color: var(--white); font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .step p { color: rgba(255,255,255,0.55); font-size: 0.8rem; line-height: 1.5; font-weight: 300; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: #25D366; color: var(--white);
+    padding: 1.1rem 2.8rem; border-radius: 50px;
+    font-weight: 700; font-size: 1.1rem; text-decoration: none;
+    box-shadow: 0 6px 30px rgba(37,211,102,0.4);
+    transition: all 0.25s; border: none; cursor: pointer;
+  }
+  .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(37,211,102,0.5); }
+  .whatsapp-icon { width: 28px; height: 28px; }
+
+  /* ── LOCATION ── */
+  .location {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center;
+  }
+  .map-placeholder {
+    background: var(--cream);
+    border-radius: 24px; height: 380px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    border: 2px dashed rgba(200,16,46,0.2);
+    font-size: 3rem; color: var(--red);
+  }
+  .map-placeholder p { font-size: 0.9rem; color: #6B4040; font-weight: 500; }
+  .info-blocks { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+  .info-block { display: flex; gap: 1rem; }
+  .info-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(200,16,46,0.08);
+    color: var(--red); font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .info-block h4 { font-weight: 700; font-size: 0.9rem; color: var(--dark); margin-bottom: 0.2rem; }
+  .info-block p { font-size: 0.85rem; color: #6B4040; line-height: 1.6; font-weight: 300; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 60px 5% 30px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 4rem; padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 2rem;
+  }
+  .footer-brand .logo-nav { font-size: 1.5rem; display: block; margin-bottom: 1rem; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; font-weight: 300; max-width: 280px; }
+  footer h5 {
+    color: var(--white); font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; font-weight: 300; transition: color 0.2s; }
+  footer ul a:hover { color: var(--gold-light); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+  .social-links { display: flex; gap: 0.8rem; }
+  .social-link {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.6); font-size: 1rem; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about, .location { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-ice { font-size: 9rem; right: 2%; }
+    section { padding: 70px 5%; }
+    .order-steps { gap: 1rem; }
+    .step { width: 150px; padding: 1.5rem 1rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-nav">Cold Stone <span>Burkina</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#commander">Commander</a></li>
+    <li><a href="#localisation">Localisation</a></li>
+    <li><a href="#commander" class="nav-btn">Commander 🍦</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇧🇫 Ouagadougou · Burkina Faso</div>
+    <h1>Une expérience<br><em>glacée</em> unique<br>au Burkina</h1>
+    <p>Des glaces artisanales de qualité supérieure, préparées avec les meilleurs ingrédients. Venez vivre 10 minutes de pur bonheur !</p>
+    <div class="hero-btns">
+      <a href="#commander" class="btn-primary">🍦 Commander maintenant</a>
+      <a href="#menu" class="btn-secondary">Voir le menu →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">1K+</div>
+        <div class="stat-label">Clients satisfaits</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Saveurs disponibles</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Fait avec amour</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-ice">🍦</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-visual">
+    <div class="about-visual-inner">
+      <span class="big-emoji">🍨</span>
+      <p>"La Création Signature"</p>
+    </div>
+    <div class="about-card">⭐ #1 Glacier à Ouaga</div>
+  </div>
+  <div>
+    <div class="section-label">Notre histoire</div>
+    <h2 class="section-title">La <span>crème</span> de la crème au Burkina</h2>
+    <p class="section-sub">Cold Stone Creamery Burkina vous offre une expérience unique, où chaque glace est préparée à la main avec des ingrédients soigneusement sélectionnés pour vous garantir le meilleur goût.</p>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🥛</div>
+        <div class="feature-text">
+          <h4>Ingrédients de qualité supérieure</h4>
+          <p>Chaque création est réalisée avec les meilleurs ingrédients pour une expérience gustative incomparable.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">👨‍🍳</div>
+        <div class="feature-text">
+          <h4>Préparé à la main</h4>
+          <p>Nos artisans préparent chaque glace devant vous, avec passion et précision sur la pierre froide.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎂</div>
+        <div class="feature-text">
+          <h4>Gâteaux & créations sur commande</h4>
+          <p>Gâteaux glacés, CupCakes et créations spéciales pour tous vos événements et célébrations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header">
+    <div class="section-label">Nos saveurs</div>
+    <h2 class="section-title">Notre <span>Menu</span></h2>
+    <p class="section-sub">Découvrez nos créations glacées, gâteaux et CupCakes. Quelque chose pour chaque envie !</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="tab active">Tout voir</button>
+    <button class="tab">Ice Cream 🍦</button>
+    <button class="tab">CupCakes 🧁</button>
+    <button class="tab">Gâteaux 🎂</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-img">🍦</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Creation du Moment</div>
+        <div class="menu-card-desc">Glace vanille, éclats de chocolat, caramel maison sur pierre froide.</div>
+        <div class="menu-card-footer">
+          <span class="price">2 500 FCFA</span>
+          <button class="add-btn">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🍫</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Chocolate Devotion</div>
+        <div class="menu-card-desc">Triple chocolat avec brownies, fudge et sauce chocolat chaud.</div>
+        <div class="menu-card-footer">
+          <span class="price">2 800 FCFA</span>
+          <button class="add-btn">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🧁</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">CupCake Glacé</div>
+        <div class="menu-card-desc">CupCake moelleux garni de glace et décoré avec soin pour toutes occasions.</div>
+        <div class="menu-card-footer">
+          <span class="price">1 500 FCFA</span>
+          <button class="add-btn">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🍓</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Strawberry Blonde</div>
+        <div class="menu-card-desc">Glace fraise fraîche, cheesecake, graham cracker et coulis de fraises.</div>
+        <div class="menu-card-footer">
+          <span class="price">2 500 FCFA</span>
+          <button class="add-btn">Commander</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🎂</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Gâteau Glacé Signature</div>
+        <div class="menu-card-desc">Gâteau personnalisé à la glace pour anniversaires et événements spéciaux.</div>
+        <div class="menu-card-footer">
+          <span class="price">À partir de 15 000 FCFA</span>
+          <button class="add-btn">Demander</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">🥭</div>
+      <div class="menu-card-body">
+        <div class="menu-card-name">Tropical Mango Bliss</div>
+        <div class="menu-card-desc">Glace mangue, noix de coco fraîche, ananas et une touche de citron.</div>
+        <div class="menu-card-footer">
+          <span class="price">2 500 FCFA</span>
+          <button class="add-btn">Commander</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-section" id="commander">
+  <div style="position:relative;z-index:2;">
+    <div class="section-label">Commande rapide</div>
+    <h2 class="section-title">Commandez en<br><span style="color:var(--gold-light)">3 étapes simples</span></h2>
+    <p class="section-sub">Plus besoin d'être bloqué par des sites étrangers. Commandez directement via WhatsApp !</p>
+    <div class="order-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <span class="step-icon">📋</span>
+        <h4>Choisissez</h4>
+        <p>Parcourez notre menu et sélectionnez vos créations préférées</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <span class="step-icon">💬</span>
+        <h4>Envoyez</h4>
+        <p>Contactez-nous sur WhatsApp avec votre commande</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <span class="step-icon">🍦</span>
+        <h4>Savourez</h4>
+        <p>Venez récupérer ou faites-vous livrer votre commande</p>
+      </div>
+    </div>
+    <a href="https://wa.me/22600000000?text=Bonjour%20Cold%20Stone%20Burkina%2C%20je%20souhaite%20passer%20une%20commande%20!" class="whatsapp-btn">
+      <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Commander sur WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="localisation">
+  <div class="map-placeholder">
+    <span>📍</span>
+    <p>Ouagadougou, Burkina Faso</p>
+    <a href="#" style="font-size:0.85rem;color:var(--red);font-weight:600;text-decoration:none;">Voir sur Google Maps →</a>
+  </div>
+  <div>
+    <div class="section-label">Nous trouver</div>
+    <h2 class="section-title">Venez nous <span>rendre visite</span></h2>
+    <p class="section-sub">Notre boutique vous accueille avec le sourire du lundi au dimanche pour votre dose quotidienne de bonheur glacé.</p>
+    <div class="info-blocks">
+      <div class="info-block">
+        <div class="info-icon">📍</div>
+        <div>
+          <h4>Adresse</h4>
+          <p>Ouagadougou, Burkina Faso<br>Secteur X — à préciser</p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">🕐</div>
+        <div>
+          <h4>Horaires d'ouverture</h4>
+          <p>Lundi – Samedi : 10h00 – 22h00<br>Dimanche : 12h00 – 21h00</p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">📞</div>
+        <div>
+          <h4>Téléphone / WhatsApp</h4>
+          <p>+226 XX XX XX XX<br>Disponible 7j/7</p>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-icon">📱</div>
+        <div>
+          <h4>Réseaux sociaux</h4>
+          <p>Instagram : @coldstone_burkina<br>Suivez-nous pour les promos !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo-nav">Cold Stone <span>Burkina</span></span>
+      <p>Des glaces de qualité supérieure préparées avec les meilleurs ingrédients. Venez vivre une escapade de 10 minutes de pur bonheur !</p>
+    </div>
+    <div>
+      <h5>Navigation</h5>
+      <ul>
+        <li><a href="#menu">Notre Menu</a></li>
+        <li><a href="#commander">Commander</a></li>
+        <li><a href="#localisation">Localisation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Commande sur mesure</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Cold Stone Creamery Burkina — Tous droits réservés</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/coldstone_burkina" class="social-link">📸</a>
+      <a href="#" class="social-link">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Smooth scroll for nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>

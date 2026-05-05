@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excellence Hôtel — Ouagadougou</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #0A1628;
+    --navy2:  #0F1E38;
+    --blue:   #1A3A6E;
+    --gold:   #C9A84C;
+    --gold2:  #E8D48A;
+    --cream:  #F8F4ED;
+    --white:  #FFFFFF;
+    --text:   #2C2C2C;
+    --muted:  #7A7A7A;
+    --light:  #F0EDE6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,22,40,0.96); backdrop-filter: blur(16px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%; height: 68px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .logo-nav {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.25rem; color: var(--white);
+    text-decoration: none; letter-spacing: 0.04em;
+  }
+  .logo-nav span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-book {
+    background: var(--gold) !important; color: var(--navy) !important;
+    padding: 0.5rem 1.4rem; border-radius: 2px;
+    font-weight: 700 !important;
+  }
+  .nav-book:hover { background: var(--gold2) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--blue) 60%, #0D2847 100%);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 110px 5% 80px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 50%, rgba(201,168,76,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 80%, rgba(201,168,76,0.06) 0%, transparent 40%);
+  }
+  .hero-pattern {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 620px; }
+  @keyframes up { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold2); font-size: 0.72rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 2px;
+    margin-bottom: 1.8rem;
+    animation: up 0.8s 0.1s both;
+  }
+  .hero h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
+    font-weight: 400; line-height: 1.08;
+    color: var(--white); margin-bottom: 1.4rem;
+    animation: up 0.8s 0.2s both;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p {
+    font-size: 1rem; color: rgba(255,255,255,0.65);
+    line-height: 1.8; max-width: 480px;
+    margin-bottom: 2.8rem; font-weight: 300;
+    animation: up 0.8s 0.3s both;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: up 0.8s 0.4s both; }
+  .btn-gold {
+    background: var(--gold); color: var(--navy);
+    padding: 0.95rem 2.4rem; font-size: 0.82rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 2px; cursor: pointer;
+    text-decoration: none; display: inline-block;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+    transition: all 0.25s;
+  }
+  .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    padding: 0.95rem 2.4rem; font-size: 0.82rem;
+    font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 2px;
+    cursor: pointer; text-decoration: none; display: inline-block;
+    transition: all 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-chips {
+    display: flex; gap: 2rem; margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    animation: up 0.8s 0.5s both; flex-wrap: wrap;
+  }
+  .chip-val {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.7rem; color: var(--gold); font-weight: 700;
+  }
+  .chip-lbl {
+    font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    margin-top: 0.1rem; font-weight: 500;
+  }
+  /* floating hotel icon */
+  .hero-icon {
+    position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+    font-size: 15rem; opacity: 0.04; user-select: none;
+    animation: float 10s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateY(-50%) rotate(-3deg);} 50%{transform:translateY(-55%) rotate(3deg);} }
+
+  /* BOOKING BAR */
+  .booking-bar {
+    background: var(--navy);
+    padding: 0 5%;
+    border-bottom: 3px solid var(--gold);
+  }
+  .booking-inner {
+    display: flex; align-items: center; gap: 0;
+    max-width: 1000px;
+  }
+  .bfield {
+    flex: 1; padding: 1.2rem 1.5rem;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .bfield label {
+    display: block; font-size: 0.62rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.3rem; font-weight: 600;
+  }
+  .bfield input, .bfield select {
+    background: transparent; border: none; outline: none;
+    color: var(--white); font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem; font-weight: 400; width: 100%;
+  }
+  .bfield select option { background: var(--navy2); }
+  .bfield input::placeholder { color: rgba(255,255,255,0.4); }
+  .book-btn {
+    background: var(--gold); color: var(--navy);
+    border: none; padding: 0 2.5rem;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; height: 100%; min-height: 72px;
+    transition: background 0.2s; white-space: nowrap;
+  }
+  .book-btn:hover { background: var(--gold2); }
+
+  /* SECTIONS */
+  section { padding: 100px 5%; }
+  .sec-tag {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .sec-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .sec-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--navy); margin-bottom: 1rem;
+  }
+  .sec-title em { font-style: italic; color: var(--gold); }
+  .sec-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; font-weight: 300; max-width: 520px; }
+
+  /* FACILITIES */
+  .facilities { background: var(--cream); }
+  .fac-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .fac-card {
+    background: var(--white); border-radius: 4px;
+    padding: 2rem; transition: all 0.3s;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .fac-card:hover { border-color: var(--gold); box-shadow: 0 8px 30px rgba(201,168,76,0.12); transform: translateY(-4px); }
+  .fac-icon {
+    width: 52px; height: 52px; background: rgba(201,168,76,0.08);
+    border-radius: 4px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.5rem; margin-bottom: 1.2rem;
+  }
+  .fac-card h4 { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+  .fac-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  /* ROOMS */
+  .rooms { background: var(--white); }
+  .rooms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; margin-top: 3.5rem; }
+  .room-card {
+    border-radius: 4px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .room-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+  .room-img {
+    height: 200px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; position: relative; overflow: hidden;
+  }
+  .room-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,22,40,0.7) 0%, transparent 50%);
+  }
+  .room-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--gold); color: var(--navy);
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 2px; z-index: 1;
+  }
+  .room-body { padding: 1.5rem; background: var(--white); }
+  .room-name { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; font-weight: 400; color: var(--navy); margin-bottom: 0.4rem; }
+  .room-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; font-weight: 300; }
+  .room-amenities { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+  .amenity { font-size: 0.72rem; color: var(--blue); background: rgba(26,58,110,0.07); padding: 0.25rem 0.7rem; border-radius: 50px; font-weight: 500; }
+  .room-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--light); }
+  .room-price { }
+  .room-price .from { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .room-price .amount { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--navy); font-weight: 700; }
+  .room-price .per { font-size: 0.72rem; color: var(--muted); }
+  .btn-sm {
+    background: var(--navy); color: var(--white);
+    border: none; padding: 0.6rem 1.4rem;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 2px; cursor: pointer;
+    transition: background 0.2s; text-decoration: none;
+    display: inline-block;
+  }
+  .btn-sm:hover { background: var(--gold); color: var(--navy); }
+
+  /* CONFERENCE */
+  .conference {
+    background: var(--navy);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; align-items: stretch;
+  }
+  .conf-visual {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--navy2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem; padding: 4rem;
+    position: relative; overflow: hidden; min-height: 400px;
+  }
+  .conf-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A84C' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .conf-visual .big-icon { font-size: 8rem; opacity: 0.3; z-index: 1; animation: float 8s ease-in-out infinite; }
+  .conf-visual .conf-cap { z-index: 1; text-align: center; }
+  .conf-visual .conf-cap span { font-family: 'Libre Baskerville', serif; font-size: 2rem; color: var(--gold); display: block; font-weight: 400; }
+  .conf-visual .conf-cap p { font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+  .conf-content { padding: 5rem 4rem; }
+  .conf-content .sec-tag::before { background: rgba(201,168,76,0.5); }
+  .conf-content .sec-title { color: var(--white); }
+  .conf-content .sec-sub { color: rgba(255,255,255,0.55); }
+  .conf-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.5rem; }
+  .conf-feat {
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px; padding: 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .conf-feat:hover { border-color: rgba(201,168,76,0.4); }
+  .conf-feat .icon { font-size: 1.3rem; margin-bottom: 0.5rem; display: block; }
+  .conf-feat h5 { font-size: 0.82rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+  .conf-feat p { font-size: 0.75rem; color: rgba(255,255,255,0.45); font-weight: 300; }
+
+  /* GALLERY strip */
+  .gallery { background: var(--light); padding: 80px 0; overflow: hidden; }
+  .gallery-header { padding: 0 5%; margin-bottom: 2.5rem; }
+  .gallery-strip { display: flex; gap: 1rem; padding: 0 5%; overflow-x: auto; scrollbar-width: none; }
+  .gallery-strip::-webkit-scrollbar { display: none; }
+  .gal-item {
+    flex-shrink: 0; width: 260px; height: 180px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; overflow: hidden; position: relative;
+    transition: transform 0.3s;
+  }
+  .gal-item:hover { transform: scale(1.03); }
+  .gal-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,22,40,0.5) 0%, transparent 60%); }
+  .gal-label { position: absolute; bottom: 0.8rem; left: 0.8rem; z-index: 1; font-size: 0.72rem; color: rgba(255,255,255,0.7); font-weight: 500; letter-spacing: 0.06em; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+  .contact-info .sec-tag::before { background: var(--gold); }
+  .info-cards { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+  .info-card {
+    background: var(--white); padding: 1.4rem;
+    border-radius: 4px; display: flex; gap: 1rem;
+    border-left: 3px solid var(--gold);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .ic-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .ic-body h4 { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; font-weight: 600; }
+  .ic-body p { font-size: 0.88rem; color: var(--text); line-height: 1.6; font-weight: 400; }
+  .ic-body a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  /* form */
+  .contact-form h3 { font-family: 'Libre Baskerville', serif; font-size: 1.6rem; font-weight: 400; color: var(--navy); margin-bottom: 0.5rem; }
+  .contact-form p { font-size: 0.88rem; color: var(--muted); margin-bottom: 2rem; font-weight: 300; line-height: 1.6; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--white); border: 1px solid #E0DAD0;
+    border-radius: 2px; padding: 0.8rem 1rem;
+    font-family: 'Outfit', sans-serif; font-size: 0.88rem;
+    color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-full { grid-column: span 2; }
+  .wa-btn {
+    display: flex; align-items: center; gap: 0.8rem;
+    background: #25D366; color: white;
+    border: none; border-radius: 2px;
+    padding: 1rem 2.5rem; font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    transition: all 0.25s; margin-top: 1rem; display: inline-flex;
+  }
+  .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.4); }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 70px 5% 30px; }
+  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 2rem; }
+  .footer-brand .logo-nav { display: block; margin-bottom: 1rem; font-size: 1.4rem; }
+  .footer-brand p { font-size: 0.82rem; color: rgba(255,255,255,0.4); line-height: 1.8; font-weight: 300; max-width: 240px; }
+  footer h6 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 600; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  footer ul a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.83rem; font-weight: 300; transition: color 0.2s; }
+  footer ul a:hover { color: var(--gold); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .socials { display: flex; gap: 0.6rem; }
+  .soc-btn { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); border-radius: 2px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); text-decoration: none; transition: all 0.2s; font-size: 0.9rem; }
+  .soc-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .rating-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); border-radius: 2px; padding: 0.4rem 0.9rem; font-size: 0.78rem; color: var(--gold2); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .booking-inner { flex-direction: column; }
+    .bfield { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .book-btn { min-height: auto; padding: 1rem; width: 100%; }
+    .conference, .contact { grid-template-columns: 1fr; gap: 0; }
+    .conf-content { padding: 3rem 5%; }
+    .conf-visual { min-height: 260px; padding: 3rem 5%; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-icon { display: none; }
+    section { padding: 70px 5%; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo-nav">Excellence <span>Hôtel</span></a>
+  <ul class="nav-links">
+    <li><a href="#chambres">Chambres</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#conference">Conférences</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-book">Réserver</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero::before"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-tag">⭐ 3,8 · 326 avis Google — Quartier Dapoya, Ouagadougou</div>
+    <h1>Votre <em>havre</em><br>de confort<br>à Ouaga</h1>
+    <p>Excellence Hôtel vous accueille dans un cadre agréable et reposant au cœur de Ouagadougou. Chambres climatisées, piscine, restaurant et salle de conférence.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-gold">Réserver maintenant</a>
+      <a href="#chambres" class="btn-ghost">Voir les chambres</a>
+    </div>
+    <div class="hero-chips">
+      <div><div class="chip-val">2</div><div class="chip-lbl">Piscines</div></div>
+      <div><div class="chip-val">326</div><div class="chip-lbl">Avis Google</div></div>
+      <div><div class="chip-val">24/7</div><div class="chip-lbl">Réception</div></div>
+      <div><div class="chip-val">★ 3.8</div><div class="chip-lbl">Note moyenne</div></div>
+    </div>
+  </div>
+  <div class="hero-icon">🏨</div>
+</section>
+
+<!-- BOOKING BAR -->
+<div class="booking-bar">
+  <div class="booking-inner">
+    <div class="bfield">
+      <label>Arrivée</label>
+      <input type="date" />
+    </div>
+    <div class="bfield">
+      <label>Départ</label>
+      <input type="date" />
+    </div>
+    <div class="bfield">
+      <label>Personnes</label>
+      <select>
+        <option>1 personne</option>
+        <option>2 personnes</option>
+        <option>3 personnes</option>
+        <option>4+ personnes</option>
+      </select>
+    </div>
+    <div class="bfield">
+      <label>Type de chambre</label>
+      <select>
+        <option>Toutes catégories</option>
+        <option>Chambre Standard</option>
+        <option>Chambre Supérieure</option>
+        <option>Suite</option>
+      </select>
+    </div>
+    <button class="book-btn">Vérifier la disponibilité →</button>
+  </div>
+</div>
+
+<!-- FACILITIES -->
+<section class="facilities" id="services">
+  <div class="sec-tag">Nos installations</div>
+  <h2 class="sec-title">Tout ce dont vous<br><em>avez besoin</em></h2>
+  <p class="sec-sub">Excellence Hôtel met à votre disposition des équipements modernes pour un séjour agréable et inoubliable.</p>
+  <div class="fac-grid">
+    <div class="fac-card">
+      <div class="fac-icon">🏊</div>
+      <h4>Deux piscines</h4>
+      <p>Profitez de nos deux piscines pour vous détendre et vous rafraîchir en toute tranquillité.</p>
+    </div>
+    <div class="fac-card">
+      <div class="fac-icon">🍽️</div>
+      <h4>Restaurant</h4>
+      <p>Savourez une cuisine variée dans notre restaurant avec une carte mêlant spécialités locales et plats internationaux.</p>
+    </div>
+    <div class="fac-card">
+      <div class="fac-icon">🌿</div>
+      <h4>Jardin & Espaces verts</h4>
+      <p>Un cadre verdoyant et apaisant pour se ressourcer loin de l'agitation de la ville.</p>
+    </div>
+    <div class="fac-card">
+      <div class="fac-icon">🅿️</div>
+      <h4>Parking sécurisé</h4>
+      <p>Un parking privé et sécurisé à la disposition de tous nos clients.</p>
+    </div>
+    <div class="fac-card">
+      <div class="fac-icon">❄️</div>
+      <h4>Climatisation</h4>
+      <p>Toutes nos chambres sont équipées de la climatisation pour votre confort en toute saison.</p>
+    </div>
+    <div class="fac-card">
+      <div class="fac-icon">📶</div>
+      <h4>WiFi gratuit</h4>
+      <p>Connexion internet haut débit disponible dans toutes les chambres et espaces communs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section class="rooms" id="chambres">
+  <div class="sec-tag">Nos hébergements</div>
+  <h2 class="sec-title">Chambres &<br><em>Suites</em></h2>
+  <p class="sec-sub">Des chambres confortables et bien équipées pour un séjour d'affaires ou de loisirs à Ouagadougou.</p>
+  <div class="rooms-grid">
+    <div class="room-card">
+      <div class="room-img">🛏️<div class="room-badge">Standard</div></div>
+      <div class="room-body">
+        <div class="room-name">Chambre Standard</div>
+        <div class="room-desc">Chambre confortable avec lit double, salle de bain privée et climatisation. Vue sur le jardin.</div>
+        <div class="room-amenities">
+          <span class="amenity">❄️ Clim</span>
+          <span class="amenity">📶 WiFi</span>
+          <span class="amenity">📺 TV</span>
+          <span class="amenity">🚿 S.d.b</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <div class="from">À partir de</div>
+            <div class="amount">15 000 <span class="per">FCFA/nuit</span></div>
+          </div>
+          <a href="https://wa.me/22625300084" class="btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img">🏨<div class="room-badge">Supérieure</div></div>
+      <div class="room-body">
+        <div class="room-name">Chambre Supérieure</div>
+        <div class="room-desc">Chambre spacieuse avec grand lit, terrasse privée et vue sur la piscine. Décor raffiné.</div>
+        <div class="room-amenities">
+          <span class="amenity">❄️ Clim</span>
+          <span class="amenity">📶 WiFi</span>
+          <span class="amenity">📺 TV</span>
+          <span class="amenity">🛁 Baignoire</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <div class="from">À partir de</div>
+            <div class="amount">22 000 <span class="per">FCFA/nuit</span></div>
+          </div>
+          <a href="https://wa.me/22625300084" class="btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img">✨<div class="room-badge">Suite</div></div>
+      <div class="room-body">
+        <div class="room-name">Suite Prestige</div>
+        <div class="room-desc">Suite luxueuse avec salon séparé, grand lit king size, jacuzzi et service en chambre inclus.</div>
+        <div class="room-amenities">
+          <span class="amenity">❄️ Clim</span>
+          <span class="amenity">📶 WiFi</span>
+          <span class="amenity">🛁 Jacuzzi</span>
+          <span class="amenity">🍽️ Service</span>
+        </div>
+        <div class="room-footer">
+          <div class="room-price">
+            <div class="from">À partir de</div>
+            <div class="amount">40 000 <span class="per">FCFA/nuit</span></div>
+          </div>
+          <a href="https://wa.me/22625300084" class="btn-sm">Réserver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFERENCE -->
+<section class="conference" id="conference">
+  <div class="conf-visual">
+    <span class="big-icon">🏛️</span>
+    <div class="conf-cap">
+      <span>50+</span>
+      <p>places disponibles</p>
+    </div>
+  </div>
+  <div class="conf-content">
+    <div class="sec-tag">Espace professionnel</div>
+    <h2 class="sec-title" style="color:white;">Salle de<br><em>Conférence</em></h2>
+    <p class="sec-sub">Organisez vos réunions, séminaires et événements d'entreprise dans notre salle de conférence entièrement équipée.</p>
+    <div class="conf-features">
+      <div class="conf-feat"><span class="icon">📽️</span><h5>Vidéoprojecteur</h5><p>Équipement audiovisuel complet</p></div>
+      <div class="conf-feat"><span class="icon">❄️</span><h5>Climatisée</h5><p>Confort optimal toute l'année</p></div>
+      <div class="conf-feat"><span class="icon">📶</span><h5>WiFi haut débit</h5><p>Connexion stable et rapide</p></div>
+      <div class="conf-feat"><span class="icon">☕</span><h5>Pause-café</h5><p>Service traiteur disponible</p></div>
+    </div>
+    <a href="https://wa.me/22625300084?text=Bonjour,%20je%20souhaite%20réserver%20la%20salle%20de%20conférence" class="btn-gold" style="margin-top:2rem;display:inline-block;">Demander un devis</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="gallery-header">
+    <div class="sec-tag">Photos</div>
+    <h2 class="sec-title">Notre <em>cadre</em></h2>
+  </div>
+  <div class="gallery-strip">
+    <div class="gal-item">🏊<div class="gal-label">Piscine principale</div></div>
+    <div class="gal-item">🛏️<div class="gal-label">Chambre Standard</div></div>
+    <div class="gal-item">🌿<div class="gal-label">Jardin & Espaces verts</div></div>
+    <div class="gal-item">🍽️<div class="gal-label">Restaurant</div></div>
+    <div class="gal-item">🏛️<div class="gal-label">Salle de conférence</div></div>
+    <div class="gal-item">🌆<div class="gal-label">Vue panoramique</div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="sec-tag">Nous contacter</div>
+    <h2 class="sec-title">Réservez<br>votre <em>séjour</em></h2>
+    <p class="sec-sub">Contactez-nous pour réserver votre chambre ou obtenir plus d'informations sur nos tarifs et disponibilités.</p>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="ic-icon">📞</div>
+        <div class="ic-body">
+          <h4>Téléphone</h4>
+          <p><a href="tel:+22625300084">+226 25 30 00 84/85</a><br><a href="tel:+22665793643">+226 65 79 36 43</a></p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">📍</div>
+        <div class="ic-body">
+          <h4>Adresse</h4>
+          <p>Quartier Dapoya<br>Ouagadougou, Burkina Faso</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="ic-icon">🕐</div>
+        <div class="ic-body">
+          <h4>Réception</h4>
+          <p>Ouverte 24h/24 — 7j/7<br>Arrivée : dès 12h00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <h3>Demande de réservation</h3>
+    <p>Remplissez ce formulaire et nous vous confirmons votre réservation dans les plus brefs délais.</p>
+    <div class="form-row">
+      <div class="form-group"><label>Nom complet</label><input type="text" placeholder="Votre nom" /></div>
+      <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="+226 XX XX XX XX" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Arrivée</label><input type="date" /></div>
+      <div class="form-group"><label>Départ</label><input type="date" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Type de chambre</label>
+        <select>
+          <option>Chambre Standard</option>
+          <option>Chambre Supérieure</option>
+          <option>Suite Prestige</option>
+          <option>Salle de conférence</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Nombre de personnes</label>
+        <select><option>1</option><option>2</option><option>3</option><option>4+</option></select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-full"><label>Message (optionnel)</label><textarea placeholder="Demandes spéciales, questions..."></textarea></div>
+    </div>
+    <a href="https://wa.me/22625300084" class="wa-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Envoyer via WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo-nav">Excellence <span>Hôtel</span></a>
+      <p>Un cadre très agréable à y passer du temps. Le confort réel et régulier au cœur de Ouagadougou.</p>
+      <div class="rating-badge" style="margin-top:1rem; display:inline-flex;">⭐ 3,8 · 326 avis Google</div>
+    </div>
+    <div>
+      <h6>Navigation</h6>
+      <ul>
+        <li><a href="#chambres">Nos chambres</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#conference">Conférences</a></li>
+        <li><a href="#contact">Réservation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Services</h6>
+      <ul>
+        <li><a href="#">Restaurant</a></li>
+        <li><a href="#">Piscines</a></li>
+        <li><a href="#">Salle de conférence</a></li>
+        <li><a href="#">Parking</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="tel:+22625300084">+226 25 30 00 84</a></li>
+        <li><a href="tel:+22665793643">+226 65 79 36 43</a></li>
+        <li><a href="#">Quartier Dapoya, Ouaga</a></li>
+        <li><a href="https://facebook.com">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Excellence Hôtel Ouagadougou — Tous droits réservés</p>
+    <div class="socials">
+      <a href="#" class="soc-btn">📘</a>
+      <a href="#" class="soc-btn">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
