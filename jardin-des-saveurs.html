@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Jardin des Saveurs – Ouagadougou</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vert: #2d5016;
+    --vert-clair: #4a7c2a;
+    --terre: #8b5e3c;
+    --ocre: #c4873a;
+    --creme: #f5efe6;
+    --blanc: #fdfaf5;
+    --noir: #1a1208;
+    --gris: #6b6258;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanc);
+    color: var(--noir);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(253,250,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139,94,60,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--vert);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { color: var(--ocre); font-style: italic; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gris);
+    text-decoration: none;
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--vert); }
+  .nav-cta {
+    background: var(--vert);
+    color: #fff !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2rem;
+    transition: background .25s !important;
+  }
+  .nav-cta:hover { background: var(--vert-clair) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    background: var(--vert);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 5rem 4rem 5rem 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(196,135,58,0.18);
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .hero-badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ocre);
+    background: rgba(196,135,58,0.15);
+    border: 1px solid rgba(196,135,58,0.4);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4vw, 4.2rem);
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title em { color: var(--ocre); font-style: italic; }
+  .hero-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ocre);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(196,135,58,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,135,58,0.5); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.85);
+    padding: 0.85rem 2rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: border-color .2s;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.7); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--ocre);
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.2rem;
+  }
+
+  .hero-right {
+    position: relative;
+    background: #e8ddd0;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    gap: 4px;
+  }
+  .hero-img {
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .5s;
+  }
+  .hero-img:hover img { transform: scale(1.05); }
+  .hero-img:first-child { grid-row: span 2; }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(45,80,22,0.2), transparent);
+  }
+
+  /* ── SECTION WRAPPER ── */
+  section { padding: 6rem 5rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ocre);
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.15;
+    color: var(--vert);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--gris);
+    line-height: 1.7;
+    max-width: 540px;
+  }
+
+  /* ── AMBIANCE ── */
+  #ambiance { background: var(--creme); }
+  .ambiance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+    align-items: center;
+  }
+  .ambiance-imgs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .ambiance-img {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .ambiance-img img { width: 100%; height: 100%; object-fit: cover; }
+  .ambiance-img:first-child {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+
+  .feature-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--vert);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .feature-text strong {
+    display: block; font-size: 0.95rem; font-weight: 500;
+    color: var(--noir); margin-bottom: 0.2rem;
+  }
+  .feature-text span { font-size: 0.85rem; color: var(--gris); }
+
+  /* ── MENU ── */
+  #menu { background: var(--blanc); }
+  .menu-tabs {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    margin: 2.5rem 0;
+  }
+  .tab {
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid #ddd;
+    background: transparent;
+    color: var(--gris);
+    transition: all .2s;
+  }
+  .tab.active, .tab:hover {
+    background: var(--vert);
+    color: #fff;
+    border-color: var(--vert);
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+  }
+  .menu-card {
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: var(--creme);
+    transition: transform .25s, box-shadow .25s;
+    cursor: pointer;
+  }
+  .menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(45,80,22,0.12);
+  }
+  .menu-card-img {
+    height: 200px; overflow: hidden;
+  }
+  .menu-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .4s;
+  }
+  .menu-card:hover .menu-card-img img { transform: scale(1.08); }
+  .menu-card-body { padding: 1.4rem; }
+  .menu-card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--vert); margin-bottom: 0.4rem;
+  }
+  .menu-card-body p {
+    font-size: 0.82rem; color: var(--gris); line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .menu-card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .menu-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: var(--ocre);
+  }
+  .menu-tag {
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(45,80,22,0.1);
+    color: var(--vert);
+    padding: 0.3rem 0.7rem;
+    border-radius: 1rem;
+  }
+
+  /* ── AVIS ── */
+  #avis {
+    background: var(--vert);
+    color: #fff;
+  }
+  #avis .section-title { color: #fff; }
+  .rating-big {
+    display: flex; align-items: center; gap: 1.5rem;
+    margin: 3rem 0;
+  }
+  .rating-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 700;
+    color: var(--ocre); line-height: 1;
+  }
+  .stars { font-size: 1.6rem; color: var(--ocre); margin-bottom: 0.3rem; }
+  .rating-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+
+  .avis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .avis-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+    transition: background .2s;
+  }
+  .avis-card:hover { background: rgba(255,255,255,0.14); }
+  .avis-stars { color: var(--ocre); font-size: 0.9rem; margin-bottom: 1rem; }
+  .avis-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+  .avis-author { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+  /* ── INFOS PRATIQUES ── */
+  #infos { background: var(--creme); }
+  .infos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .info-block { margin-bottom: 2.5rem; }
+  .info-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: var(--vert);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .info-block p, .info-block li {
+    font-size: 0.9rem; color: var(--gris); line-height: 1.8;
+    list-style: none;
+  }
+  .horaires-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.3rem 2rem;
+  }
+  .jour { font-weight: 500; color: var(--noir); }
+
+  .map-placeholder {
+    background: linear-gradient(135deg, #c8deb8, #a8c490);
+    border-radius: 1.5rem;
+    height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 1rem;
+    color: var(--vert);
+    font-size: 0.9rem;
+    border: 2px dashed rgba(45,80,22,0.3);
+  }
+  .map-icon { font-size: 3rem; }
+  .map-placeholder strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+  }
+
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: var(--vert);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+    margin-top: 1.5rem;
+    transition: background .2s, transform .2s;
+  }
+  .contact-btn:hover { background: var(--vert-clair); transform: translateY(-2px); }
+
+  /* ── RÉSERVATION ── */
+  #reservation {
+    background: linear-gradient(135deg, var(--terre), #6b3d1e);
+    text-align: center;
+    padding: 6rem 5rem;
+  }
+  #reservation .section-title { color: #fff; text-align: center; }
+  #reservation .section-sub { color: rgba(255,255,255,0.7); margin: 0 auto 3rem; text-align: center; }
+  .resa-form {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    justify-content: center; max-width: 800px; margin: 0 auto;
+  }
+  .resa-input {
+    flex: 1; min-width: 160px;
+    padding: 0.9rem 1.4rem;
+    border-radius: 2rem;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12);
+    color: #fff; font-size: 0.9rem;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .resa-input::placeholder { color: rgba(255,255,255,0.5); }
+  .resa-input:focus { border-color: var(--ocre); }
+  .resa-btn {
+    background: var(--ocre);
+    color: #fff;
+    padding: 0.9rem 2.5rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 0.9rem; font-weight: 600;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(196,135,58,0.5);
+  }
+  .resa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(196,135,58,0.6); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noir);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 5rem;
+    display: flex;
+    justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: #fff;
+  }
+  .footer-logo span { color: var(--ocre); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color .2s; }
+  .footer-links a:hover { color: var(--ocre); }
+  .footer-copy { font-size: 0.78rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp .7s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: .1s; }
+  .hero-left > *:nth-child(2) { animation-delay: .25s; }
+  .hero-left > *:nth-child(3) { animation-delay: .4s; }
+  .hero-left > *:nth-child(4) { animation-delay: .55s; }
+  .hero-left > *:nth-child(5) { animation-delay: .7s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 320px; }
+    section { padding: 4rem 1.5rem; }
+    .ambiance-grid, .infos-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr 1fr; }
+    .avis-grid { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    #reservation { padding: 4rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🌿 Jardin des <span>Saveurs</span></div>
+  <ul class="nav-links">
+    <li><a href="#ambiance">L'espace</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#infos">Infos</a></li>
+    <li><a href="#reservation" class="nav-cta">Réserver</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <span class="hero-badge">⭐ 4,5 · 161 avis Google · Ouagadougou</span>
+    <h1 class="hero-title">Un <em>jardin</em><br>de saveurs<br>authentiques</h1>
+    <p class="hero-desc">Espace gastronomique et de détente au cœur de la Patte d'Oie. Grillades, fruits de mer, plats africains — dans un cadre verdoyant et familial.</p>
+    <div class="hero-btns">
+      <a href="#reservation" class="btn-primary">Réserver une table</a>
+      <a href="#menu" class="btn-ghost">Voir le menu</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">4,5★</div>
+        <div class="stat-label">Note Google</div>
+      </div>
+      <div>
+        <div class="stat-num">161</div>
+        <div class="stat-label">Avis clients</div>
+      </div>
+      <div>
+        <div class="stat-num">4,7k</div>
+        <div class="stat-label">Abonnés Facebook</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-grid">
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Restaurant extérieur">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" alt="Plat de poisson grillé">
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80" alt="Ambiance jardin">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMBIANCE -->
+<section id="ambiance">
+  <span class="section-label">Notre espace</span>
+  <h2 class="section-title">Un cadre unique<br>pour chaque moment</h2>
+  <div class="ambiance-grid">
+    <div class="ambiance-imgs">
+      <div class="ambiance-img">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=80" alt="Jardin verdoyant">
+      </div>
+      <div class="ambiance-img">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&q=80" alt="Bar">
+      </div>
+      <div class="ambiance-img">
+        <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=400&q=80" alt="Espace enfants">
+      </div>
+    </div>
+    <div>
+      <p class="section-sub">Le Jardin des Saveurs, c'est bien plus qu'un restaurant. C'est un lieu de vie où chaque détail est pensé pour votre plaisir.</p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">🌿</div>
+          <div class="feature-text">
+            <strong>Grand jardin en plein air</strong>
+            <span>Espace vert aménagé avec tables et gazebos pour profiter de la fraîcheur</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🍶</div>
+          <div class="feature-text">
+            <strong>Bar bien garni</strong>
+            <span>Large sélection de boissons, bières pression, cocktails et jus frais</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎡</div>
+          <div class="feature-text">
+            <strong>Aire de jeux pour enfants</strong>
+            <span>Un espace sécurisé pour que les petits s'amusent pendant votre repas</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎵</div>
+          <div class="feature-text">
+            <strong>Soirées Live Music</strong>
+            <span>Concerts et animations régulières pour égayer vos soirées</span>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🅿️</div>
+          <div class="feature-text">
+            <strong>Parking spacieux</strong>
+            <span>Vaste aire de stationnement à votre disposition</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <span class="section-label">Notre cuisine</span>
+  <h2 class="section-title">Des saveurs qui<br>racontent une histoire</h2>
+  <div class="menu-tabs">
+    <button class="tab active">Nos spécialités</button>
+    <button class="tab">Grillades</button>
+    <button class="tab">Fruits de mer</button>
+    <button class="tab">Salades</button>
+    <button class="tab">Boissons</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&q=80" alt="Mixte grillé de mer">
+      </div>
+      <div class="menu-card-body">
+        <h3>Mixte Grillé de Mer JDS</h3>
+        <p>Sélection de fruits de mer grillés aux herbes du jardin, servis avec accompagnements de saison.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Sur demande</span>
+          <span class="menu-tag">Signature</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=500&q=80" alt="Salade composée">
+      </div>
+      <div class="menu-card-body">
+        <h3>Salade Composée JDS</h3>
+        <p>Fraîcheur et générosité avec notre salade maison garnie d'olives, légumes croquants et vinaigrette maison.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Sur demande</span>
+          <span class="menu-tag">Entrée</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=500&q=80" alt="Brochettes">
+      </div>
+      <div class="menu-card-body">
+        <h3>Brochettes maison</h3>
+        <p>Viande marinée aux épices locales, grillée à la perfection et joliment dressée.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Sur demande</span>
+          <span class="menu-tag">Grillade</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1615361200141-f45040f367be?w=500&q=80" alt="Carpe grillée">
+      </div>
+      <div class="menu-card-body">
+        <h3>Carpe Grillée JDS</h3>
+        <p>Carpe entière grillée avec citron, oignons et poivrons colorés sur lit de feuille de bananier.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Sur demande</span>
+          <span class="menu-tag">Poisson</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=500&q=80" alt="Poulet flambé">
+      </div>
+      <div class="menu-card-body">
+        <h3>Poulet Flambé aux Herbes</h3>
+        <p>Notre spécialité du 1er Mai — poulet flambé aux herbes fraîches du jardin.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Sur demande</span>
+          <span class="menu-tag">Volaille</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&q=80" alt="Boissons">
+      </div>
+      <div class="menu-card-body">
+        <h3>Boissons & Cocktails</h3>
+        <p>Bières pression, jus naturels, sodas et cocktails maison pour accompagner votre repas.</p>
+        <div class="menu-card-footer">
+          <span class="menu-price">Dès 500 F</span>
+          <span class="menu-tag">Boissons</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section id="avis">
+  <span class="section-label" style="color:var(--ocre)">Ce qu'ils disent</span>
+  <h2 class="section-title">Nos clients<br>témoignent</h2>
+  <div class="rating-big">
+    <div class="rating-num">4,5</div>
+    <div>
+      <div class="stars">★★★★½</div>
+      <div class="rating-label">161 avis vérifiés sur Google Maps</div>
+    </div>
+  </div>
+  <div class="avis-grid">
+    <div class="avis-card">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">« Un endroit magnifique avec une cuisine délicieuse. Le cadre en plein air est parfait pour les sorties en famille. Je recommande vivement ! »</p>
+      <div class="avis-author">— Aminata K. · il y a 2 mois</div>
+    </div>
+    <div class="avis-card">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">« Le mixte de mer est exceptionnel. Le service est rapide et le personnel très accueillant. On y retourne chaque semaine ! »</p>
+      <div class="avis-author">— Moussa T. · il y a 3 mois</div>
+    </div>
+    <div class="avis-card">
+      <div class="avis-stars">★★★★☆</div>
+      <p class="avis-text">« Bel espace, les enfants adorent l'aire de jeux. La nourriture est savoureuse et généreuse. Bonne ambiance le week-end avec la musique live. »</p>
+      <div class="avis-author">— Fatoumata D. · il y a 1 mois</div>
+    </div>
+  </div>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section id="infos">
+  <span class="section-label">Nous trouver</span>
+  <h2 class="section-title">Infos pratiques</h2>
+  <div class="infos-grid">
+    <div>
+      <div class="info-block">
+        <h3>📍 Adresse</h3>
+        <p>8F9Q+327, Rue 15.458, Patte d'Oie<br>Ouagadougou, Burkina Faso<br><br>
+        <em>Route de la Mosquée de Kanazoé,<br>à 100m après la Pharmacie Les Rochers, à droite</em></p>
+      </div>
+      <div class="info-block">
+        <h3>🕐 Horaires d'ouverture</h3>
+        <div class="horaires-grid">
+          <span class="jour">Lundi – Dimanche</span><span>07h30 – 23h30</span>
+          <span class="jour">Ouvert tous les jours</span><span>🟢 Ouvert</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h3>📞 Contact</h3>
+        <p>+226 68 14 14 14<br>+226 67 30 34 34</p>
+        <a href="tel:+22668141414" class="contact-btn">📞 Appeler maintenant</a>
+      </div>
+      <div class="info-block">
+        <h3>📱 Réseaux sociaux</h3>
+        <p>
+          Facebook : <strong>Jardin des Saveurs</strong> (4,7k abonnés)<br>
+          Instagram : <strong>jardindessaveursouagad</strong>
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="map-placeholder">
+        <div class="map-icon">🗺️</div>
+        <strong>Patte d'Oie, Ouagadougou</strong>
+        <span>Route de la Mosquée de Kanazoé</span>
+        <a href="https://maps.google.com" class="contact-btn" style="margin-top:0.5rem">
+          Ouvrir dans Google Maps
+        </a>
+      </div>
+      <div style="margin-top:1.5rem; background:rgba(45,80,22,0.08); border-radius:1rem; padding:1.2rem;">
+        <p style="font-size:0.85rem; color:var(--gris); line-height:1.7;">
+          ℹ️ <strong style="color:var(--vert)">Le savoir-faire JDS</strong><br>
+          • Réservation recommandée les week-ends<br>
+          • Formule à volonté disponible<br>
+          • Happy Hour sur la restauration<br>
+          • Durée moyenne sur place : 20 min – 3h
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RÉSERVATION -->
+<section id="reservation">
+  <span class="section-label" style="color:var(--ocre)">Réserver une table</span>
+  <h2 class="section-title">Venez nous rendre visite</h2>
+  <p class="section-sub">Réservez votre table et profitez d'un moment inoubliable dans notre jardin.</p>
+  <div class="resa-form">
+    <input type="text" class="resa-input" placeholder="Votre nom">
+    <input type="tel" class="resa-input" placeholder="Téléphone">
+    <input type="date" class="resa-input">
+    <input type="number" class="resa-input" placeholder="Nombre de personnes" min="1">
+    <button class="resa-btn">Confirmer ma réservation</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌿 Jardin des <span>Saveurs</span></div>
+  <ul class="footer-links">
+    <li><a href="#ambiance">L'espace</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#infos">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Le Jardin des Saveurs · Ouagadougou</div>
+</footer>
+
+<script>
+  // Tabs menu
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-card, .avis-card, .feature-item, .ambiance-img').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
