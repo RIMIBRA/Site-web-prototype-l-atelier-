@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wakanda Restaurant — Ouagadougou · Ouvert 24h/24</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tenor+Sans&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #080604;
+    --dark:    #100E0A;
+    --dark2:   #1A1610;
+    --amber:   #C8861A;
+    --amber2:  #E8A832;
+    --amber3:  #F5C860;
+    --red:     #8B1A1A;
+    --cream:   #F0E8D8;
+    --text:    #D4C8B0;
+    --muted:   #7A6E5A;
+    --white:   #FAF6EF;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; background:var(--black); color:var(--text); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0 6%; height:70px;
+    background:rgba(8,6,4,0.92); backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(200,134,26,0.15);
+  }
+  .nav-logo {
+    font-family:'Bebas Neue',cursive;
+    font-size:2rem; letter-spacing:0.15em;
+    color:var(--white); text-decoration:none;
+  }
+  .nav-logo span { color:var(--amber2); }
+  .nav-center { display:flex; gap:2.5rem; list-style:none; }
+  .nav-center a { color:rgba(212,200,176,0.6); text-decoration:none; font-size:0.75rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-center a:hover { color:var(--amber2); }
+  .nav-badge {
+    display:flex; align-items:center; gap:0.5rem;
+    font-size:0.7rem; color:var(--amber2); font-weight:600;
+    letter-spacing:0.1em; text-transform:uppercase;
+    background:rgba(200,134,26,0.1); border:1px solid rgba(200,134,26,0.25);
+    padding:0.4rem 0.9rem; border-radius:2px;
+  }
+  .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--amber2); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+  /* HERO */
+  .hero {
+    min-height:100vh;
+    display:grid; grid-template-columns:1fr 1fr;
+    position:relative; overflow:hidden;
+  }
+  .hero-left {
+    background:var(--dark);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:140px 8% 80px 6%;
+    position:relative; z-index:2;
+  }
+  .hero-left::after {
+    content:'';
+    position:absolute; right:-1px; top:0; bottom:0; width:2px;
+    background:linear-gradient(to bottom, transparent, var(--amber), transparent);
+  }
+  .hero-right {
+    background:var(--black);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+    padding:140px 6% 80px 8%;
+  }
+  .hero-pattern {
+    position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,134,26,0.02) 40px, rgba(200,134,26,0.02) 41px),
+      repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(200,134,26,0.02) 40px, rgba(200,134,26,0.02) 41px);
+  }
+  .hero-glow { position:absolute; top:20%; left:20%; width:400px; height:400px; background:radial-gradient(circle, rgba(200,134,26,0.08) 0%, transparent 70%); }
+  @keyframes up { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+  .hero-eyebrow {
+    display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;
+    animation:up 0.8s 0.1s both;
+  }
+  .hero-eyebrow::before { content:''; display:block; width:40px; height:1px; background:var(--amber); }
+  .hero-eyebrow span { font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--amber2); font-weight:600; }
+  .hero h1 {
+    font-family:'Bebas Neue',cursive;
+    font-size:clamp(5rem,12vw,9rem);
+    line-height:0.9; color:var(--white);
+    letter-spacing:0.05em;
+    animation:up 0.8s 0.2s both;
+  }
+  .hero h1 .accent { color:var(--amber2); display:block; }
+  .hero h1 .outline { display:block; -webkit-text-stroke:1px rgba(200,134,26,0.5); color:transparent; }
+  .hero-sub {
+    font-family:'Tenor Sans',serif;
+    font-size:1.05rem; color:var(--muted);
+    line-height:1.8; margin:2rem 0 3rem;
+    max-width:420px; font-weight:400;
+    animation:up 0.8s 0.3s both;
+  }
+  .hero-sub strong { color:var(--text); }
+  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; animation:up 0.8s 0.4s both; }
+  .btn-amber {
+    background:var(--amber); color:var(--black);
+    padding:1rem 2.5rem; font-size:0.78rem; font-weight:700;
+    letter-spacing:0.16em; text-transform:uppercase;
+    border:none; border-radius:2px; cursor:pointer;
+    text-decoration:none; display:inline-block;
+    transition:all 0.25s; box-shadow:0 4px 24px rgba(200,134,26,0.3);
+  }
+  .btn-amber:hover { background:var(--amber2); transform:translateY(-2px); box-shadow:0 8px 32px rgba(200,134,26,0.45); }
+  .btn-outline {
+    background:transparent; color:var(--cream);
+    padding:1rem 2.5rem; font-size:0.78rem; font-weight:600;
+    letter-spacing:0.16em; text-transform:uppercase;
+    border:1px solid rgba(200,134,26,0.35); border-radius:2px;
+    cursor:pointer; text-decoration:none; display:inline-block;
+    transition:all 0.25s;
+  }
+  .btn-outline:hover { border-color:var(--amber); color:var(--amber2); }
+  /* Right side visual */
+  .hero-visual { position:relative; z-index:2; width:100%; }
+  .hero-cards { display:flex; flex-direction:column; gap:1.5rem; }
+  .hcard {
+    background:rgba(26,22,16,0.8);
+    border:1px solid rgba(200,134,26,0.12);
+    border-radius:4px; padding:1.5rem;
+    backdrop-filter:blur(10px);
+    transition:border-color 0.3s;
+    animation:up 0.8s both;
+  }
+  .hcard:nth-child(1){animation-delay:0.2s;}
+  .hcard:nth-child(2){animation-delay:0.35s; margin-left:2rem;}
+  .hcard:nth-child(3){animation-delay:0.5s;}
+  .hcard:hover { border-color:rgba(200,134,26,0.35); }
+  .hcard-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem; }
+  .hcard-icon { font-size:1.8rem; }
+  .hcard-badge { font-size:0.62rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(200,134,26,0.3); padding:0.2rem 0.6rem; border-radius:2px; }
+  .hcard h4 { font-family:'Tenor Sans',serif; font-size:1rem; color:var(--white); margin-bottom:0.3rem; }
+  .hcard p { font-size:0.78rem; color:var(--muted); line-height:1.6; font-weight:300; }
+  /* Stats strip */
+  .hero-stats {
+    position:absolute; bottom:0; left:0; right:0;
+    background:var(--dark2);
+    border-top:1px solid rgba(200,134,26,0.1);
+    display:grid; grid-template-columns:repeat(4,1fr);
+    z-index:10;
+  }
+  .hstat {
+    padding:1.5rem 2rem; text-align:center;
+    border-right:1px solid rgba(200,134,26,0.08);
+  }
+  .hstat:last-child { border-right:none; }
+  .hstat-num { font-family:'Bebas Neue',cursive; font-size:2.2rem; color:var(--amber2); letter-spacing:0.05em; line-height:1; }
+  .hstat-lbl { font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-top:0.2rem; font-weight:500; }
+
+  /* SECTION COMMON */
+  section { padding:100px 6%; }
+  .sec-eyebrow { display:flex; align-items:center; gap:0.8rem; margin-bottom:1rem; }
+  .sec-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--amber); }
+  .sec-eyebrow span { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--amber); font-weight:600; }
+  .sec-title { font-family:'Bebas Neue',cursive; font-size:clamp(3rem,6vw,5rem); color:var(--white); line-height:0.95; letter-spacing:0.05em; margin-bottom:1rem; }
+  .sec-title span { color:var(--amber2); }
+  .sec-sub { font-family:'Tenor Sans',serif; font-size:0.95rem; color:var(--muted); line-height:1.8; max-width:500px; }
+
+  /* ABOUT */
+  .about { background:var(--dark); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+  .about-visual-wrap { position:relative; height:500px; }
+  .about-img-main {
+    position:absolute; left:0; top:0;
+    width:80%; height:80%;
+    background:linear-gradient(160deg,var(--dark2) 0%,#0A0800 100%);
+    border-radius:4px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    font-size:10rem;
+    border:1px solid rgba(200,134,26,0.1);
+  }
+  .about-img-accent {
+    position:absolute; right:0; bottom:0;
+    width:55%; height:55%;
+    background:linear-gradient(135deg,var(--amber) 0%,var(--red) 100%);
+    border-radius:4px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:4rem;
+  }
+  .about-badge {
+    position:absolute; top:1.5rem; right:1.5rem;
+    background:var(--black); border:1px solid var(--amber);
+    color:var(--amber2); font-size:0.72rem; font-weight:700;
+    letter-spacing:0.1em; text-transform:uppercase;
+    padding:0.5rem 1rem; border-radius:2px; z-index:2;
+  }
+  .about-feats { display:flex; flex-direction:column; gap:1.5rem; margin-top:2.5rem; }
+  .about-feat { display:flex; gap:1.2rem; align-items:flex-start; }
+  .feat-num { font-family:'Bebas Neue',cursive; font-size:1.8rem; color:rgba(200,134,26,0.25); line-height:1; flex-shrink:0; width:40px; }
+  .feat-body h4 { font-weight:700; font-size:0.9rem; color:var(--cream); margin-bottom:0.2rem; }
+  .feat-body p { font-size:0.82rem; color:var(--muted); line-height:1.6; font-weight:300; }
+
+  /* MENU */
+  .menu-section { background:var(--black); }
+  .menu-head { text-align:center; margin-bottom:4rem; }
+  .menu-head .sec-eyebrow { justify-content:center; }
+  .menu-head .sec-eyebrow::before { display:none; }
+  .menu-head .sec-sub { margin:0 auto; text-align:center; }
+  .menu-tabs { display:flex; gap:0; justify-content:center; overflow:hidden; border:1px solid rgba(200,134,26,0.2); border-radius:2px; width:fit-content; margin:0 auto 3.5rem; }
+  .mtab { background:transparent; color:var(--muted); padding:0.7rem 2rem; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; border:none; cursor:pointer; transition:all 0.2s; border-right:1px solid rgba(200,134,26,0.15); }
+  .mtab:last-child { border-right:none; }
+  .mtab.active,.mtab:hover { background:var(--amber); color:var(--black); }
+  .menu-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1px; background:rgba(200,134,26,0.08); border:1px solid rgba(200,134,26,0.08); }
+  .mitem {
+    background:var(--dark);
+    padding:2rem;
+    transition:background 0.3s;
+    position:relative; overflow:hidden;
+  }
+  .mitem::before { content:''; position:absolute; left:0; top:0; bottom:0; width:0; background:rgba(200,134,26,0.05); transition:width 0.3s; }
+  .mitem:hover { background:var(--dark2); }
+  .mitem:hover::before { width:100%; }
+  .mitem-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.5rem; position:relative; z-index:1; }
+  .mitem-name { font-family:'Tenor Sans',serif; font-size:1.1rem; color:var(--white); }
+  .mitem-price { font-family:'Bebas Neue',cursive; font-size:1.2rem; color:var(--amber2); letter-spacing:0.05em; margin-left:1rem; white-space:nowrap; }
+  .mitem-desc { font-size:0.8rem; color:var(--muted); line-height:1.7; font-weight:300; position:relative; z-index:1; }
+  .mitem-tag { display:inline-block; margin-top:0.7rem; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber); border:1px solid rgba(200,134,26,0.25); padding:0.2rem 0.6rem; border-radius:2px; position:relative; z-index:1; }
+
+  /* RESERVE */
+  .reserve-section {
+    background:var(--dark2);
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:0; align-items:stretch;
+    min-height:500px;
+  }
+  .reserve-left {
+    background:var(--amber);
+    padding:80px 6% 80px 6%;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .reserve-left::before {
+    content:'WAKANDA';
+    position:absolute; bottom:-20px; right:-20px;
+    font-family:'Bebas Neue',cursive;
+    font-size:10rem; color:rgba(0,0,0,0.1);
+    letter-spacing:0.05em; line-height:1;
+    pointer-events:none;
+  }
+  .reserve-left .sec-eyebrow::before { background:var(--black); }
+  .reserve-left .sec-eyebrow span { color:rgba(0,0,0,0.6); }
+  .reserve-left .sec-title { color:var(--black); }
+  .reserve-left p { font-size:0.95rem; color:rgba(0,0,0,0.65); line-height:1.8; margin:1.5rem 0 2.5rem; font-family:'Tenor Sans',serif; }
+  .wa-big {
+    display:inline-flex; align-items:center; gap:0.8rem;
+    background:var(--black); color:var(--amber2);
+    padding:1.1rem 2.5rem; border-radius:2px;
+    font-size:0.82rem; font-weight:700;
+    text-decoration:none; letter-spacing:0.12em; text-transform:uppercase;
+    transition:all 0.25s; border:none; cursor:pointer;
+    box-shadow:0 4px 20px rgba(0,0,0,0.3);
+    width:fit-content;
+  }
+  .wa-big:hover { background:#111; transform:translateY(-2px); }
+  .contact-infos { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+  .cinfo { display:flex; gap:0.8rem; align-items:center; }
+  .cinfo .icon { font-size:1.1rem; color:rgba(0,0,0,0.5); }
+  .cinfo p { font-size:0.88rem; color:rgba(0,0,0,0.75); font-weight:600; }
+  .reserve-right {
+    padding:80px 6%;
+    background:var(--dark2);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .reserve-right h3 { font-family:'Bebas Neue',cursive; font-size:2.5rem; color:var(--white); letter-spacing:0.05em; margin-bottom:0.5rem; }
+  .reserve-right p { font-size:0.85rem; color:var(--muted); margin-bottom:2rem; font-weight:300; line-height:1.6; }
+  .rform { display:flex; flex-direction:column; gap:1rem; }
+  .rform-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .rfield { display:flex; flex-direction:column; gap:0.4rem; }
+  .rfield label { font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  .rfield input, .rfield select { background:rgba(255,255,255,0.04); border:1px solid rgba(200,134,26,0.15); color:var(--text); padding:0.8rem 1rem; font-family:'Jost',sans-serif; font-size:0.88rem; border-radius:2px; outline:none; transition:border-color 0.2s; width:100%; }
+  .rfield input:focus, .rfield select:focus { border-color:var(--amber); }
+  .rfield input::placeholder { color:var(--muted); }
+  .rfield select option { background:var(--dark2); }
+  .rform .btn-amber { margin-top:0.5rem; text-align:center; border:none; border-radius:2px; cursor:pointer; }
+
+  /* FOOTER */
+  footer { background:var(--black); padding:60px 6% 30px; border-top:1px solid rgba(200,134,26,0.1); }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:4rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.05); margin-bottom:2rem; }
+  .footer-logo { font-family:'Bebas Neue',cursive; font-size:2.5rem; color:var(--white); letter-spacing:0.1em; display:block; margin-bottom:0.5rem; text-decoration:none; }
+  .footer-logo span { color:var(--amber2); }
+  .footer-brand p { font-size:0.82rem; color:var(--muted); line-height:1.8; font-weight:300; max-width:260px; }
+  .open-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(200,134,26,0.1); border:1px solid rgba(200,134,26,0.2); color:var(--amber2); font-size:0.72rem; font-weight:700; padding:0.3rem 0.8rem; border-radius:2px; margin-top:1rem; letter-spacing:0.08em; }
+  footer h6 { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:1.2rem; font-weight:700; }
+  footer ul { list-style:none; display:flex; flex-direction:column; gap:0.7rem; }
+  footer ul a { color:var(--muted); text-decoration:none; font-size:0.83rem; font-weight:300; transition:color 0.2s; }
+  footer ul a:hover { color:var(--amber2); }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--muted); flex-wrap:wrap; gap:1rem; }
+  .socials { display:flex; gap:0.6rem; }
+  .soc { width:34px; height:34px; border:1px solid rgba(200,134,26,0.2); border-radius:2px; display:flex; align-items:center; justify-content:center; color:var(--muted); text-decoration:none; transition:all 0.2s; }
+  .soc:hover { border-color:var(--amber); color:var(--amber2); }
+
+  @media (max-width:768px) {
+    nav .nav-center { display:none; }
+    .hero { grid-template-columns:1fr; }
+    .hero-right { display:none; }
+    .hero-stats { grid-template-columns:repeat(2,1fr); }
+    .about-grid { grid-template-columns:1fr; gap:3rem; }
+    .reserve-section { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; gap:2rem; }
+    section { padding:70px 5%; }
+    .footer-bottom { flex-direction:column; }
+    .rform-row { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Wa<span>kan</span>da</a>
+  <ul class="nav-center">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#reserver">Réserver</a></li>
+  </ul>
+  <div class="nav-badge">
+    <div class="badge-dot"></div>
+    Ouvert 24h/24
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span>Restaurant · Ouagadougou · Burkina Faso 🇧🇫</span></div>
+    <h1>
+      L'expérience
+      <span class="accent">Wakanda</span>
+      <span class="outline">vous attend</span>
+    </h1>
+    <p class="hero-sub">
+      Un cadre unique et chaleureux au cœur de Ouagadougou.
+      <strong>Cuisine raffinée, ambiance incomparable</strong> et
+      service d'exception — disponible 24h/24, 7j/7.
+    </p>
+    <div class="hero-actions">
+      <a href="#reserver" class="btn-amber">Réserver une table</a>
+      <a href="#menu" class="btn-outline">Voir le menu</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-visual">
+      <div class="hero-cards">
+        <div class="hcard">
+          <div class="hcard-top">
+            <span class="hcard-icon">🏆</span>
+            <span class="hcard-badge">Top Ouaga</span>
+          </div>
+          <h4>⭐ 4,1 / 5 sur Google</h4>
+          <p>247 avis de clients satisfaits — l'un des restaurants les mieux notés de Ouagadougou.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-top">
+            <span class="hcard-icon">🌙</span>
+            <span class="hcard-badge">Unique</span>
+          </div>
+          <h4>Ouvert 24h/24 — 7j/7</h4>
+          <p>Le seul restaurant de Ouagadougou disponible à toute heure du jour et de la nuit.</p>
+        </div>
+        <div class="hcard">
+          <div class="hcard-top">
+            <span class="hcard-icon">🎉</span>
+            <span class="hcard-badge">Événements</span>
+          </div>
+          <h4>Privatisation disponible</h4>
+          <p>Anniversaires, soirées d'entreprise, célébrations — cadre idéal pour vos événements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">4,1</div><div class="hstat-lbl">Note Google</div></div>
+    <div class="hstat"><div class="hstat-num">247</div><div class="hstat-lbl">Avis clients</div></div>
+    <div class="hstat"><div class="hstat-num">24H</div><div class="hstat-lbl">Ouverture</div></div>
+    <div class="hstat"><div class="hstat-num">7J/7</div><div class="hstat-lbl">Disponible</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-visual-wrap">
+      <div class="about-img-main">🍽️<div class="about-badge">⭐ 4,1 · 247 avis</div></div>
+      <div class="about-img-accent">🌙</div>
+    </div>
+    <div>
+      <div class="sec-eyebrow"><span>Notre histoire</span></div>
+      <h2 class="sec-title">L'art de la<br>table <span>revisité</span></h2>
+      <p class="sec-sub">Wakanda Restaurant vous invite dans un espace unique à Ouagadougou — où la gastronomie rencontre une ambiance inoubliable. Un lieu de vie disponible à toute heure.</p>
+      <div class="about-feats">
+        <div class="about-feat">
+          <div class="feat-num">01</div>
+          <div class="feat-body">
+            <h4>Cuisine de qualité</h4>
+            <p>Des plats soigneusement préparés avec les meilleurs ingrédients pour une expérience gustative incomparable.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-num">02</div>
+          <div class="feat-body">
+            <h4>Cadre exceptionnel</h4>
+            <p>Une salle élégante avec piscine, pensée pour votre confort et votre plaisir en toutes occasions.</p>
+          </div>
+        </div>
+        <div class="about-feat">
+          <div class="feat-num">03</div>
+          <div class="feat-body">
+            <h4>Ouvert 24h/24 — Le seul à Ouaga</h4>
+            <p>Que ce soit à minuit ou à l'aube, Wakanda vous accueille avec le même niveau d'excellence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-head">
+    <div class="sec-eyebrow"><span>Notre carte</span></div>
+    <h2 class="sec-title">Notre <span>Menu</span></h2>
+    <p class="sec-sub">Une sélection de plats et de saveurs pour tous les goûts, servis avec soin à toute heure.</p>
+  </div>
+  <div class="menu-tabs">
+    <button class="mtab active">Entrées</button>
+    <button class="mtab">Plats</button>
+    <button class="mtab">Pizzas</button>
+    <button class="mtab">Desserts</button>
+    <button class="mtab">Boissons</button>
+  </div>
+  <div class="menu-grid">
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Salade Wakanda</span><span class="mitem-price">3 500 FCFA</span></div>
+      <div class="mitem-desc">Mesclun frais, tomates cerises, avocat, vinaigrette maison aux herbes aromatiques.</div>
+      <span class="mitem-tag">Végétarien</span>
+    </div>
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Brochettes de Bœuf</span><span class="mitem-price">8 500 FCFA</span></div>
+      <div class="mitem-desc">Pièce de bœuf mariné, grillée à la perfection, servie avec frites et sauce maison.</div>
+      <span class="mitem-tag">Chef recommande</span>
+    </div>
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Pizza Margherita</span><span class="mitem-price">5 500 FCFA</span></div>
+      <div class="mitem-desc">Pâte fine croustillante, sauce tomate maison, mozzarella fondante et basilic frais.</div>
+      <span class="mitem-tag">Bestseller</span>
+    </div>
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Poulet Rôti</span><span class="mitem-price">7 000 FCFA</span></div>
+      <div class="mitem-desc">Poulet fermier rôti lentement aux épices, servi avec garniture de légumes sautés.</div>
+      <span class="mitem-tag">Signature</span>
+    </div>
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Poisson du Jour</span><span class="mitem-price">9 000 FCFA</span></div>
+      <div class="mitem-desc">Poisson frais du marché, cuisiné selon la technique du jour par notre chef.</div>
+      <span class="mitem-tag">Frais quotidien</span>
+    </div>
+    <div class="mitem">
+      <div class="mitem-top"><span class="mitem-name">Fondant Chocolat</span><span class="mitem-price">2 500 FCFA</span></div>
+      <div class="mitem-desc">Cœur coulant au chocolat noir, servi avec une boule de glace vanille et coulis.</div>
+      <span class="mitem-tag">Dessert</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<div class="reserve-section" id="reserver">
+  <div class="reserve-left">
+    <div class="sec-eyebrow"><span>Nous rejoindre</span></div>
+    <h2 class="sec-title" style="font-size:3.5rem;">Réservez<br>votre table</h2>
+    <p>Assurez votre place pour une expérience mémorable. Réservation confirmée rapidement par notre équipe.</p>
+    <a href="https://wa.me/22605145454" class="wa-big">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Réserver sur WhatsApp
+    </a>
+    <div class="contact-infos">
+      <div class="cinfo"><span class="icon">📞</span><p>+226 05 14 54 54</p></div>
+      <div class="cinfo"><span class="icon">📍</span><p>09bp1087 Ouaga09, Ouagadougou</p></div>
+      <div class="cinfo"><span class="icon">🕐</span><p>Ouvert 24h/24 — 7j/7</p></div>
+    </div>
+  </div>
+  <div class="reserve-right">
+    <h3>Demande de réservation</h3>
+    <p>Remplissez ce formulaire et nous vous confirmons votre table dans les plus brefs délais.</p>
+    <div class="rform">
+      <div class="rform-row">
+        <div class="rfield"><label>Nom complet</label><input type="text" placeholder="Votre nom" /></div>
+        <div class="rfield"><label>Téléphone</label><input type="tel" placeholder="+226 XX XX XX XX" /></div>
+      </div>
+      <div class="rform-row">
+        <div class="rfield"><label>Date</label><input type="date" /></div>
+        <div class="rfield"><label>Heure</label><input type="time" /></div>
+      </div>
+      <div class="rfield">
+        <label>Nombre de personnes</label>
+        <select>
+          <option>1 personne</option>
+          <option>2 personnes</option>
+          <option>3-4 personnes</option>
+          <option>5-10 personnes</option>
+          <option>10+ personnes (événement)</option>
+        </select>
+      </div>
+      <button class="btn-amber" onclick="window.open('https://wa.me/22605145454','_blank')">Confirmer la réservation →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">Wa<span>kan</span>da</a>
+      <p>Restaurant unique à Ouagadougou — cuisine raffinée, ambiance incomparable. Le seul restaurant ouvert 24h/24 au Burkina.</p>
+      <div class="open-badge"><div class="badge-dot"></div> Ouvert 24h/24 · 7j/7</div>
+    </div>
+    <div>
+      <h6>Navigation</h6>
+      <ul>
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#reserver">Réservation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="tel:+22605145454">+226 05 14 54 54</a></li>
+        <li><a href="https://wa.me/22605145454">WhatsApp</a></li>
+        <li><a href="#">09bp1087 Ouaga09</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Wakanda Restaurant — Ouagadougou, Burkina Faso 🇧🇫</p>
+    <div class="socials">
+      <a href="#" class="soc">📘</a>
+      <a href="#" class="soc">📸</a>
+      <a href="https://wa.me/22605145454" class="soc">💬</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.mtab').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.mtab').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
