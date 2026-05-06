@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alimentation Le Bon Samaritain – Ouagadougou</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rouge: #c0392b;
+    --rouge-fonce: #96281b;
+    --rouge-clair: #e74c3c;
+    --vert: #27ae60;
+    --vert-fonce: #1e8449;
+    --jaune: #f39c12;
+    --blanc: #ffffff;
+    --gris-clair: #f8f9fa;
+    --gris: #6c757d;
+    --noir: #1a1a2e;
+    --bleu-nuit: #16213e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--blanc); color: var(--noir); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 4rem;
+    background: var(--rouge);
+    box-shadow: 0 2px 20px rgba(192,57,43,0.3);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .nav-logo-icon {
+    width: 40px; height: 40px; background: #fff;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .nav-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1rem;
+    color: #fff; line-height: 1.2;
+  }
+  .nav-logo-text span { font-weight: 400; font-size: 0.75rem; display: block; opacity: 0.85; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; transition: color .2s;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta {
+    background: #fff !important;
+    color: var(--rouge) !important;
+    padding: 0.5rem 1.3rem;
+    border-radius: 6px; font-weight: 600 !important;
+    transition: transform .2s !important;
+  }
+  .nav-cta:hover { transform: translateY(-1px) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: var(--bleu-nuit);
+    display: flex; align-items: center;
+    padding: 100px 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-shapes {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .shape {
+    position: absolute; border-radius: 50%;
+    background: rgba(192,57,43,0.12);
+  }
+  .shape-1 { width: 600px; height: 600px; top: -200px; right: -100px; }
+  .shape-2 { width: 300px; height: 300px; bottom: -100px; left: -80px; background: rgba(39,174,96,0.08); }
+  .shape-3 { width: 150px; height: 150px; top: 30%; left: 45%; background: rgba(243,156,18,0.1); }
+
+  .hero-content {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+    position: relative; z-index: 1; width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 0.4rem 1rem; border-radius: 2rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.7);
+    margin-bottom: 1.5rem;
+  }
+  .hero-badge span { color: var(--jaune); }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 800; line-height: 1.1;
+    color: #fff; margin-bottom: 1.2rem;
+  }
+  .hero-title .accent { color: var(--rouge-clair); }
+  .hero-title .accent2 { color: var(--vert); }
+  .hero-desc {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem; color: rgba(255,255,255,0.65);
+    line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-red {
+    background: var(--rouge);
+    color: #fff; padding: 0.9rem 2rem;
+    border-radius: 8px; font-size: 0.9rem;
+    font-weight: 600; text-decoration: none;
+    transition: background .2s, transform .2s;
+    box-shadow: 0 4px 15px rgba(192,57,43,0.4);
+  }
+  .btn-red:hover { background: var(--rouge-clair); transform: translateY(-2px); }
+  .btn-outline-white {
+    color: #fff; padding: 0.9rem 2rem;
+    border-radius: 8px; font-size: 0.9rem;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    transition: border-color .2s;
+  }
+  .btn-outline-white:hover { border-color: #fff; }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat { text-align: center; }
+  .stat-n {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 800; color: var(--rouge-clair);
+  }
+  .stat-l { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* Hero right — store visual */
+  .hero-visual {
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; gap: 12px;
+    height: 480px;
+  }
+  .hero-card {
+    border-radius: 16px; overflow: hidden;
+    position: relative;
+  }
+  .hero-card img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-card:first-child { grid-row: span 2; }
+  .hero-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(22,33,62,0.6), transparent);
+  }
+  .hero-card-label {
+    position: absolute; bottom: 12px; left: 12px;
+    font-size: 0.7rem; font-weight: 600;
+    color: #fff; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(192,57,43,0.85);
+    padding: 0.3rem 0.7rem; border-radius: 4px;
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 5rem 4rem; }
+  .s-label {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--rouge);
+    font-weight: 600; margin-bottom: 0.6rem; display: block;
+  }
+  .s-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    font-weight: 800; color: var(--noir);
+    line-height: 1.2; margin-bottom: 0.8rem;
+  }
+  .s-sub {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem; color: var(--gris);
+    line-height: 1.7; max-width: 520px;
+  }
+
+  /* ── AGENCES ── */
+  #agences { background: var(--gris-clair); }
+  .agences-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .agence-card {
+    background: #fff; border-radius: 16px;
+    padding: 1.8rem 1.5rem;
+    border: 2px solid transparent;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+    cursor: pointer;
+  }
+  .agence-card:hover {
+    border-color: var(--rouge);
+    box-shadow: 0 10px 30px rgba(192,57,43,0.12);
+    transform: translateY(-4px);
+  }
+  .agence-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(192,57,43,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 1rem;
+  }
+  .agence-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--noir); margin-bottom: 0.4rem;
+  }
+  .agence-card p { font-size: 0.82rem; color: var(--gris); line-height: 1.6; }
+  .agence-badge {
+    display: inline-block; margin-top: 0.8rem;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+  }
+  .open { background: rgba(39,174,96,0.12); color: var(--vert-fonce); }
+  .delivery { background: rgba(243,156,18,0.12); color: #c87f0a; }
+
+  /* ── RAYONS ── */
+  #rayons { background: #fff; }
+  .rayons-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .rayons-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .rayon-card {
+    border-radius: 16px; overflow: hidden;
+    position: relative; cursor: pointer;
+    transition: transform .3s;
+  }
+  .rayon-card:hover { transform: scale(1.02); }
+  .rayon-card:first-child { grid-column: span 2; }
+  .rayon-img {
+    height: 220px; overflow: hidden;
+  }
+  .rayon-card:first-child .rayon-img { height: 280px; }
+  .rayon-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+  .rayon-card:hover .rayon-img img { transform: scale(1.06); }
+  .rayon-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(22,33,62,0.8) 0%, rgba(22,33,62,0.1) 60%, transparent 100%);
+  }
+  .rayon-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.2rem 1.4rem;
+  }
+  .rayon-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: #fff; margin-bottom: 0.2rem;
+  }
+  .rayon-info p { font-size: 0.78rem; color: rgba(255,255,255,0.65); }
+  .rayon-tag {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--rouge);
+    color: #fff; font-size: 0.65rem; font-weight: 700;
+    padding: 0.25rem 0.6rem; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  /* ── LIVRAISON ── */
+  #livraison {
+    background: var(--rouge);
+    color: #fff;
+  }
+  .livraison-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  #livraison .s-title { color: #fff; }
+  #livraison .s-sub { color: rgba(255,255,255,0.75); }
+  .livraison-steps {
+    display: flex; flex-direction: column; gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .step {
+    display: flex; align-items: center; gap: 1rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 1rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 0.9rem; color: #fff; flex-shrink: 0;
+  }
+  .step-text strong { display: block; font-size: 0.9rem; font-weight: 600; }
+  .step-text span { font-size: 0.8rem; color: rgba(255,255,255,0.65); }
+
+  .livraison-visual {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    text-align: center;
+  }
+  .livraison-visual .big-icon { font-size: 5rem; margin-bottom: 1rem; }
+  .livraison-visual h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 800; color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .livraison-visual p { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-bottom: 1.5rem; }
+  .livraison-tel {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 800;
+    color: var(--jaune); letter-spacing: 0.05em;
+  }
+
+  /* ── AVIS ── */
+  #avis { background: var(--gris-clair); }
+  .avis-top {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .rating-display {
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .rating-num-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 4.5rem; font-weight: 800;
+    color: var(--rouge); line-height: 1;
+  }
+  .stars-big { font-size: 1.4rem; color: var(--jaune); }
+  .rating-count { font-size: 0.8rem; color: var(--gris); margin-top: 0.2rem; }
+
+  .avis-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .avis-card {
+    background: #fff; border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .avis-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+  .avis-stars { color: var(--jaune); font-size: 0.85rem; margin-bottom: 0.8rem; }
+  .avis-text {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 0.95rem; color: #444; line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+  .avis-footer { display: flex; align-items: center; gap: 0.8rem; }
+  .avis-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--rouge); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+  }
+  .avis-name { font-size: 0.82rem; font-weight: 600; color: var(--noir); }
+  .avis-date { font-size: 0.72rem; color: var(--gris); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bleu-nuit); }
+  #contact .s-title { color: #fff; }
+  #contact .s-label { color: var(--rouge-clair); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; margin-top: 3rem; align-items: start;
+  }
+  .contact-info-block { margin-bottom: 2rem; }
+  .contact-info-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+  }
+  .contact-info-block p, .contact-info-block a {
+    font-size: 1rem; color: #fff;
+    line-height: 1.7; text-decoration: none;
+  }
+  .contact-info-block a:hover { color: var(--rouge-clair); }
+
+  .horaires-list { list-style: none; }
+  .horaires-list li {
+    display: flex; justify-content: space-between;
+    font-size: 0.88rem; color: rgba(255,255,255,0.7);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .horaires-list .ouvert { color: var(--vert); font-weight: 600; }
+
+  .contact-form {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 2rem;
+  }
+  .contact-form h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: #fff; margin-bottom: 1.5rem;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-input {
+    width: 100%; padding: 0.85rem 1.2rem;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 10px; color: #fff;
+    font-size: 0.88rem; outline: none;
+    transition: border-color .2s;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.35); }
+  .form-input:focus { border-color: var(--rouge); }
+  textarea.form-input { height: 100px; resize: none; }
+  .form-btn {
+    width: 100%; padding: 0.9rem;
+    background: var(--rouge); color: #fff;
+    border: none; border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+    margin-top: 0.5rem;
+  }
+  .form-btn:hover { background: var(--rouge-clair); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d1117;
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; color: #fff; font-size: 1rem;
+  }
+  .footer-logo span { color: var(--rouge-clair); }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+  .footer-socials { display: flex; gap: 1rem; }
+  .social-btn {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; text-decoration: none;
+    transition: background .2s;
+  }
+  .social-btn:hover { background: var(--rouge); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left-content > * { animation: fadeUp .6s ease both; }
+  .hero-left-content > *:nth-child(1) { animation-delay: .1s; }
+  .hero-left-content > *:nth-child(2) { animation-delay: .25s; }
+  .hero-left-content > *:nth-child(3) { animation-delay: .4s; }
+  .hero-left-content > *:nth-child(4) { animation-delay: .55s; }
+  .hero-left-content > *:nth-child(5) { animation-delay: .7s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.5rem; }
+    #hero { padding: 90px 1.5rem 3rem; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .agences-grid { grid-template-columns: 1fr 1fr; }
+    .rayons-grid { grid-template-columns: 1fr; }
+    .rayon-card:first-child { grid-column: 1; }
+    .livraison-inner { grid-template-columns: 1fr; }
+    .avis-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🛒</div>
+    <div class="nav-logo-text">
+      Le Bon Samaritain
+      <span>Alimentation · Ouagadougou</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#agences">Nos agences</a></li>
+    <li><a href="#rayons">Nos rayons</a></li>
+    <li><a href="#livraison">Livraison</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#contact" class="nav-cta">Nous contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left-content">
+      <div class="hero-badge">
+        <span>⭐ 4,0</span> · 773 avis Google · Plusieurs agences à Ouaga
+      </div>
+      <h1 class="hero-title">
+        Votre supermarché<br>de <span class="accent">confiance</span><br>à <span class="accent2">Ouagadougou</span>
+      </h1>
+      <p class="hero-desc">
+        Alimentation, produits ménagers, épices, jouets et bien plus — Le Bon Samaritain vous offre tout ce dont vous avez besoin, avec livraison à domicile disponible.
+      </p>
+      <div class="hero-actions">
+        <a href="#rayons" class="btn-red">Découvrir nos rayons</a>
+        <a href="#livraison" class="btn-outline-white">Commander en ligne</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-n">4,0★</div>
+          <div class="stat-l">Note Google</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">773</div>
+          <div class="stat-l">Avis clients</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">4+</div>
+          <div class="stat-l">Agences</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">🚚</div>
+          <div class="stat-l">Livraison</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80" alt="Supermarché">
+        <div class="hero-card-overlay"></div>
+        <div class="hero-card-label">Notre magasin</div>
+      </div>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=400&q=80" alt="Rayons">
+        <div class="hero-card-overlay"></div>
+        <div class="hero-card-label">Rayons</div>
+      </div>
+      <div class="hero-card">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&q=80" alt="Produits frais">
+        <div class="hero-card-overlay"></div>
+        <div class="hero-card-label">Produits frais</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENCES -->
+<section id="agences">
+  <span class="s-label">Présence à Ouagadougou</span>
+  <h2 class="s-title">Nos agences près de chez vous</h2>
+  <div class="agences-grid">
+    <div class="agence-card">
+      <div class="agence-icon">🏪</div>
+      <h3>Ouaga 2000</h3>
+      <p>Notre agence principale, référence du quartier depuis des années.</p>
+      <span class="agence-badge delivery">Livraison disponible</span>
+    </div>
+    <div class="agence-card">
+      <div class="agence-icon">🏬</div>
+      <h3>Kalgondin</h3>
+      <p>Supermarché bien approvisionné, noté 4,0★ avec 773 avis clients.</p>
+      <span class="agence-badge delivery">Livraison disponible</span>
+    </div>
+    <div class="agence-card">
+      <div class="agence-icon">🛒</div>
+      <h3>Tampouy</h3>
+      <p>Épicerie de proximité ouverte, accessible et bien fournie.</p>
+      <span class="agence-badge open">Ouvert</span>
+    </div>
+    <div class="agence-card">
+      <div class="agence-icon">🏷️</div>
+      <h3>Patte d'Oie</h3>
+      <p>Supérette de quartier avec livraison, notée 3,9★ par nos clients.</p>
+      <span class="agence-badge delivery">Livraison disponible</span>
+    </div>
+  </div>
+</section>
+
+<!-- RAYONS -->
+<section id="rayons">
+  <div class="rayons-header">
+    <div>
+      <span class="s-label">Ce que nous proposons</span>
+      <h2 class="s-title">Nos rayons</h2>
+    </div>
+    <p style="color:var(--gris); font-size:0.85rem; max-width:300px; text-align:right;">
+      Des milliers de produits disponibles dans nos magasins pour tous vos besoins.
+    </p>
+  </div>
+  <div class="rayons-grid">
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1506617420156-8e4536971650?w=700&q=80" alt="Alimentation générale">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Alimentation générale</h3>
+        <p>Riz, huile, farine, conserves, épices et produits du quotidien</p>
+      </div>
+      <div class="rayon-tag">Bestseller</div>
+    </div>
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&q=80" alt="Produits ménagers">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Produits ménagers</h3>
+        <p>Entretien, hygiène, nettoyage</p>
+      </div>
+    </div>
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1566140967404-b8b3932483f5?w=400&q=80" alt="Jouets">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Jouets & Cadeaux</h3>
+        <p>Pour les petits et les grands</p>
+      </div>
+    </div>
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1470119693884-47d3a1d1f180?w=400&q=80" alt="Épices et condiments">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Épices & Condiments</h3>
+        <p>Large choix d'épices locales et importées</p>
+      </div>
+    </div>
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&q=80" alt="Boissons">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Boissons</h3>
+        <p>Eau, jus, sodas et boissons locales</p>
+      </div>
+    </div>
+    <div class="rayon-card">
+      <div class="rayon-img">
+        <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400&q=80" alt="Électronique">
+      </div>
+      <div class="rayon-overlay"></div>
+      <div class="rayon-info">
+        <h3>Électronique & Divers</h3>
+        <p>Accessoires, gadgets et articles variés</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVRAISON -->
+<section id="livraison">
+  <div class="livraison-inner">
+    <div>
+      <span class="s-label" style="color:rgba(255,255,255,0.5)">Service rapide</span>
+      <h2 class="s-title">Livraison à domicile disponible</h2>
+      <p class="s-sub">Commandez vos produits depuis chez vous et recevez-les directement à votre porte. Rapide, simple et fiable.</p>
+      <div class="livraison-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Appelez-nous</strong>
+            <span>Contactez notre équipe par téléphone ou WhatsApp</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Passez votre commande</strong>
+            <span>Donnez votre liste de produits et votre adresse</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Recevez votre livraison</strong>
+            <span>Nos livreurs vous apportent vos courses à domicile</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="livraison-visual">
+      <div class="big-icon">🚚</div>
+      <h3>Livraison rapide</h3>
+      <p>Disponible dans toutes nos agences de Ouagadougou</p>
+      <div class="livraison-tel">Contactez-nous</div>
+      <p style="margin-top:0.4rem; font-size:0.78rem; color:rgba(255,255,255,0.5);">via WhatsApp ou téléphone</p>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section id="avis">
+  <div class="avis-top">
+    <div>
+      <span class="s-label">Témoignages</span>
+      <h2 class="s-title">Ce que disent nos clients</h2>
+    </div>
+    <div class="rating-display">
+      <div class="rating-num-big">4,0</div>
+      <div>
+        <div class="stars-big">★★★★☆</div>
+        <div class="rating-count">773 avis · Google Maps</div>
+      </div>
+    </div>
+  </div>
+  <div class="avis-grid">
+    <div class="avis-card">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">« Super supermarché, bien approvisionné avec des prix raisonnables. Le service de livraison est très pratique ! »</p>
+      <div class="avis-footer">
+        <div class="avis-avatar">A</div>
+        <div>
+          <div class="avis-name">Adama S.</div>
+          <div class="avis-date">il y a 1 mois</div>
+        </div>
+      </div>
+    </div>
+    <div class="avis-card">
+      <div class="avis-stars">★★★★☆</div>
+      <p class="avis-text">« Très bonne alimentation, on trouve presque tout ce qu'on cherche. L'agence de Ouaga 2000 est ma préférée. »</p>
+      <div class="avis-footer">
+        <div class="avis-avatar" style="background:var(--vert)">F</div>
+        <div>
+          <div class="avis-name">Fatimata K.</div>
+          <div class="avis-date">il y a 2 mois</div>
+        </div>
+      </div>
+    </div>
+    <div class="avis-card">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">« Grande variété de produits, personnel sympathique. Je fais mes courses ici chaque semaine depuis des années ! »</p>
+      <div class="avis-footer">
+        <div class="avis-avatar" style="background:var(--jaune); color:#333">M</div>
+        <div>
+          <div class="avis-name">Moussa B.</div>
+          <div class="avis-date">il y a 3 mois</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="s-label">Nous joindre</span>
+  <h2 class="s-title" style="color:#fff">Contactez-nous</h2>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-info-block">
+        <h3>Téléphones</h3>
+        <p>📞 <a href="tel:+22625365656">+226 25 36 56 56</a><br>
+           📱 WhatsApp disponible</p>
+      </div>
+      <div class="contact-info-block">
+        <h3>Adresse principale</h3>
+        <p>Avenue des Arts, Ouaga 2000<br>Ouagadougou, Burkina Faso</p>
+      </div>
+      <div class="contact-info-block">
+        <h3>Horaires d'ouverture</h3>
+        <ul class="horaires-list">
+          <li><span>Lundi – Vendredi</span><span class="ouvert">08h00 – 20h00</span></li>
+          <li><span>Samedi</span><span class="ouvert">08h00 – 20h00</span></li>
+          <li><span>Dimanche</span><span class="ouvert">09h00 – 18h00</span></li>
+        </ul>
+      </div>
+      <div class="contact-info-block">
+        <h3>Réseaux sociaux</h3>
+        <p>🌐 Facebook · Bon Samaritain Ouaga</p>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>📩 Envoyez-nous un message</h3>
+      <div class="form-group">
+        <input type="text" class="form-input" placeholder="Votre nom complet">
+      </div>
+      <div class="form-group">
+        <input type="tel" class="form-input" placeholder="Votre numéro de téléphone">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-input" placeholder="Sujet (commande, info, réclamation...)">
+      </div>
+      <div class="form-group">
+        <textarea class="form-input" placeholder="Votre message..."></textarea>
+      </div>
+      <button class="form-btn">Envoyer le message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🛒 Le Bon <span>Samaritain</span></div>
+  <p>© 2025 Alimentation Le Bon Samaritain · Ouagadougou, Burkina Faso</p>
+  <div class="footer-socials">
+    <a class="social-btn" href="#">📘</a>
+    <a class="social-btn" href="#">📷</a>
+    <a class="social-btn" href="#">💬</a>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.agence-card, .rayon-card, .avis-card, .step').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
