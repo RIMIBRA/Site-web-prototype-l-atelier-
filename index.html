@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hub Innovation Burkina — Incub@UO & BBI</title>
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:   #1A6B3C;
+      --green2:  #22a05a;
+      --red:     #C0392B;
+      --gold:    #F39C12;
+      --dark:    #0D1B2A;
+      --dark2:   #13263B;
+      --slate:   #1e3a5f;
+      --light:   #F5F7FA;
+      --white:   #ffffff;
+      --gray:    #8899aa;
+      --cyan:    #00D4FF;
+      --font:    'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 88px 0; }
+    .section-dark { background: var(--dark); color: var(--white); }
+    .section-light { background: var(--light); }
+    .badge {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 4px 14px; border-radius: 20px;
+      background: rgba(243,156,18,.15); color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .badge-green { background: rgba(26,107,60,.12); color: var(--green2); }
+    .badge-red   { background: rgba(192,57,43,.12);  color: var(--red);  }
+    h2.section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 800;
+      line-height: 1.2; margin-bottom: 16px;
+    }
+    p.section-sub { font-size: 1.05rem; color: var(--gray); max-width: 640px; line-height: 1.7; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 28px; border-radius: 8px; font-weight: 700;
+      font-size: .95rem; cursor: pointer; transition: all .22s;
+      border: none; outline: none;
+    }
+    .btn-green  { background: var(--green);  color: #fff; }
+    .btn-green:hover  { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,107,60,.35); }
+    .btn-gold   { background: var(--gold);   color: #fff; }
+    .btn-gold:hover   { background: #e08e00; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(243,156,18,.35); }
+    .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
+    .btn-outline:hover { background: var(--white); color: var(--dark); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .grid-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .section { padding: 60px 0; }
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(13,27,42,.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px; max-width: 1180px; margin: 0 auto;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; color: #fff; font-size: 1rem;
+    }
+    .nav-logo-text { color: #fff; font-weight: 800; font-size: 1.1rem; }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,.75); font-size: .9rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--green); color: #fff !important; padding: 9px 20px; border-radius: 6px; font-weight: 700 !important; }
+    .nav-cta:hover { background: var(--green2) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all .3s; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 68px; left: 0; right: 0; background: var(--dark2); flex-direction: column; padding: 20px; gap: 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh; padding-top: 68px;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 50%, #0a2540 100%);
+      display: flex; align-items: center; position: relative; overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(26,107,60,.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,212,255,.1) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(243,156,18,.08) 0%, transparent 40%);
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-inner { position: relative; z-index: 1; width: 100%; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(26,107,60,.2); border: 1px solid rgba(26,107,60,.4);
+      color: var(--green2); padding: 6px 16px; border-radius: 20px;
+      font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-tag::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900;
+      color: #fff; line-height: 1.1; margin-bottom: 24px;
+    }
+    .hero-title em { font-style: normal; color: var(--gold); }
+    .hero-title .line2 { color: var(--cyan); }
+    .hero-desc { font-size: 1.1rem; color: rgba(255,255,255,.65); max-width: 540px; line-height: 1.75; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 64px; flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.1); padding-top: 40px;
+    }
+    .stat-item .num { font-size: 2.4rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .stat-item .label { font-size: .85rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+    .hero-cards {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .hero-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 28px; backdrop-filter: blur(8px);
+      transition: transform .25s, border-color .25s;
+    }
+    .hero-card:hover { transform: translateX(-8px); border-color: rgba(255,255,255,.25); }
+    .hero-card-logo {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    }
+    .hc-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: #fff;
+    }
+    .hc-icon-green { background: linear-gradient(135deg, #1A6B3C, #22a05a); }
+    .hc-icon-blue  { background: linear-gradient(135deg, #0077cc, #00D4FF); }
+    .hc-name { color: #fff; font-weight: 800; font-size: .95rem; }
+    .hc-sub  { color: rgba(255,255,255,.45); font-size: .78rem; }
+    .hc-desc { color: rgba(255,255,255,.6); font-size: .87rem; line-height: 1.6; }
+    .hc-tag {
+      display: inline-block; margin-top: 14px; font-size: .72rem; font-weight: 700;
+      padding: 3px 12px; border-radius: 4px; background: rgba(243,156,18,.15); color: var(--gold);
+    }
+    @media (max-width: 900px) {
+      .hero-cards { display: none; }
+    }
+
+    /* ─── ABOUT SECTIONS ─── */
+    .about-img-placeholder {
+      border-radius: 20px; overflow: hidden;
+      background: linear-gradient(135deg, var(--slate), var(--dark));
+      aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 16px; color: rgba(255,255,255,.35);
+      font-size: .9rem; text-align: center; padding: 32px;
+      position: relative;
+    }
+    .about-img-placeholder .big-icon { font-size: 4rem; opacity: .4; }
+    .about-img-placeholder::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(26,107,60,.2), rgba(0,212,255,.1));
+      border-radius: 20px;
+    }
+    .feature-list { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .feature-item {
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .feature-icon {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(26,107,60,.1); display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem;
+    }
+    .feature-icon.orange { background: rgba(243,156,18,.1); }
+    .feature-icon.blue   { background: rgba(0,212,255,.1); }
+    .feature-text h4 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; color: var(--dark); }
+    .feature-text p  { font-size: .85rem; color: var(--gray); line-height: 1.6; }
+
+    /* ─── SERVICES CARDS ─── */
+    .service-card {
+      background: var(--white); border: 1px solid #e8edf2;
+      border-radius: 16px; padding: 30px; transition: all .25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--cyan));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .service-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { font-size: 2rem; margin-bottom: 16px; }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .service-card p  { font-size: .87rem; color: var(--gray); line-height: 1.65; }
+
+    /* ─── CAMP D'IDÉATION ─── */
+    #camp {
+      background: linear-gradient(135deg, var(--dark) 0%, #0a2540 100%);
+      position: relative; overflow: hidden;
+    }
+    #camp::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(26,107,60,.2) 0%, transparent 60%);
+    }
+    .camp-header { text-align: center; max-width: 700px; margin: 0 auto 60px; position: relative; }
+    .editions-timeline { display: flex; gap: 16px; margin-bottom: 48px; flex-wrap: wrap; justify-content: center; position: relative; }
+    .edition-dot {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      cursor: pointer;
+    }
+    .edition-circle {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .85rem; transition: all .25s;
+      background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.6);
+    }
+    .edition-circle.active {
+      background: var(--green); border-color: var(--green2); color: #fff;
+      box-shadow: 0 0 0 4px rgba(26,107,60,.3);
+    }
+    .edition-year { font-size: .72rem; color: rgba(255,255,255,.4); }
+    .edition-year.active { color: var(--green2); }
+    .camp-spotlight {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px; padding: 40px; position: relative;
+    }
+    .spotlight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    @media (max-width: 768px) { .spotlight-grid { grid-template-columns: 1fr; } }
+    .spotlight-stat {
+      text-align: center; padding: 24px;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .spotlight-stat:last-child { border: none; }
+    .spotlight-stat .big-num { font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .spotlight-stat .label   { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 6px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
+    @media (max-width: 640px) { .projects-grid { grid-template-columns: 1fr; } }
+    .project-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px; padding: 24px; transition: all .25s;
+    }
+    .project-card:hover { background: rgba(255,255,255,.09); transform: translateY(-3px); }
+    .project-rank { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .rank-1 { color: var(--gold); }
+    .rank-2 { color: #b0b8c1; }
+    .rank-3 { color: #cd7f32; }
+    .rank-sp { color: var(--cyan); }
+    .project-card h4 { color: #fff; font-size: 1.05rem; margin: 8px 0 6px; }
+    .project-card p  { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; }
+    .project-prize {
+      margin-top: 14px; font-size: .82rem; font-weight: 700;
+      color: var(--gold); display: flex; align-items: center; gap: 6px;
+    }
+
+    /* ─── STARTUPS PORTFOLIO ─── */
+    .startup-card {
+      background: var(--white); border: 1px solid #e8edf2; border-radius: 16px;
+      padding: 28px; transition: all .25s; cursor: pointer;
+    }
+    .startup-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .startup-avatar {
+      width: 56px; height: 56px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.3rem; color: #fff; margin-bottom: 16px;
+    }
+    .startup-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .startup-card p  { font-size: .85rem; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+    .startup-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: .72rem; font-weight: 600; padding: 3px 10px; border-radius: 4px;
+      background: rgba(26,107,60,.08); color: var(--green);
+    }
+    .tag-blue { background: rgba(0,212,255,.08); color: #0099cc; }
+    .tag-gold { background: rgba(243,156,18,.1); color: #c87d00; }
+
+    /* ─── INCUBATORS COMPARE ─── */
+    .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 760px) { .compare-wrap { grid-template-columns: 1fr; } }
+    .compare-card {
+      border-radius: 20px; padding: 40px; position: relative; overflow: hidden;
+    }
+    .compare-card-green { background: linear-gradient(135deg, #1A6B3C, #0d4225); }
+    .compare-card-blue  { background: linear-gradient(135deg, #0077cc, #003d6b); }
+    .compare-card h3 { color: #fff; font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+    .compare-card .sub { color: rgba(255,255,255,.6); font-size: .85rem; margin-bottom: 24px; }
+    .compare-list { display: flex; flex-direction: column; gap: 12px; }
+    .compare-item { display: flex; gap: 10px; align-items: center; color: rgba(255,255,255,.8); font-size: .9rem; }
+    .compare-item::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .compare-cta {
+      margin-top: 32px; display: inline-block; padding: 12px 24px;
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      color: #fff; border-radius: 8px; font-weight: 700; font-size: .88rem;
+      transition: all .2s; backdrop-filter: blur(4px);
+    }
+    .compare-cta:hover { background: rgba(255,255,255,.25); }
+    .compare-bg-icon {
+      position: absolute; bottom: -20px; right: -10px;
+      font-size: 7rem; opacity: .08;
+    }
+
+    /* ─── APPLICATION FORM ─── */
+    #candidature { background: var(--light); }
+    .form-wrap {
+      max-width: 760px; margin: 0 auto;
+      background: var(--white); border-radius: 24px;
+      padding: 48px; box-shadow: 0 24px 80px rgba(0,0,0,.08);
+      border: 1px solid #e8edf2;
+    }
+    .form-header { text-align: center; margin-bottom: 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 20px; }
+    .form-group label { font-size: .85rem; font-weight: 600; color: var(--dark); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px; border: 1.5px solid #dde2e8; border-radius: 8px;
+      font-size: .95rem; font-family: var(--font); transition: border-color .2s;
+      background: var(--white); color: var(--dark); outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,107,60,.1); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-step-indicator {
+      display: flex; gap: 8px; justify-content: center; margin-bottom: 36px;
+    }
+    .step-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #dde2e8; transition: all .3s;
+    }
+    .step-dot.active { background: var(--green); transform: scale(1.3); }
+    .form-submit {
+      width: 100%; padding: 15px; background: var(--green);
+      color: #fff; font-weight: 700; font-size: 1rem; border-radius: 10px;
+      border: none; cursor: pointer; transition: all .25s; margin-top: 8px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .form-submit:hover { background: var(--green2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,107,60,.35); }
+    .form-success {
+      display: none; text-align: center; padding: 40px 20px;
+    }
+    .form-success .check { font-size: 4rem; margin-bottom: 16px; }
+    .form-success h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; color: var(--green); }
+    .form-success p { color: var(--gray); }
+
+    /* ─── PARTNERS ─── */
+    #partenaires { background: var(--white); }
+    .partners-grid {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center; align-items: center; margin-top: 48px;
+    }
+    .partner-chip {
+      background: var(--light); border: 1px solid #e8edf2; border-radius: 12px;
+      padding: 16px 28px; font-weight: 700; font-size: .9rem; color: var(--slate);
+      transition: all .2s; cursor: default;
+    }
+    .partner-chip:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+    /* ─── ACTUALITES ─── */
+    .news-card {
+      background: var(--white); border: 1px solid #e8edf2; border-radius: 16px;
+      overflow: hidden; transition: all .25s;
+    }
+    .news-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,.1); transform: translateY(-4px); }
+    .news-thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .news-thumb-green { background: linear-gradient(135deg, #1A6B3C22, #22a05a22); }
+    .news-thumb-blue  { background: linear-gradient(135deg, #0077cc22, #00D4FF22); }
+    .news-thumb-gold  { background: linear-gradient(135deg, #F39C1222, #e08e0022); }
+    .news-body { padding: 24px; }
+    .news-date { font-size: .78rem; color: var(--gray); margin-bottom: 8px; }
+    .news-body h4 { font-size: .95rem; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+    .news-body p  { font-size: .83rem; color: var(--gray); line-height: 1.6; }
+    .news-tag { display: inline-block; margin-top: 14px; font-size: .72rem; font-weight: 700; padding: 3px 10px; border-radius: 4px; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--dark); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-info h3 { color: #fff; font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; }
+    .contact-item { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+    .contact-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: rgba(255,255,255,.07); display: flex; align-items: center;
+      justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-item-text .label { font-size: .78rem; color: rgba(255,255,255,.4); margin-bottom: 2px; }
+    .contact-item-text .val   { font-size: .92rem; color: rgba(255,255,255,.85); }
+    .contact-card {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 28px;
+    }
+    .contact-card h4 { color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+    .social-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+      border-radius: 8px; font-size: .85rem; font-weight: 600; transition: all .2s;
+    }
+    .social-fb   { background: #1877F2; color: #fff; }
+    .social-fb:hover   { background: #1565d8; }
+    .social-yt   { background: #FF0000; color: #fff; }
+    .social-yt:hover   { background: #cc0000; }
+    .social-li   { background: #0A66C2; color: #fff; }
+    .social-li:hover   { background: #084e98; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #07111c; color: rgba(255,255,255,.45);
+      padding: 40px 24px; text-align: center;
+    }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-logo { color: rgba(255,255,255,.8); font-weight: 800; font-size: 1.1rem; margin-bottom: 12px; }
+    .footer-logo span { color: var(--gold); }
+    .footer-nav { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .footer-nav a { font-size: .85rem; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-nav a:hover { color: rgba(255,255,255,.8); }
+    .footer-copy { font-size: .8rem; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s, transform .6s; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-icon">H</div>
+      <div class="nav-logo-text">Hub<span>BF</span> Innovation</div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#incubuo">Incub@UO</a></li>
+      <li><a href="#bbi">BBI</a></li>
+      <li><a href="#camp">Camp d'Idéation</a></li>
+      <li><a href="#startups">Startups</a></li>
+      <li><a href="#actualites">Actualités</a></li>
+      <li><a href="#candidature" class="nav-cta">Candidater</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="container hero-inner">
+    <div class="grid-2" style="gap:60px; align-items:center;">
+      <div>
+        <div class="hero-tag">🇧🇫 Écosystème Innovation — Ouagadougou</div>
+        <h1 class="hero-title">
+          Forge les<br>
+          <em>startups</em> de demain<br>
+          <span class="line2">au Burkina Faso</span>
+        </h1>
+        <p class="hero-desc">
+          Deux incubateurs pionniers, une mission commune : transformer les idées numériques
+          des étudiants et entrepreneurs burkinabè en entreprises à fort impact.
+        </p>
+        <div class="hero-actions">
+          <a href="#candidature" class="btn btn-green">Soumettre mon projet →</a>
+          <a href="#incubuo" class="btn btn-outline">Découvrir l'écosystème</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="num">5+</div><div class="label">Éditions du Camp d'Idéation</div></div>
+          <div class="stat-item"><div class="num">300+</div><div class="label">Candidatures reçues (2025)</div></div>
+          <div class="stat-item"><div class="num">5</div><div class="label">Secteurs prioritaires</div></div>
+          <div class="stat-item"><div class="num">2</div><div class="label">Incubateurs partenaires</div></div>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-logo">
+            <div class="hc-icon hc-icon-green">I@</div>
+            <div>
+              <div class="hc-name">Incub@UO</div>
+              <div class="hc-sub">Université Joseph Ki-Zerbo · UFR SEA</div>
+            </div>
+          </div>
+          <p class="hc-desc">Incubateur digital interdisciplinaire public logé au cœur de l'Université de Ouagadougou. Formate les futurs entrepreneurs tech du pays à travers un programme rigoureux d'idéation et d'incubation.</p>
+          <span class="hc-tag">🎓 Universitaire · Public</span>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-logo">
+            <div class="hc-icon hc-icon-blue">BBI</div>
+            <div>
+              <div class="hc-name">Burkina Business Incubator</div>
+              <div class="hc-sub">Échangeur de l'Est · Ouagadougou</div>
+            </div>
+          </div>
+          <p class="hc-desc">Centre d'incubation pour PME avec espace de co-working physique. Priorise les projets TIC, agro-industrie et énergies renouvelables. Membre du réseau AfriLabs.</p>
+          <span class="hc-tag">🏢 Privé · Réseau AfriLabs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     INCUB@UO — ABOUT
+════════════════════════════════════════ -->
+<section id="incubuo" class="section">
+  <div class="container">
+    <div class="grid-2" style="align-items:center; gap:60px;">
+      <div class="about-img-placeholder reveal">
+        <div class="big-icon">🎓</div>
+        <div style="color:rgba(255,255,255,.5); font-size:1.1rem; font-weight:700;">Incub@UO</div>
+        <div style="color:rgba(255,255,255,.3); font-size:.85rem;">Université Joseph Ki-Zerbo<br>UFR Sciences Exactes & Appliquées</div>
+      </div>
+      <div class="reveal">
+        <span class="badge badge-green">Incubateur Universitaire</span>
+        <h2 class="section-title">Incub@UO — L'incubateur<br>digital de l'Université</h2>
+        <p class="section-sub">
+          Hébergé au sein de l'UFR SEA de l'Université Ouaga I Pr. Joseph KI-ZERBO, Incub@UO
+          place le numérique au centre des solutions aux défis de la société burkinabè.
+          Ouvert à tous les étudiants et enseignants porteurs de projets à fort potentiel digital.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🏗️</div>
+            <div class="feature-text">
+              <h4>Co-working & Laboratoires</h4>
+              <p>Espaces équipés en matériel informatique, salles de réunion et labs dédiés aux projets tech.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon orange">🧠</div>
+            <div class="feature-text">
+              <h4>Accompagnement Expert</h4>
+              <p>Coaching individuel et collectif, mentorat en entrepreneuriat, IA et développement business.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon blue">🌐</div>
+            <div class="feature-text">
+              <h4>Réseau International</h4>
+              <p>Partenariats avec l'AUF (Programme ACTIF), le PNUD, l'UVBF et le centre CITADEL.</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px;">
+          <a href="#candidature" class="btn btn-green">Rejoindre Incub@UO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     BBI — ABOUT
+════════════════════════════════════════ -->
+<section id="bbi" class="section section-light">
+  <div class="container">
+    <div class="grid-2" style="align-items:center; gap:60px;">
+      <div class="reveal">
+        <span class="badge">Incubateur Privé · AfriLabs</span>
+        <h2 class="section-title">Burkina Business Incubator<br>— De l'idée à l'entreprise</h2>
+        <p class="section-sub">
+          Le BBI est un centre d'incubation pour PME situé à l'Échangeur de l'Est, Ouagadougou.
+          Il offre un cadre physique complet pour la maturation d'idées innovantes et la formation
+          à la création d'entreprise, de l'idée jusqu'au lancement.
+        </p>
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🏢</div>
+            <div class="feature-text">
+              <h4>Espace Physique Complet</h4>
+              <p>Bureaux partagés à loyer réduit, salles de conférence, cafétéria, internet haut débit.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon orange">📊</div>
+            <div class="feature-text">
+              <h4>Conseil Stratégique 360°</h4>
+              <p>Business plan, marketing, conseil financier, propriété industrielle, accompagnement juridique.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon blue">🤝</div>
+            <div class="feature-text">
+              <h4>Réseau AfriLabs</h4>
+              <p>Accès au plus grand réseau de hubs d'innovation en Afrique, actif depuis 2011 dans plus de 40 pays.</p>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px;">
+          <a href="#candidature" class="btn btn-gold">Rejoindre le BBI</a>
+        </div>
+      </div>
+      <div class="about-img-placeholder reveal" style="background: linear-gradient(135deg,#003d6b,#0077cc);">
+        <div class="big-icon">🏢</div>
+        <div style="color:rgba(255,255,255,.5); font-size:1.1rem; font-weight:700;">Burkina Business Incubator</div>
+        <div style="color:rgba(255,255,255,.3); font-size:.85rem;">Échangeur de l'Est · Ouagadougou<br>Membre AfriLabs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     SECTEURS & SERVICES
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:56px;" class="reveal">
+      <span class="badge">Secteurs & Services</span>
+      <h2 class="section-title">Ce que nous offrons</h2>
+      <p class="section-sub" style="margin:0 auto;">Un accompagnement complet de A à Z pour transformer votre projet en startup viable.</p>
+    </div>
+    <div class="grid-3">
+      <div class="service-card reveal">
+        <div class="service-icon">💻</div>
+        <h3>Technologies & Numérique</h3>
+        <p>Projets en logiciels, applications mobiles, IA, cybersécurité, e-commerce et transformation digitale.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌾</div>
+        <h3>Agro-industrie</h3>
+        <p>Solutions tech pour l'agriculture intelligente, la chaîne alimentaire, la gestion des cultures et marketplaces agricoles.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">☀️</div>
+        <h3>Énergies Renouvelables</h3>
+        <p>Innovations pour l'accès à l'énergie propre, l'efficacité énergétique et la gestion environnementale.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏨</div>
+        <h3>Tourisme & Hôtellerie</h3>
+        <p>Projets digitaux pour valoriser le patrimoine burkinabè, la mobilité touristique et les services d'accueil.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🧶</div>
+        <h3>Artisanat & Culture</h3>
+        <p>Numérisation de l'artisanat local, e-commerce artisanal, valorisation des savoir-faire burkinabè.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📈</div>
+        <h3>Formation & Coaching</h3>
+        <p>Ateliers business model, marketing digital, leadership, pitch investisseurs et financement de projet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CAMP D'IDÉATION
+════════════════════════════════════════ -->
+<section id="camp" class="section section-dark">
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="camp-header reveal">
+      <span class="badge">Signature Incub@UO</span>
+      <h2 class="section-title" style="color:#fff;">Le Camp d'Idéation</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6); margin:0 auto;">
+        5 jours · 50 campeurs · 10 projets retenus · 3 lauréats accompagnés sur 12 mois.
+        Le rendez-vous annuel de l'innovation numérique universitaire au Burkina Faso.
+      </p>
+    </div>
+
+    <div class="editions-timeline reveal">
+      <div class="edition-dot">
+        <div class="edition-circle">1ère</div>
+        <div class="edition-year">2019</div>
+      </div>
+      <div class="edition-dot">
+        <div class="edition-circle">2ème</div>
+        <div class="edition-year">2021</div>
+      </div>
+      <div class="edition-dot">
+        <div class="edition-circle">3ème</div>
+        <div class="edition-year">2022</div>
+      </div>
+      <div class="edition-dot">
+        <div class="edition-circle">4ème</div>
+        <div class="edition-year">2024</div>
+      </div>
+      <div class="edition-dot">
+        <div class="edition-circle active">5ème</div>
+        <div class="edition-year active">2025</div>
+      </div>
+    </div>
+
+    <div class="camp-spotlight reveal">
+      <div style="margin-bottom:28px;">
+        <span class="badge">5ème Édition · Décembre 2025</span>
+        <h3 style="color:#fff; font-size:1.3rem; margin-top:8px;">
+          "Entrepreneuriat numérique & Intelligence Artificielle :<br>des solutions innovantes aux défis locaux"
+        </h3>
+      </div>
+      <div class="spotlight-grid">
+        <div class="spotlight-stat">
+          <div class="big-num">300+</div>
+          <div class="label">Candidatures reçues</div>
+        </div>
+        <div class="spotlight-stat">
+          <div class="big-num">50</div>
+          <div class="label">Campeurs sélectionnés</div>
+        </div>
+        <div class="spotlight-stat" style="border:none;">
+          <div class="big-num">96h</div>
+          <div class="label">D'activités intensives</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-rank rank-1">🥇 1er Prix — 1 000 000 FCFA</div>
+        <h4>EduklinkBF</h4>
+        <p>Plateforme éducative de suivi des apprenants du primaire à l'université, avec tableau de bord temps réel pour les parents.</p>
+        <div class="project-prize">💰 Besoin levée : 18 250 000 FCFA</div>
+      </div>
+      <div class="project-card">
+        <div class="project-rank rank-sp">🌟 Prix Spécial Partenaire — 400 000 FCFA</div>
+        <h4>Yilga</h4>
+        <p>Plateforme d'agriculture intelligente intégrant l'IA avec un volet client et une marketplace mettant en relation producteurs et acheteurs.</p>
+        <div class="project-prize">💰 Besoin levée : 30–34 millions FCFA</div>
+      </div>
+      <div class="project-card">
+        <div class="project-rank rank-2">🥈 2ème Prix — 300 000 FCFA</div>
+        <h4>KudmdéArt</h4>
+        <p>Solution numérique innovante pour la valorisation et la diffusion de l'artisanat et de la culture burkinabè.</p>
+        <div class="project-prize">🎨 Secteur : Culture & Artisanat</div>
+      </div>
+      <div class="project-card">
+        <div class="project-rank rank-3">🥉 3ème Prix — 200 000 FCFA</div>
+        <h4>Smart Eyes</h4>
+        <p>Projet tech appliquant l'intelligence artificielle à la surveillance et à l'analyse d'images pour des usages locaux.</p>
+        <div class="project-prize">🤖 Secteur : IA & Sécurité</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     STARTUPS PORTFOLIO
+════════════════════════════════════════ -->
+<section id="startups" class="section section-light">
+  <div class="container">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; flex-wrap:wrap; gap:20px;" class="reveal">
+      <div>
+        <span class="badge badge-green">Portfolio</span>
+        <h2 class="section-title">Startups incubées</h2>
+        <p class="section-sub">Des projets étudiants devenus de vraies entreprises, déjà sur le marché.</p>
+      </div>
+      <a href="#candidature" class="btn btn-green">Rejoindre le portfolio →</a>
+    </div>
+    <div class="grid-3">
+      <div class="startup-card reveal">
+        <div class="startup-avatar" style="background:linear-gradient(135deg,#1A6B3C,#22a05a);">📚</div>
+        <h4>EduklinkBF</h4>
+        <p>Plateforme de suivi éducatif connectant élèves, parents et enseignants en temps réel.</p>
+        <div class="startup-tags">
+          <span class="tag">EdTech</span>
+          <span class="tag-blue tag">IA</span>
+          <span class="tag-gold tag">Lauréat 2025</span>
+        </div>
+      </div>
+      <div class="startup-card reveal">
+        <div class="startup-avatar" style="background:linear-gradient(135deg,#0077cc,#00D4FF);">🌾</div>
+        <h4>Yilga</h4>
+        <p>Plateforme agri-tech intelligente avec marketplace agricole et conseils IA pour les producteurs.</p>
+        <div class="startup-tags">
+          <span class="tag">AgriTech</span>
+          <span class="tag-blue tag">IA</span>
+          <span class="tag">Marketplace</span>
+        </div>
+      </div>
+      <div class="startup-card reveal">
+        <div class="startup-avatar" style="background:linear-gradient(135deg,#7b2d8b,#b044c0);">🎨</div>
+        <h4>KudmdéArt</h4>
+        <p>Digitalisation et valorisation de l'artisanat burkinabè : vitrine en ligne et réseau de créateurs.</p>
+        <div class="startup-tags">
+          <span class="tag">Culture</span>
+          <span class="tag">E-commerce</span>
+        </div>
+      </div>
+      <div class="startup-card reveal">
+        <div class="startup-avatar" style="background:linear-gradient(135deg,#C0392B,#e74c3c);">👁️</div>
+        <h4>Smart Eyes</h4>
+        <p>Système de surveillance intelligente basé sur la vision par ordinateur pour usages urbains et ruraux.</p>
+        <div class="startup-tags">
+          <span class="tag-blue tag">IA</span>
+          <span class="tag">Vision</span>
+          <span class="tag">Sécurité</span>
+        </div>
+      </div>
+      <div class="startup-card reveal">
+        <div class="startup-avatar" style="background:linear-gradient(135deg,#F39C12,#e67e22);">🔐</div>
+        <h4>Rialé Cybersécurité</h4>
+        <p>Startup spécialisée en cybersécurité, co-organisatrice du premier CTF universitaire du Burkina Faso.</p>
+        <div class="startup-tags">
+          <span class="tag">Cybersécurité</span>
+          <span class="tag-blue tag">CTF</span>
+        </div>
+      </div>
+      <div class="startup-card reveal" style="border:2px dashed #dde2e8; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:200px;">
+        <div style="font-size:2.5rem; margin-bottom:12px;">🚀</div>
+        <h4 style="color:var(--gray);">Votre startup ici</h4>
+        <p>Soumettez votre projet et rejoignez la prochaine cohorte d'innovateurs burkinabè.</p>
+        <a href="#candidature" class="btn btn-green" style="margin-top:16px;">Candidater</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     COMPARE INCUBATEURS
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:56px;" class="reveal">
+      <span class="badge">Nos deux structures</span>
+      <h2 class="section-title">Choisissez votre incubateur</h2>
+      <p class="section-sub" style="margin:0 auto;">Deux structures complémentaires pour des besoins différents.</p>
+    </div>
+    <div class="compare-wrap">
+      <div class="compare-card compare-card-green reveal">
+        <div class="compare-bg-icon">🎓</div>
+        <h3>Incub@UO</h3>
+        <p class="sub">Incubateur universitaire · UFR SEA · Université Joseph Ki-Zerbo</p>
+        <ul class="compare-list">
+          <li class="compare-item">Ouvert aux étudiants et enseignants</li>
+          <li class="compare-item">Camp d'Idéation annuel (5 jours)</li>
+          <li class="compare-item">Équipes pluridisciplinaires obligatoires</li>
+          <li class="compare-item">Accompagnement 12 mois pour lauréats</li>
+          <li class="compare-item">Financement PNUD & AUF disponible</li>
+          <li class="compare-item">Focus fort sur le numérique & l'IA</li>
+        </ul>
+        <a href="#candidature" class="compare-cta">Postuler à Incub@UO →</a>
+      </div>
+      <div class="compare-card compare-card-blue reveal">
+        <div class="compare-bg-icon">🏢</div>
+        <h3>Burkina Business Incubator</h3>
+        <p class="sub">Centre PME · Échangeur de l'Est · Membre AfriLabs</p>
+        <ul class="compare-list">
+          <li class="compare-item">Ouvert à tous les porteurs de projets</li>
+          <li class="compare-item">Espace physique avec bureaux partagés</li>
+          <li class="compare-item">5 secteurs prioritaires : TIC, Agro, Énergie…</li>
+          <li class="compare-item">Accompagnement juridique, compta, marketing</li>
+          <li class="compare-item">Réseau AfriLabs (40+ pays africains)</li>
+          <li class="compare-item">Accès financement & investisseurs</li>
+        </ul>
+        <a href="#candidature" class="compare-cta">Postuler au BBI →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ACTUALITÉS
+════════════════════════════════════════ -->
+<section id="actualites" class="section section-light">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:48px;" class="reveal">
+      <span class="badge">Fil d'actualité</span>
+      <h2 class="section-title">Dernières nouvelles</h2>
+    </div>
+    <div class="grid-3">
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb-gold" style="font-size:3rem; padding:24px;">🏆</div>
+        <div class="news-body">
+          <div class="news-date">Décembre 2025</div>
+          <h4>EduklinkBF remporte le 1er prix du 5ème Camp d'Idéation Incub@UO</h4>
+          <p>La plateforme éducative de suivi des apprenants créée par une équipe pluridisciplinaire décroche 1 000 000 FCFA et un accompagnement de 12 mois.</p>
+          <span class="news-tag" style="background:rgba(243,156,18,.1); color:#c87d00;">🏅 Incub@UO</span>
+        </div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb-green" style="font-size:3rem; padding:24px;">🤖</div>
+        <div class="news-body">
+          <div class="news-date">Décembre 2025</div>
+          <h4>5ème Camp d'Idéation : plus de 300 candidatures reçues sur le thème IA</h4>
+          <p>Sous le thème "Entrepreneuriat numérique et IA", le camp enregistre un record de candidatures toutes issues de la communauté étudiante burkinabè.</p>
+          <span class="news-tag" style="background:rgba(26,107,60,.1); color:var(--green);">🎓 Incub@UO</span>
+        </div>
+      </div>
+      <div class="news-card reveal">
+        <div class="news-thumb news-thumb-blue" style="font-size:3rem; padding:24px;">🌍</div>
+        <div class="news-body">
+          <div class="news-date">2025</div>
+          <h4>Incub@UO organise un CTF national en cybersécurité avec Rialé et l'UVBF</h4>
+          <p>Premier concours "Capture The Flag" universitaire au Burkina Faso, co-organisé avec la startup Rialé Cybersécurité et l'Université Virtuelle du Burkina.</p>
+          <span class="news-tag" style="background:rgba(0,212,255,.08); color:#0099cc;">🔐 Cybersécurité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FORMULAIRE DE CANDIDATURE
+════════════════════════════════════════ -->
+<section id="candidature" class="section">
+  <div class="container">
+    <div class="form-wrap reveal">
+      <div class="form-header">
+        <span class="badge badge-green">Candidature en ligne</span>
+        <h2 style="font-size:1.8rem; font-weight:800; margin-bottom:10px; color:var(--dark);">
+          Soumettez votre projet
+        </h2>
+        <p style="color:var(--gray); font-size:.95rem;">Remplissez ce formulaire pour rejoindre le prochain programme d'incubation.</p>
+      </div>
+      <div id="formError" style="display:none; background:#ffeaea; color:#c0392b; padding:12px 16px; border-radius:8px; font-size:.9rem; margin-bottom:16px; border:1px solid #f5b7b1;"></div>
+      <form id="appForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom *</label>
+            <input type="text" name="prenom" placeholder="Votre prénom" required />
+          </div>
+          <div class="form-group">
+            <label>Nom *</label>
+            <input type="text" name="nom" placeholder="Votre nom" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" placeholder="votre@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Téléphone</label>
+            <input type="tel" name="telephone" placeholder="+226 XX XX XX XX" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Incubateur visé *</label>
+            <select name="incubateur" required>
+              <option value="">-- Choisissez --</option>
+              <option>Incub@UO (Université)</option>
+              <option>Burkina Business Incubator (BBI)</option>
+              <option>Les deux</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Secteur du projet *</label>
+            <select name="secteur" required>
+              <option value="">-- Choisissez --</option>
+              <option>Technologies & Numérique</option>
+              <option>Agro-industrie</option>
+              <option>Énergies Renouvelables</option>
+              <option>Tourisme & Hôtellerie</option>
+              <option>Artisanat & Culture</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nom du projet *</label>
+          <input type="text" name="nom_projet" placeholder="Le nom de votre startup ou projet" required />
+        </div>
+        <div class="form-group">
+          <label>Description du projet *</label>
+          <textarea name="description" placeholder="Décrivez votre projet en quelques lignes : problème résolu, solution proposée, marché cible..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Stade actuel du projet</label>
+          <select name="stade">
+            <option>Idée (concept)</option>
+            <option>Prototype / MVP</option>
+            <option>Produit lancé</option>
+            <option>Entreprise en croissance</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">
+          <span>Envoyer ma candidature</span>
+          <span>→</span>
+        </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="check">✅</div>
+        <h3>Candidature envoyée !</h3>
+        <p>Merci pour votre soumission. Notre équipe examinera votre dossier et vous contactera dans les plus brefs délais.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     PARTENAIRES
+════════════════════════════════════════ -->
+<section id="partenaires" class="section section-light">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:8px;" class="reveal">
+      <span class="badge">Ils nous font confiance</span>
+      <h2 class="section-title">Partenaires & Soutiens</h2>
+    </div>
+    <div class="partners-grid reveal">
+      <div class="partner-chip">🇺🇳 PNUD</div>
+      <div class="partner-chip">📚 AUF — Programme ACTIF</div>
+      <div class="partner-chip">🎓 Université Joseph Ki-Zerbo</div>
+      <div class="partner-chip">💻 UVBF</div>
+      <div class="partner-chip">🔬 CITADEL Center</div>
+      <div class="partner-chip">🌍 AfriLabs Network</div>
+      <div class="partner-chip">🤝 ProFeJec / PNUD</div>
+      <div class="partner-chip">🏛️ BIT — Burkina Institute of Technology</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="badge">Nous contacter</span>
+        <h2 class="section-title" style="color:#fff;">Prenez contact<br>avec nous</h2>
+        <p style="color:rgba(255,255,255,.55); line-height:1.7; margin-bottom:36px;">
+          Que vous soyez étudiant, entrepreneur ou partenaire institutionnel,
+          nos équipes sont disponibles pour répondre à vos questions.
+        </p>
+        <div class="contact-info">
+          <h3>Incub@UO</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <div class="label">Adresse</div>
+              <div class="val">UFR SEA, Université Joseph Ki-Zerbo (Ouaga I)<br>Ouagadougou, Burkina Faso</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <div class="label">Téléphone</div>
+              <div class="val">+226 70 11 62 48</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-info" style="margin-top:28px;">
+          <h3>Burkina Business Incubator</h3>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <div class="label">Adresse</div>
+              <div class="val">Secteur Échangeur de l'Est<br>Ouagadougou, Burkina Faso</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-card" style="margin-bottom:20px;">
+          <h4>Suivre Incub@UO</h4>
+          <div class="social-links">
+            <a href="#" class="social-btn social-fb">📘 Facebook Incub@UO</a>
+            <a href="#" class="social-btn social-yt">▶️ YouTube</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <h4>Suivre Burkina Business Incubator</h4>
+          <div class="social-links">
+            <a href="#" class="social-btn social-fb">📘 Facebook BBI</a>
+          </div>
+        </div>
+        <div class="contact-card" style="margin-top:20px;">
+          <h4>Horaires d'accueil</h4>
+          <div style="color:rgba(255,255,255,.7); font-size:.9rem; line-height:1.8;">
+            <div>🗓️ <strong>Lundi – Vendredi</strong> : 08h00 – 17h00</div>
+            <div>📋 Rendez-vous conseillé pour les consultations</div>
+            <div style="margin-top:12px; color:rgba(255,255,255,.4); font-size:.8rem;">
+              Candidatures en ligne disponibles 24h/24 via ce portail.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Hub<span>BF</span> Innovation — Incub@UO & BBI</div>
+    <nav class="footer-nav">
+      <a href="#incubuo">Incub@UO</a>
+      <a href="#bbi">BBI</a>
+      <a href="#camp">Camp d'Idéation</a>
+      <a href="#startups">Startups</a>
+      <a href="#candidature">Candidater</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-copy">
+      © 2025 Hub Innovation Burkina Faso — Portail web non-officiel créé à titre de proposition.<br>
+      Incub@UO · Université Joseph Ki-Zerbo · Burkina Business Incubator
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ─── NAV MOBILE ─── */
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  /* ─── SCROLL REVEAL ─── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ─── NAV SCROLL EFFECT ─── */
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 40
+      ? '0 4px 32px rgba(0,0,0,.4)'
+      : 'none';
+  });
+
+  /* ─── FORM SUBMIT → API ─── */
+  async function submitForm(e) {
+    e.preventDefault();
+    const form   = document.getElementById('appForm');
+    const btn    = form.querySelector('.form-submit');
+    const inputs = form.querySelectorAll('input,select,textarea');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span>Envoi en cours…</span>';
+
+    const data = {};
+    inputs.forEach(el => { if (el.name) data[el.name] = el.value; });
+
+    try {
+      const res = await fetch('/api/candidatures', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || 'Erreur serveur');
+
+      form.style.display = 'none';
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      success.style.opacity = '0';
+      setTimeout(() => { success.style.transition = 'opacity .5s'; success.style.opacity = '1'; }, 50);
+    } catch (err) {
+      btn.disabled = false;
+      btn.innerHTML = '<span>Envoyer ma candidature</span><span>→</span>';
+      const errBox = document.getElementById('formError');
+      errBox.textContent = err.message;
+      errBox.style.display = 'block';
+      setTimeout(() => { errBox.style.display = 'none'; }, 5000);
+    }
+  }
+
+  /* ─── SMOOTH ACTIVE NAV ─── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 90) current = s.getAttribute('id');
+    });
+    navLinks.forEach(l => {
+      l.style.color = l.getAttribute('href') === '#' + current
+        ? '#fff' : 'rgba(255,255,255,.75)';
+    });
+  });
+</script>
+
+</body>
+</html>
